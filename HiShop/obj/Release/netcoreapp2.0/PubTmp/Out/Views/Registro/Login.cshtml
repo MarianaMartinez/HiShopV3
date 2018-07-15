@@ -1,0 +1,251 @@
+﻿@model HiShop.Models.RegistroModalAndView
+@{
+
+    Layout = "~/Views/Shared/_BaseMenuNoRegistrado.cshtml";
+}
+
+
+<html>
+<body>
+    <h2>Login</h2>
+    <div class="container-fluid ">
+
+        @{
+
+            if (TempData["Mensajes"] != null)
+            {
+                List<HiShop.Models.MensajeModel> mensajes = (List<HiShop.Models.MensajeModel>)TempData["Mensajes"];
+                foreach (var mensaje in mensajes)
+                {
+
+                    <div class="alert @mensaje.tipo">@mensaje.texto </div>
+                }
+            }
+
+
+        }
+
+        <div class="Separator">
+        </div>
+
+    </div>
+    <div class="Separator">
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <form class="form" action="/Registro/LoginPost" method="post">
+                <div class="form-group">
+                    <label class="control-label">Mail</label>
+                    <input type="text" name="mailLogin" class="form-control" placeholder="Ingrese Nombre">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Contraseña</label>
+                    <input type="password" name="contraseñaLogin" class="form-control" placeholder="Ingrese Contraseña">
+                </div>
+                <button type="submit" class="btn btn-success">Ingresar</button>
+
+
+            </form>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <form class="form" action="/Registro/RegistroPostAsync" method="post">
+                <div class="form-group">
+                    <label class="control-label">Nombre</label>
+                    <div>
+                        <input class="form-control" name="nombre" value="@Model.nombre" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.nombre)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Apellido</label>
+                    <div>
+                        <input class="form-control" name="apellido" value="@Model.apellido" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.apellido)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Mail</label>
+                    <div>
+                        <input class="form-control" name="mail" value="@Model.mail" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.mail)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Repita el Mail</label>
+                    <div>
+                        <input class="form-control" name="mail2" value="@Model.mail2" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.mail2)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Contraseña</label>
+                    <div>
+                        <input type="password" class="form-control" name="Contraseña" value="@Model.contraseña" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.contraseña)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Repita la Contraseña</label>
+                    <div>
+                        <input type="password" class="form-control" name="Contraseña2" value="@Model.contraseña2" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.contraseña2)</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Registrarse  </button>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="map"></div>
+    <script>
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 2,
+                center: new google.maps.LatLng(2.8, -187.3),
+                mapTypeId: 'terrain'
+            });
+
+            // Create a <script> tag and set the USGS URL as the source.
+            var script = document.createElement('script');
+            // This example uses a local copy of the GeoJSON stored at
+            // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+            script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+            document.getElementsByTagName('head')[0].appendChild(script);
+        }
+
+        // Loop through the results array and place a marker for each
+        // set of coordinates.
+        window.eqfeed_callback = function (results) {
+            for (var i = 0; i < results.features.length; i++) {
+                var coords = results.features[i].geometry.coordinates;
+                var latLng = new google.maps.LatLng(coords[1], coords[0]);
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map
+                });
+            }
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo4se0v-wBIz1uaWy-K1Qdid5NZebDSeg&callback=initMap">
+    </script>
+
+
+
+
+
+
+    @*facebook*@
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
+    <div id="fb-root"></div>
+    <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    <div id="status">
+    </div>
+    <input type="button" id="btnFacebookLogin"
+           value="Login with Facebook" class="btn btn-success" />
+
+
+
+    <script>
+        // This is called with the results from from FB.getLoginStatus().
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else {
+                // The person is not logged into your app or we are unable to tell.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                    'into this app.';
+            }
+        }
+
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '{310053636156963}',
+                cookie: true,  // enable cookies to allow the server to access
+                // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.8' // use graph api version 2.8
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+            //FB.getLoginStatus(function(response) {
+            //  statusChangeCallback(response);
+            //});
+
+            //  };
+
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                    console.log('Logged in.');
+                }
+                else {
+                    FB.login();
+                }
+            });
+
+            // Load the SDK asynchronously
+            //(function (d, s, id) {
+            //    var js, fjs = d.getElementsByTagName(s)[0];
+            //    if (d.getElementById(id)) return;
+            //    js = d.createElement(s); js.id = id;
+            //    js.src = "https://connect.facebook.net/es_LA/sdk.js";
+            //    fjs.parentNode.insertBefore(js, fjs);
+            //}(document, 'script', 'facebook-jssdk'));
+
+
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.11&appId=310053636156963';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+
+
+
+            // Here we run a very simple test of the Graph API after login is
+            // successful.  See statusChangeCallback() for when this call is made.
+            function testAPI() {
+                console.log('Welcome!  Fetching your information.... ');
+                FB.api('/me', function (response) {
+                    console.log('Successful login for: ' + response.name);
+                    document.getElementById('status').innerHTML =
+                        'Thanks for logging in, ' + response.name + '!';
+                });
+            }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,138 @@
+﻿@model HiShop.Models.Articulo.ArticuloGeneralModelAndView
+@{
+    ViewData["Title"] = "ListarArticulo";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+<script>
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.12&appId=1610232299056898&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    //Cambia el estado de un negocio cuando toca que si
+    //AxelMolaro
+    function borrar(id) {
+        $.ajax({
+            url: '/Articulo/BorrarArticulo',
+            data: { id },
+            type: 'POST',
+            async: true,
+            success: (function (result) {
+                location.reload();//TODOAM: CAMBIAR PARA QUE NO RECARGUE AXEL
+
+            }),
+            error: (function (result) {
+                alert("Error al borrar");
+            })
+        })
+    }
+
+    //Limpiar los filtros
+    //AxelMolaro
+    function limpiarFiltros() {
+        $("#nombreFiltro").val("");
+        $("formFiltro").submit();
+    }
+</script>
+<div id="fb-root"></div>
+
+<div class="row">
+    <div class="container">
+        <div>
+        <br />
+            <h3><i class="zmdi zmdi-plus-box" ></i> Mis Articulos </h3>
+        </div>
+        <div>
+            Filtro
+            <form method="get" id="formFiltro" action="/Articulo/ListarArticulo" class="form-inline">
+                <div class="form-group form-inline">
+                    <label class="control-label">Nombre</label>
+                    <input class="form-control" name="nombreFiltro" id="nombreFiltro" value="@Model.filtro.nombreFiltro" />
+                </div>
+                <input name="paginaActual" value="@Model.filtro.paginaActual" id="inputPaginaActual" readonly="readonly" type="hidden" />
+                <input value="@Model.filtro.total" id="inputTotalDePaginas" readonly="readonly" type="hidden" />
+
+                <div class="form-group form-inline">
+                    <button type="submit" class="btn btn-success2">Filtrar</button>
+                    <button type="submit" class="btn btn-info" onclick="limpiarFiltros()">Limpiar Filtros</button>
+                </div>
+            </form>
+        </div>
+        <br />
+        <div class="col-md-offset-11">
+            <i class="zmdi zmdi-skip-previous" id="paginaAnterior" onclick="paginarAnterior()" style="cursor:pointer"></i> @Model.filtro.paginaActual - @Model.filtro.total <i class="zmdi zmdi-skip-next" id="paginaSiguiente" onclick="paginarSiguiente()" style="cursor:pointer"></i>
+        </div>
+        <table class="col-md-12 table table-responsive table-striped" >
+            <thead>
+                <tr>
+                    <th>
+                        Imagen
+                    </th>
+                    <th>
+                       Nombre
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Precio
+                    </th>                   
+                    <th>
+                       Editar
+                    </th>
+                    <th>
+                        Borrar
+                    </th>
+                    <th>
+                        Compartir
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listaDeArticulos)
+                {
+                    <tr>
+                        <td>
+                        <img src="@item.UrlImagen" alt="ImagenArticulo" width="60" height="60" /> </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>                      
+                        <td>                     
+                            <a href="/Articulo/EditarArticulo/@item.ID" value="@item.ID"><i class="zmdi zmdi-edit" ></i></a> 
+                        </td>
+                        <td>
+                            <i class="zmdi zmdi-delete" onclick="borrar(@item.ID)"></i>
+                        </td>
+                        <td>
+                            <div class="fb-share-button" data-href="  http://192.168.0.3:8080/Catalogo/DetallesDeProducto/@item.ID" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A49836%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
+                            <!--
+                            <div class="fb-share-button" data-href="  http://192.168.0.3:8080/a/prueba" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A49836%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
+                                
+                            -->
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/Articulo/CrearArticulo" class="btn btn-success2">
+            <i class="zmdi zmdi-plus-circle"></i> Nuevo
+        </a>
+    </div>
+</div>
+<hr />

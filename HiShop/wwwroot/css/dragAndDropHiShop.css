@@ -1,0 +1,23 @@
+﻿
+/*Menu de elementos*/
+.menuDeElementos {
+    background-color: ghostwhite;
+    border: 1px solid black;
+    height: 96%;
+    left: 80%;
+    top: 0;
+    position: absolute;
+    z-index: 2;
+}
+
+/*El el contenegdor principal del contenirdo*/
+.contenedorPrincipalClase {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.menuReducido {
+    
+}

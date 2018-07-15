@@ -1,0 +1,110 @@
+﻿@model HiShop.Models.Servicio.ServicioGeneralModelAndView
+@{
+    ViewData["Title"] = "ListarServicio";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+
+
+<script>
+
+    //Cambia el estado de un negocio cuando toca que si
+    //AxelMolaro
+    function borrar(id) {
+        $.ajax({
+            url: '/Servicio/BorrarServicio',
+            data: { id },
+            type: 'POST',
+            async: true,
+            success: (function (result) {
+                location.reload();//TODOAM: CAMBIAR PARA QUE NO RECARGUE AXEL
+
+            }),
+            error: (function (result) {
+                alert("Error al borrar");
+            })
+        })
+    }
+
+    //Limpiar los filtros
+    //AxelMolaro
+    function limpiarFiltros() {
+        $("#nombreFiltro").val("");
+        $("formFiltro").submit();
+    }
+</script>
+
+<div class="row">
+    <div class="container">
+        <div>
+            <br />
+            <h3><i class="zmdi zmdi-plus-box"></i> Mis Servicios </h3>
+        </div>
+        <div>
+            Filtro
+            <form method="get" id="formFiltro" action="/Servicio/ListarServicio" class="form-inline">
+                <div class="form-group form-inline">
+                    <label class="control-label">Nombre</label>
+                    <input class="form-control" name="nombreFiltro" id="nombreFiltro" value="@Model.filtro.nombreFiltro" />
+                </div>
+                <input name="paginaActual" value="@Model.filtro.paginaActual" id="inputPaginaActual" readonly="readonly" type="hidden" />
+                <input value="@Model.filtro.total" id="inputTotalDePaginas" readonly="readonly" type="hidden" />
+
+                <div class="form-group form-inline">
+                    <button type="submit" class="btn btn-success2">Filtrar</button>
+                    <button type="submit" class="btn btn-info" onclick="limpiarFiltros()">Limpiar Filtros</button>
+                </div>
+            </form>
+        </div>
+        <br />
+        <div class="col-md-offset-11">
+            <i class="zmdi zmdi-skip-previous" id="paginaAnterior" onclick="paginarAnterior()" style="cursor:pointer"></i> @Model.filtro.paginaActual - @Model.filtro.total <i class="zmdi zmdi-skip-next" id="paginaSiguiente" onclick="paginarSiguiente()" style="cursor:pointer"></i>
+        </div>
+        <table class="col-md-12 table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Imagen
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>   
+                    <th>
+                        Editar
+                    </th>
+                    <th>
+                        Borrar
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listaDeServicios)
+                {
+                    <tr>
+                        <td>
+                            <img src="@item.UrlImagen" alt="ImagenArticulo" width="60" height="60" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            <a href="/Servicio/EditarServicio/@item.ID" ><i class="zmdi zmdi-edit"></i></a> 
+                        </td>
+                        <td>
+                           <i class="zmdi zmdi-delete" onclick="borrar(@item.ID)"></i>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/Servicio/CrearServicio" class="btn btn-success2">
+            <i class="zmdi zmdi-plus-circle"></i> Nuevo
+        </a>
+    </div>
+</div>
+<hr />

@@ -1,0 +1,143 @@
+﻿@model HiShop.Models.ShowroomsModel.ShowroomGeneralModelAndView
+@{
+    ViewData["Title"] = "Showroom2";
+    Layout = "~/Views/Shared/_BaseShowroom.cshtml";
+}
+
+
+<html>
+<body>
+    <div class="main">
+        <section class="module bg-dark-60 portfolio-page-header" data-background="~/assets/images/portfolio/portfolio_header_bg.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <h2 class="module-title font-alt">SHOWROOM2</h2>
+                        <div class="module-subtitle font-serif">EMPRENDEDOR REPOSTERIA.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="module pb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="filter font-alt" id="filters">
+                            <li><a class="current wow fadeInUp" href="#" data-filter="*">Todo</a></li>
+                            <li><a class="wow fadeInUp" href="#" data-filter=".torta" data-wow-delay="0.2s">Torta</a></li>
+                            <li><a class="wow fadeInUp" href="#" data-filter=".postre" data-wow-delay="0.4s">Postre</a></li>
+                            <li><a class="wow fadeInUp" href="#" data-filter=".desayuno" data-wow-delay="0.6s">Desayuno</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="works-grid works-grid-masonry works-grid-3 works-hover-w" id="works-grid">
+                <li class="work-item torta webdesign">
+                    <a href="portfolio_single_featured_image1.html">
+                        <div class="work-image"><img src="~/assets/images/portfolio/torta1.jpg" alt="Portfolio Item" /></div>
+                        <div class="work-caption font-alt">
+                            <h3 class="work-title">Torta Frutal</h3>
+                            <div class="work-descr">$600</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="work-item torta photography">
+                    <a href="portfolio_single_featured_image2.html">
+                        <div class="work-image"><img src="~/assets/images/portfolio/torta2.jpg" alt="Portfolio Item" /></div>
+                        <div class="work-caption font-alt">
+                            <h3 class="work-title">Torta tres capas</h3>
+                            <div class="work-descr">$1080</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="work-item postre photography">
+                    <a href="portfolio_single_featured_slider1.html">
+                        <div class="work-image"><img src="~/assets/images/portfolio/volcan.jpg" alt="Portfolio Item" /></div>
+                        <div class="work-caption font-alt">
+                            <h3 class="work-title">Volcan de Chocolate</h3>
+                            <div class="work-descr">$60</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="work-item desayuno photography">
+                    <a href="portfolio_single_featured_slider2.htmll">
+                        <div class="work-image"><img src="~/assets/images/portfolio/desayuno1.jpg" alt="Portfolio Item" /></div>
+                        <div class="work-caption font-alt">
+                            <h3 class="work-title">Desayuno</h3>
+                            <div class="work-descr">$800</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="work-item torta webdesign">
+                    <a href="portfolio_single_featured_video1.html">
+                        <div class="work-image"><img src="~/assets/images/portfolio/torta3.jpg" alt="Portfolio Item" /></div>
+                        <div class="work-caption font-alt">
+                            <h3 class="work-title">Torta </h3>
+                            <div class="work-descr">$860</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="work-item desayuno webdesign">
+                    <a href="portfolio_single_featured_video2.html">
+                        <div class="work-image"><img src="~/assets/images/portfolio/desayuno2.jpg" alt="Portfolio Item" /></div>
+                        <div class="work-caption font-alt">
+                            <h3 class="work-title">Desayuno </h3>
+                            <div class="work-descr">$780</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="work-item postre webdesign">
+                    <a href="portfolio_single_featured_image1.html">
+                        <div class="work-image"><img src="~/assets/images/portfolio/postre2.jpg" alt="Portfolio Item" /></div>
+                        <div class="work-caption font-alt">
+                            <h3 class="work-title">Postre</h3>
+                            <div class="work-descr">$400</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+    <div class="module-small bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">Reposteria</h5>
+                        <p>The languages only differ in their grammar, their pronunciation and their most common words.</p>
+                        <p>Phone: +1 234 567 89 10</p>Fax: +1 234 567 89 10
+                        <p>Email:<a href="#">somecompany@example.com</a></p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">Recent Comments</h5>
+                        <ul class="icon-list">
+                            <li>Maria on <a href="#">Designer Desk Essentials</a></li>
+                            <li>John on <a href="#">Realistic Business Card Mockup</a></li>
+                            <li>Andy on <a href="#">Eco bag Mockup</a></li>
+                            <li>Jack on <a href="#">Bottle Mockup</a></li>
+                            <li>Mark on <a href="#">Our trip to the Alps</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">Blog Categories</h5>
+                        <ul class="icon-list">
+                            <li><a href="#">Tortas - 7</a></li>
+                            <li><a href="#">Desayunos - 3</a></li>
+                            <li><a href="#">Postres - 12</a></li>
+                            <li><a href="#">Eventos - 1</a></li>                          
+                        </ul>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+    <hr class="divider-d">
+
+
+</body>
+</html>

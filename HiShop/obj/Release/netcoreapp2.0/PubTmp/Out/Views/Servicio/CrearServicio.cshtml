@@ -1,0 +1,54 @@
+﻿@model HiShop.Models.ServicioModel
+@{
+    ViewData["Title"] = "CrearServicio";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+
+@{
+            if (TempData["Mensajes"] != null)
+            {
+                List<HiShop.Models.MensajeModel> mensajes = (List<HiShop.Models.MensajeModel>)TempData["Mensajes"];
+                foreach (var mensaje in mensajes)
+                {
+            <div class="alert @mensaje.tipo">@mensaje.texto </div>
+        }
+    }
+
+}
+
+<h2>Crear Servicio</h2>
+<div class="col-md-12">
+    <div class="container-fluid ">
+        <div class="Separator">
+        </div>
+    </div>
+    <form class="form" action="/Servicio/CrearServicio" enctype="multipart/form-data" method="post">
+        <div class="form-group col-md-6">
+            <label class="control-label ">Nombre</label>
+            <div>
+                <input class="form-control" name="nombre" value="@ViewData["Nombre"]" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Nombre)</div>
+            </div>
+        </div>
+        <div class=" form-group col-md-6 ">
+            <label class="control-label">Descripcion</label>
+            <div>
+                <input class="form-control" name="descripcion" value="@ViewData["Descripcion"]" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Descripcion)</div>
+            </div>
+        </div>
+        <div class="form-group col-md-6" id="inputFileFoto">
+            <label class="control-label">Foto</label>
+            <div>
+                <input type="file" name="file" id="file" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.file)</div>
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-success2"><i class="zmdi zmdi-save"> </i> Guardar</button>
+            <button type="button" class="btn btn-info" onclick="return history.back(1);"><i class="zmdi zmdi-long-arrow-left "> </i> Volver</button>
+        </div>
+
+    </form>
+
+</div>

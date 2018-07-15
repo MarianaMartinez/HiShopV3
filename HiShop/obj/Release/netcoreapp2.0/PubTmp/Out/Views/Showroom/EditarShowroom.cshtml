@@ -1,0 +1,178 @@
+﻿@model HiShop.Models.Showroom.ShowroomDADGeneralModelAndView
+@{
+    ViewData["Title"] = "EditarShowroom";
+    Layout = "~/Views/Shared/_Base.cshtml";
+}
+<script type="text/javascript" src="~/js/dragAndDropHiShop.js"></script>
+<script>
+
+    /**
+    * Optener los productos
+    */
+
+
+    window.addEventListener('load', init);
+
+    function init() {
+        llenarPantalla();
+        activarColorPicker();
+    }
+
+
+
+    
+
+
+     //Optiene el html del cuerpo
+   /* function getHtmlCuerpo()
+    {
+        var texto = 'Model.showroom.Cuerpo.Html';
+        var html = formatearHtml(texto);
+        debugger;
+        return html;
+    }*/
+
+    //Permite Activar el clor picker
+    function activarColorPicker()
+    {
+        var colpick = $('.colorPicker').each(function () {
+            $(this).minicolors({
+                control: $(this).attr('data-control') || 'hue',
+                inline: $(this).attr('data-inline') === 'true',
+                letterCase: 'lowercase',
+                opacity: false,
+                change: function (hex, opacity) {
+                    if (!hex) return;
+                    if (opacity) hex += ', ' + opacity;
+                    try {
+                        console.log(hex);
+                    } catch (e) { }
+                    $(this).select();
+                },
+                theme: 'bootstrap'
+            });
+        });
+
+    }
+
+</script>
+<div class="contenedorPrincipalClase" id="contenedorPrincipal" >
+    <div id="contenedorBanner" >
+       
+    </div>
+    <div id="contenedorCuerpo">
+        
+    </div>
+
+</div>
+
+<div class="menuReducido pull-right">
+    <button class="btn btn-success" id="botonMenuDAD">Menu</button>
+    
+</div>
+
+<div class="col-md-2 menuDeElementos pull-right" id="MenuElementosDAD">
+   <table class="table" id="tablaPrincipal">
+       <thead>
+           <tr>
+               <td><button class="btn btn-success" onclick="guardarShowroom();">Guardar</button></td>
+               <td><button class="btn btn-info">Atras</button></td>
+               <td><button class="btn btn-danger" id="botonMinimizarMenuDAD">Minimizar</button></td>
+           </tr>
+           <tr>
+               <td>
+                   <button id="btnMenuBanners">Banners</button>
+               </td>
+               <td><button id="btnMenuCuerpoInicio">Cuerpo</button></td>
+               <td><button id="btnMenuFondo">Fondo</button></td>
+           </tr>
+       </thead>
+       <tbody id="ElementosSeleccionablesBanner" class="elementosSeleccionablesMenu" style="display:none">
+          <tr>
+              <th>Numero</th><th>Nombre</th><th>Imagen</th>
+          </tr>
+          @foreach (var banner in @Model.bannersMenu)
+          {
+           <tr class="elementoMenu" tipo="@banner.tipo" htmlIncluido="@banner.Html" id="elemento-@banner.ID" idBdd="@banner.ID" draggable="true">
+               <td >@banner.ID</td> <td>@banner.Titulo</td> <td>Imagen</td>
+           </tr>
+          }
+
+       </tbody>
+       <tbody id="ElementosSeleccionablesCuerpoInicio" class="elementosSeleccionablesMenu" style="display:none">
+           <tr>
+               <th>Numero</th>
+               <th>Nombre</th>
+               <th>Imagen</th>
+           </tr>
+           @foreach (var cuerpo in @Model.cuerpoInicioMenu)
+           {
+               <tr class="elementoMenu" tipo="@cuerpo.tipo" htmlIncluido="@cuerpo.Html" id="elemento-@cuerpo.ID" idBdd="@cuerpo.ID" draggable="true">
+                   <td>@cuerpo.ID</td>
+                   <td>@cuerpo.Titulo</td>
+                   <td>Imagen</td>
+               </tr>
+           }
+
+       </tbody>
+       <tbody id="ElementosSeleccionablesFondo" class="elementosSeleccionablesMenu">
+           <tr>
+               <th>Color</th>
+           </tr>
+           <tr>
+               <td  >
+                   <input type="text" id="colorPickerFondoInput" class="form-control colorPicker" data-control="hue"  value="@if (Model.showroom != null && Model.showroom.ColorDeFondo != null ) { @Model.showroom.ColorDeFondo}">
+               </td>
+           </tr>
+
+       </tbody>
+
+       
+   </table>
+    
+    <table id="tablaBannerEditable" class="container-fluid tablaEditable" style="display:none">
+      
+        <tbody id="ElementoEditableBanner">
+            <tr>
+                <th class="volverAElementos" onclick="volverAElementos()"><button>Volver a Elementos</button></th>
+            </tr>
+            <tr>
+                <th>Texto Principal</th>
+            </tr>
+            <tr class="">
+                <td><input class="form-control" id="textoPrincipalBannerInput" maxlength="30" value="@if (Model.showroom != null && Model.showroom.Banner != null ) { @Model.showroom.Banner.Titulo} "/></td>
+            </tr>
+            <tr>
+                <th>Color</th>
+            </tr>
+            <tr class="">
+                <td>
+                    <input type="text" id="colorPickerBannerInput" class="form-control colorPicker" data-control="hue" value="@if (Model.showroom != null && Model.showroom.Banner != null ) { @Model.showroom.Banner.ColorBanner}" readonly="readonly">
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div class=""></div>
+
+    
+</div>
+<div class=" ">
+   <form  method="post" id="formaulatioGeneral" style="display:none ; height : 100%;">
+       
+       <div class="form-group col-md-2" style="border:1px solid black;">
+           <h5>Banners General</h5>
+           <div class="col-md-12">IdBannerActivo<label></label><input class="inputBannerFormGeneral form-control" id="idBannerActivo" value="@if (Model.showroom != null) { @Model.showroom.BannerID} " /></div>
+           <div class="col-md-12">ColorBannerActivo<label></label><input class=" inputBannerFormGeneral form-control" id="colorBannerActivo" value="@if (Model.showroom != null && Model.showroom.Banner != null ) { @Model.showroom.Banner.ColorBanner} " /></div>
+           <div class="col-md-12">Texto Principal<label></label><input class=" inputBannerFormGeneral form-control" id="textoPrincipalBannerActivo" value="@if (Model.showroom != null && Model.showroom.Banner != null ) { @Model.showroom.Banner.Titulo} " /></div>
+           <div class="col-md-12">EstaVacioSeccionBanner<label></label><input class="form-control" id="estaVacioSeccionBanner" /></div>
+           <div class="col-md-12">EsNuevo<label></label><input class="form-control" id="esNuevoBanner" value="false" /></div>
+           <h5>ShowRoom General</h5>
+           <div class="col-md-12">Color de fondo principal<label></label><input class="form-control inputFormularioPrincipal" id="colorDeFondoGenetal" value="" /></div>
+           <h5>Cuepo</h5>
+           <div class="col-md-12">IdCuepoActivo<label></label><input class="inputCuerpoFormGeneral form-control" id="idCuerpoActivo" value="@if (Model.showroom != null && Model.showroom.CuerpoID != null) { @Model.showroom.CuerpoID} " /></div>
+           <div class="col-md-12">
+               EsNuevo<label></label><input class="form-control" id="esNuevoCuerpo" value="false" />
+           </div>
+       </div>
+           </form>

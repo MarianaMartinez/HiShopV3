@@ -1,0 +1,55 @@
+﻿@model HiShop.Models.Base.ModelBase
+<!--AxelMolaro--><!--AxelMolaro-->
+<!--En esta vista irian todas la librerias , para no tener que agregarlas en las vistas-->
+@{
+    ViewBag.Title = "_base";
+}
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>HiShop</title>
+
+    <link href="~/css/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="~/css/material-design-iconic-font.css" rel="stylesheet" />
+    <!--<link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" href="~/css/bootstrap3.min.css" />
+    <link rel="stylesheet" href="~/css/jquery.minicolors.css" />
+    <link rel="stylesheet" href="~/css/dragAndDropHiShop.css" />
+    @RenderSection("libreriasCss", false)<!--Si se quiere agregar mas librerias se llama a esta seccion o la de librerias js de otra vista-->
+    <script type="text/javascript" src="~/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="~/js/popper.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="~/js/bootstrap.js"></script>-->
+    <script type="text/javascript" src="~/js/MensajesHiShop.js"></script>
+    <script type="text/javascript" src="~/js/PaginacionHiShop.js"></script>
+    <script type="text/javascript" src="~/js/stacktable.js"></script>
+    <script type="text/javascript" src="~/js/jquery.minicolors.min.js"></script>
+    <script type="text/javascript" src="~/js/facebookInicioSessin.js"></script>
+    <script type="text/javascript" src="~/js/push.min.js"></script>
+    <script type="text/javascript" src="~/js/Push.js"></script>
+    <script type="text/javascript" src="~/js/push/index.js"></script>
+    <script type="text/javascript" src="~/js/push/Messages.js"></script>
+    <script type="text/javascript" src="~/js/push/Permission.js"></script>
+    <script type="text/javascript" src="~/js/push/Util.js"></script>
+
+    @RenderSection("libreriasJs", false)
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+<body >
+    <script>
+        function estaLogueadoConFacebook() {
+        }
+    </script>
+  @RenderBody()<!--Se renderiza el body-->
+
+    <div class=" separadorFinal"><br /></div>
+
+    <footer class="pie">
+        <p id="time"><center>&copy; @DateTime.Now.Year - HiShop</center></p>
+    </footer>
+</body>
+</html>

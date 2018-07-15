@@ -1,0 +1,11 @@
+C:\finalfinal\HiShop\HiShop\bin\Release\netcoreapp2.0\HiShop.deps.json
+C:\finalfinal\HiShop\HiShop\bin\Release\netcoreapp2.0\HiShop.runtimeconfig.json
+C:\finalfinal\HiShop\HiShop\bin\Release\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+C:\finalfinal\HiShop\HiShop\bin\Release\netcoreapp2.0\HiShop.dll
+C:\finalfinal\HiShop\HiShop\bin\Release\netcoreapp2.0\HiShop.pdb
+C:\finalfinal\HiShop\HiShop\obj\Release\netcoreapp2.0\HiShop.csprojResolveAssemblyReference.cache
+C:\finalfinal\HiShop\HiShop\obj\Release\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+C:\finalfinal\HiShop\HiShop\obj\Release\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+C:\finalfinal\HiShop\HiShop\obj\Release\netcoreapp2.0\HiShop.AssemblyInfo.cs
+C:\finalfinal\HiShop\HiShop\obj\Release\netcoreapp2.0\HiShop.dll
+C:\finalfinal\HiShop\HiShop\obj\Release\netcoreapp2.0\HiShop.pdb

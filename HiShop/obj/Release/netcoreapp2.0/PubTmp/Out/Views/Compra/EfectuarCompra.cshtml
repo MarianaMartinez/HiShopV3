@@ -1,0 +1,37 @@
+﻿@model HiShop.Models.OrdenPedido.OrdenPedidoGeneralModelAndView
+@{
+    ViewData["Title"] = "EfectuarCompra";
+    Layout = null;
+}
+
+<body>
+    <div class="main">
+        
+
+
+<h2>Efectuar Compra</h2>
+<div class="col-md-12">
+    <div class="container-fluid ">
+        <div class="Separator">
+        </div>
+    </div>
+     <div class="main" >
+    <form class="form" action="/Compra/EfectuarCompra" enctype="multipart/form-data" method="post">
+        <div class="form-group col-md-4">
+            <label for="Nombre" class="control-label">Nombre </label>
+            <div>
+                <input class="form-control" name="productoId" value="@Model.Producto.ID" />
+                <input class="form-control" name="cantidad" value="@Model.cantidad" />
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-success2"><i class="zmdi zmdi-save"> </i> Guardar</button>
+            <button type="button" class="btn btn-info" onclick="return history.back(1);"><i class="zmdi zmdi-long-arrow-left "> </i> Volver</button>
+        </div>
+
+    </form>
+
+</div>
+    </div>
+    </div>
+</body>

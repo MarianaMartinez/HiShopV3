@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "prueba";
+}
+
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+
+                window.fbAsyncInit = function() {
+                    FB.init({
+                        appId: '1610232299056898',
+                        xfbml: true,
+                        version: 'v2.12'
+                    });
+                    FB.AppEvents.logPageView();
+                    cuarioDeDialogo();
+                    alimentarBoton();
+                   
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       
+        }(document, 'script', 'facebook-jssdk'));
+
+
+    /* mio 
+        $(document).ready(function () {
+            $.ajaxSetup({ cache: true });
+            $.getScript('https://connect.facebook.net/en_US/sdk.js', function () {
+                FB.init({
+                    appId: '1610232299056898',
+                    version: 'v2.7' // or v2.1, v2.2, v2.3, ...
+                });
+                FB.getLoginStatus(function () {
+                    //alert('Status updated!!');
+                    cuarioDeDialogo();
+                });
+            });
+        });
+    */
+        function cuarioDeDialogo() { 
+
+            FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.likes',
+                action_properties: JSON.stringify({
+                    object: 'http://localhost:49836',
+                })
+            }, function (response) {
+                // Debug response (optional)
+                console.log(response);
+                });
+
+        }
+
+        function alimentarBoton() { 
+            $('#fb-share-button').click(function () {
+                FB.ui({
+                    method: 'feed',
+                    link: "http://localhost:49836/",
+                    picture: 'https://media1.fdncms.com/memphisflyer/imager/u/magnum/4993317/art_amum_thismaysurpriseyou_installationviews-7-mag.jpg',
+                    name: "HiShop",
+                    description: "DESCRUPCION"
+                }, function (response) {
+                    console.log(response);
+                }
+                );
+            });
+
+
+        }
+        
+    </script>
+
+    <div class="fb-like"
+         data-share="true"
+         data-width="450"
+         data-show-faces="true">
+    </div>
+    <button id="fb-share-button">COMPARTIR</button>
+
+
+    
+
+</body>
+

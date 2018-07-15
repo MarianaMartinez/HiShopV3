@@ -1,0 +1,87 @@
+C:\Users\Jorge\source\repos\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.deps.json
+C:\Users\Jorge\source\repos\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.json
+C:\Users\Jorge\source\repos\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+C:\Users\Jorge\source\repos\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.dll
+C:\Users\Jorge\source\repos\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csprojResolveAssemblyReference.cache
+C:\Users\Jorge\source\repos\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+C:\Users\Jorge\source\repos\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+C:\Users\Jorge\source\repos\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
+C:\Users\Jorge\source\repos\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.pdb
+C:\Users\Jorge\source\repos\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
+C:\Users\Jorge\source\repos\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\bin\Debug\netcoreapp2.0\HiShop.deps.json
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.json
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\bin\Debug\netcoreapp2.0\HiShop.dll
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\bin\Debug\netcoreapp2.0\HiShop.pdb
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\obj\Debug\netcoreapp2.0\HiShop.csprojResolveAssemblyReference.cache
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\obj\Debug\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
+C:\Users\Pedro Cora\Desktop\HiShop-master\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
+C:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.deps.json
+C:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.json
+C:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+C:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csprojResolveAssemblyReference.cache
+C:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
+C:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
+C:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
+C:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.dll
+C:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.pdb
+C:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+C:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+C:\bk\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.deps.json
+C:\bk\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.json
+C:\bk\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+C:\bk\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.dll
+C:\bk\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.pdb
+C:\bk\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+C:\bk\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+C:\bk\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
+C:\bk\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
+C:\bk\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
+C:\pruebarepo2\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.deps.json
+C:\pruebarepo2\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.json
+C:\pruebarepo2\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+C:\pruebarepo2\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.dll
+C:\pruebarepo2\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.pdb
+C:\pruebarepo2\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csprojResolveAssemblyReference.cache
+C:\pruebarepo2\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+C:\pruebarepo2\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+C:\pruebarepo2\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
+C:\pruebarepo2\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
+C:\pruebarepo2\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.deps.json
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.json
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.dll
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.pdb
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csprojResolveAssemblyReference.cache
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
+C:\Users\Jorge\Documents\GitHub\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
+D:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.deps.json
+D:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.json
+D:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+D:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.dll
+D:\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.pdb
+D:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csprojResolveAssemblyReference.cache
+D:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+D:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+D:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
+D:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
+D:\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csprojResolveAssemblyReference.cache
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.deps.json
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.json
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.dll
+C:\Users\Pedro Cora\Desktop\HiShop\HiShop\bin\Debug\netcoreapp2.0\HiShop.pdb

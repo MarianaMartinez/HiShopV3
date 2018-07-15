@@ -1,0 +1,64 @@
+﻿@model HiShop.Models.ShowroomsModel.ShowroomGeneralModelAndView
+@{
+    ViewData["Title"] = "Catalogo";
+    Layout = "~/Views/Shared/_BaseShowroom.cshtml";
+}
+
+<h2>Catalogo</h2>
+
+<style>
+    .imagenCatalogo {
+        cursor: pointer;
+        height: 280px;
+        background-size: 100%;
+        background-repeat: no-repeat ;
+        border: 1px solid black;
+        padding-top: 200px;
+    }
+     .imagenCatalogo .texto{
+         background-color: rgba(0, 0, 0,0.5);
+         color:white;
+         font-weight: bold;
+    }
+</style>
+<div class="row">
+    <div class="container">
+        <div>
+            <br />
+            <h3><i class="zmdi zmdi-plus-box"></i> Catálogo </h3>
+        </div>
+        <div>
+            Filtro
+            <form method="get" id="formFiltro" action="/Articulo/ListarArticulo" class="form-inline">
+                <div class="form-group form-inline">
+                    <label class="control-label">Nombre</label>
+                    <input class="form-control" name="nombreFiltro" id="nombreFiltro" value="" />
+                </div>
+                <input name="paginaActual" value="" id="inputPaginaActual" readonly="readonly" type="hidden" />
+                <input value="" id="inputTotalDePaginas" readonly="readonly" type="hidden" />
+
+                <div class="form-group form-inline">
+                    <button type="submit" class="btn btn-success2">Filtrar</button>
+                    <button type="submit" class="btn btn-info" onclick="limpiarFiltros()">Limpiar Filtros</button>
+                </div>
+            </form>
+        </div>
+        <br />
+        <section>
+           @foreach (var p in Model.listaDeProductos)
+           { 
+               <a href="/Compra/DetallesDeProducto/@p.ID">
+                   <div class="imagenCatalogo col-md-3 col-md-offset-1" style="background-image: url(@p.UrlImagen);" >
+                        <div class="texto">
+                            <p>Nombre : @p.Nombre</p>
+                            <p>Precio : @p.Precio</p>
+                        </div>
+                    </div>
+               </a>
+
+           }
+        </section>
+        
+    </div>
+</div>
+<hr />

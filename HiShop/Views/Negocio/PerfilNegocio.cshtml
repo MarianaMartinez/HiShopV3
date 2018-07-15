@@ -1,0 +1,79 @@
+﻿@model HiShop.Entity.Negocio
+@{
+    ViewData["Title"] = "PerfilNegocio";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+<div class="row">
+    <div class="col-md-6 col-md-offset-4">
+        <div>
+            <h6>
+                Mi Negocio
+            </h6>
+            <p>Esta vista por ahora queda así, después va a ser la plantilla del showroom</p> 
+            <div class="alert-success text-success text-center">
+                @TempData["RegistroCorrecto"]
+            </div>
+            <br />
+        </div>
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Calle)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Calle)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Numero)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Numero)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Telefono)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Showroom)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Showroom)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Descripcion)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a href="javascript:history.back(1)" class="btn btn-warning">
+                <span class="glyphicon glyphicon-circle-arrow-left">
+
+                </span> Atrás
+            </a>
+            <a href="/Negocio/EditarNegocio/@Model.ID" value="@Model.ID" class="btn btn-info">Editar</a>
+            <a href="/Negocio/DarDeBajaNegocio/@Model.ID" value="@Model.ID" class="btn btn-danger">Dar de baja</a>
+        </div>
+    </div>
+</div>
+<div>
+    <a href="javascript:history.back(1)">
+        <input type="button" value="Atras" class="btn btn-danger" />
+    </a>
+</div> 

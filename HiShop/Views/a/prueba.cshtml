@@ -1,0 +1,64 @@
+﻿@model HiShop.Models.Base.ModelBase
+
+@{ 
+    ViewData["Title"] = "prueba";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>prueba</title>
+    <link href="~/css/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="~/css/material-design-iconic-font.css" rel="stylesheet" />
+    <!--<link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" href="~/css/bootstrap3.min.css" />
+    <link rel="stylesheet" href="~/css/jquery.minicolors.css" />
+    <link rel="stylesheet" href="~/css/dragAndDropHiShop.css" />
+    <script type="text/javascript" src="~/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="~/js/popper.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="~/js/bootstrap.js"></script>-->
+    <script type="text/javascript" src="~/js/MensajesHiShop.js"></script>
+    <script type="text/javascript" src="~/js/PaginacionHiShop.js"></script>
+    <script type="text/javascript" src="~/js/stacktable.js"></script>
+    <script type="text/javascript" src="~/js/jquery.minicolors.min.js"></script>
+    <script type="text/javascript" src="~/js/facebookInicioSessin.js"></script>
+</head>
+<body>
+    <p> TEST </p>
+    
+
+
+    <div id="fb-root"></div>
+    <script>
+        $("document").ready(function () { 
+            (function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = 'https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.12&appId=1610232299056898&autoLogAppEvents=1';
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+
+
+            $('.fbsharelink').click(function ()
+            {
+            var shareurl = $(this).data('shareurl');
+            window.open('https://www.facebook.com/sharer/sharer.php?u=' + escape("http://192.168.0.3:8080/a/prueba")+'&t='+"HiShop", '',
+            'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+            return false;
+            });
+
+        });
+
+    </script>
+
+    <div class="fb-share-button" data-href="  http://192.168.0.3:8080/a/prueba" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A49836%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
+    <a class="fbsharelink" data-shareurl="YOURLINK">Facebook</a>
+
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+﻿@model HiShop.Models.Inicio.InicioModelAndView
+@{
+    ViewData["Title"] = "InicioNoRegistrado";
+    Layout = "~/Views/Shared/_BaseMenuNoRegistrado.cshtml";
+}
+
+@section libreriasJs
+    {
+    <script>
+
+        $("document").ready(function () {
+            $("body").addClass("bodyInicio");
+            $("#btn-ingresar").click(function () {
+                mostrarSeccionRegistroLogin();
+            });
+        });
+
+        function mostrarSeccionRegistroLogin() {
+            debugger;
+            $("#seccionRegistroLogin").show();
+        }
+
+        function ocultarSeccionRegistroLogin() {
+            $("#seccionRegistroLogin").hide();
+        }
+    </script>
+
+
+    <script type="text/javascript">
+
+        Push.create('Bienvenido a HiShop'), {
+            icon: '~\HiShop\wwwroot\images\Logo2.png',
+
+        };
+    </script>
+
+}
+<style>
+</style>
+<div class="separador "></div>
+<div class="container-fluid col-lg-12 ">
+
+
+    <div class="fondo  visible-lg visible-md visible-sm "> </div>
+    <div id="seccionRegistroLogin " class=" registroLoginForm ">
+        <div class="fondo2  visible-xs "> </div>
+
+
+
+        <div class="col-xs-12  visible-xs">
+            <h4>Ingreso</h4>
+            <form class="form" action="/Registro/LoginPostMobile" method="post">
+                <div class="form-group">
+                    <label class="control-label">Mail</label>
+                    <input type="text" name="mailLogin" class="form-control" placeholder="Ingrese Nombre">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Contraseña</label>
+                    <input type="password" name="contraseñaLogin" class="form-control" placeholder="Ingrese Contraseña">
+                </div>
+                <button type="submit" class="btn btn-success">Ingresar</button>
+                <button type="button" class="btn btn-success"> <fb:login-button autologoutlink="true" perms="read_friendlists, create_event, email, publish_stream"></fb:login-button></button>
+
+            </form>
+        </div>
+
+        <div class="separador"></div>
+        <div class="col-md-4 col-xs-12 pull-right ">
+            <form class="form" action="/Registro/RegistroPostAsync" method="post">
+                <h4>Registro</h4>
+                <div class="form-group">
+                    <label class="control-label">Nombre</label>
+                    <div>
+                        <input class="form-control" name="nombre" value="@Model.nombre" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.nombre)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Apellido</label>
+                    <div>
+                        <input class="form-control" name="apellido" value="@Model.apellido" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.apellido)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Mail</label>
+                    <div>
+                        <input class="form-control" name="mail" value="@Model.mail" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.mail)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Repita el Mail</label>
+                    <div>
+                        <input class="form-control" name="mail2" value="@Model.mail2" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.mail2)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Contraseña</label>
+                    <div>
+                        <input type="password" class="form-control" name="Contraseña" value="@Model.contraseña" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.contraseña)</div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="control-label">Repita la Contraseña</label>
+                    <div>
+                        <input type="password" class="form-control" name="Contraseña2" value="@Model.contraseña2" />
+                        <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.contraseña2)</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Registrarse  </button>
+            </form>
+            <div class="separador"></div>
+            <div class="separador"><br /></div>
+        </div>
+    </div>
+</div>
+

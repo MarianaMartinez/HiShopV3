@@ -1,0 +1,234 @@
+﻿@model HiShop.Models.Base.ModelBase
+
+
+@{
+    ViewData["Title"] = "InicioNoRegistrado";
+    Layout = "~/Views/Shared/_Base.cshtml";
+}
+
+
+<script>
+    //D. Ready
+    $(function () {
+        //Inicia facebook
+        //AxelMolaro
+        //cargarFacebook();
+      
+    });
+
+    //Seleccionar un negocio y lo manda al controller y lo poene en session
+    //AxelMolaro
+    function seleccionarNegocio(id) {
+        $.ajax({
+            url: '/Negocio/SeleccionarNegocio',
+            data: { id },
+            type: 'POST',
+            async: true,
+            success: (function (result) {
+                debugger;
+                if (result.data.mensaje.tipo == "ERROR") {
+                    crearMensaje("mensajeGeneral", result.data.mensaje.texto, result.data.mensaje.tipo);
+                } else {
+                    location.reload();
+                }
+            }),
+            error: (function (result) {
+
+                alert("Error al seleccionar");
+            })
+        })
+    }
+
+
+    function cerrarSession() { 
+
+        //cerrarSessionFacebook();
+        window.location.href = "/Usuario/CerrarSesion";
+    }
+</script>
+
+<title>@ViewBag.Title</title>
+
+
+
+<nav class=" navbar-collapse navbar-default">
+
+    <div class="container-fluid ">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand visible-xs" href="/Inicio/InicioLogueado">HiShop</a>
+           
+    
+    </div>
+
+    
+    <a class="navbar-brand visible-lg visible-md" href="/Inicio/InicioLogueado">HiShop</a>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        
+        <ul class="nav navbar-nav ">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Ecommerce
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/Catalogo/Ecommerce">Buscar Productos</a></li>
+                </ul>
+
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Negocio
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/Negocio/MisNegocios">Negocios</a></li>
+                    @if (Model.negocioModelBase != null)
+                    {
+                        <li><a href="/Showroom/EditarShowroom">Maquetar negocio</a></li>
+                        <li><a href="/Articulo/ListarArticulo">Artículos</a></li>
+                    }
+                   
+                </ul>
+            </li>
+        
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Estadísticas
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/Catalogo/OrdenesDePedido">Ventas</a></li>
+                    <li><a href="#">Pedidos</a></li>
+                </ul>
+
+            </li>
+           
+            <li><a href="/Usuario/Perfil"><span class="glyphicon glyphicon-user"></span> @if (Model.usuarioModelBase != null) { @Model.usuarioModelBase.Mail }</a></li>
+            
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    @if (Model.negocioModelBase != null)
+                    {
+                        <span> @Model.negocioModelBase.Nombre</span>
+                    }
+                    else
+                    {
+                        <span> Seleccionar Negocio </span>
+                    }
+
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                @if (Model.negociosModelBase != null)
+                {
+                    @foreach (var negocio in Model.negociosModelBase)
+                    {
+                        @if (Model.negocioModelBase != null && Model.negocioModelBase.ID == negocio.ID)
+                        {
+                            <li class="alert-success" onclick="seleccionarNegocio('@negocio.ID')"><a  >@negocio.Nombre</a></li>
+                        }
+                        else
+                        {
+                            <li onclick="seleccionarNegocio('@negocio.ID')"><a >@negocio.Nombre</a></li>
+                        }
+                    }
+                }
+                    @if ( Model.negociosModelBase == null  ||Model.negociosModelBase.Count <= 0 )
+                    {
+                        <li><a href="#">No tienes ningun negocio</a></li>
+
+                    }
+                    <li ><a href="/Negocio/RegistrarNegocio" class=" alert-info " ><span class="glyphicon glyphicon-plus-sign"></span> Nuevo</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right visible-lg visible-md">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Tienes una nueva venta</a></li>
+                </ul>
+            </li>
+            <li><a href="/Usuario/CerrarSesion"><span class="glyphicon glyphicon-user"></span> Cerrar Sesión</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav  visible-xs visible-sm">
+            
+            <li><a href="/Usuario/CerrarSesion"><span class="glyphicon glyphicon-user"></span> Cerrar Sesión</a></li>
+
+        </ul>
+         
+        <form class="buscadorHeader  visible-md visible-lg" role="search" action="/Catalogo/Ecommerce/query=@TempData["PalabraClave"]" id="formBuscar" method="post">
+            <div class="input-group">
+                <input type="text" class="form-control" aria-describedby="start-date">
+                <span class="input-group-addon" id="start-date"><span class="glyphicon glyphicon-search" onclick="$('#formBuscar').submit()"></span></span>
+            </div>
+        </form>
+    </div>
+
+
+</nav>
+
+<br />
+@{
+
+    if (TempData["Mensajes"] != null)
+    {
+        List<HiShop.Models.MensajeModel> mensajes = (List<HiShop.Models.MensajeModel>)TempData["Mensajes"];
+        foreach (var mensaje in mensajes)
+        {
+
+            <div class="alert @mensaje.tipo">@mensaje.texto </div>
+        }
+    }
+
+
+}
+
+<br />
+@{
+
+    if (TempData["Mensajes"] != null)
+    {
+        List<HiShop.Models.MensajeModel> mensajes = (List<HiShop.Models.MensajeModel>)TempData["Mensajes"];
+        foreach (var mensaje in mensajes)
+        {
+
+            <div class="alert @mensaje.tipo">@mensaje.texto </div>
+        }
+    }
+
+
+}
+<form class="buscadorMobile  pull-right visible-xs" role="search" action="/Catalogo/Ecommerce/query=@TempData["PalabraClave"]" id="formBuscar2" method="post">
+    <div class="input-group">
+        <input type="text" class="form-control" aria-describedby="start-date" >
+        <span class="input-group-addon" id="start-date"><span class="glyphicon glyphicon-search" onclick="$('#formBuscar2').submit()"></span></span>
+    </div>
+</form>
+<br />
+
+<div id="mensajeGeneral"></div>
+@RenderBody()
+
+
+
+
+  
+@RenderBody()
+
+    
+   
+
+

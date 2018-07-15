@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "InicioLogueado";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+
+<link href="~/css/menu.css" rel="stylesheet" />
+<script type="text/javascript">
+    //var noti = 1;
+    //if (noti == 1) {
+    //if (@ViewBag.MSG != null) {
+
+    Push.create("Inicio de Negocio: @Model.negocioModelBase.Nombre", {
+            timeout: 2000,
+            body: "Revisa tu Stock de Proudctos",
+            icon: "~\HiShop\wwwroot\images\succes.png",
+            onClick: function () {
+                window.location = "http://localhost:44300/Articulo/ListarArticulo";
+                this.close();
+            },
+            //noti = noti + 1
+        });
+    @*}
+    else
+        Push.create("Inicio de Negocio: @Model.negocioModelBase.Nombre", {
+            timeout: 4000,
+            body: "Proudctos",
+        });*@
+
+         @*if(noti == 2)
+     Push.create("Inicio de Negocio: @Model.usuarioModelBase.Nombre", {
+            timeout: 2000,
+            body: "Visita el Ecommerce",
+            icon: "~\HiShop\wwwroot\images\succes.png",
+            onClick: function () {
+                window.location ="http://localhost:44300/Catalogo/Ecommerce";
+                this.close();
+            }
+        });*@
+
+    //}
+
+
+
+</script>
+
+
+
+
+
+
+@*Push.create("@Model.negocioModelBase.Nombre Tiene una nueva venta", {
+           timeout: 4000,
+           icon: "~\wwwroot\images\Hi2.png",
+           onClick: function () {
+               window.focus();
+               this.close();
+           }
+    });*@
+
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">*@
+<div class="container-fluid">
+    <div class="title-arch">HiShop <p>De Emprendedores para Emprendedores.</p></div>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project wow animated animated4 fadeInLeft">
+        <div class="project-hover">
+            <h2>Ecommerce</h2>
+
+            <hr />
+            <p>En el Ecommerce de HiShop encontras articulos y servicios variados.</p>
+            <a href="/Catalogo/Ecommerce">Visita el Ecommerce de HiShop</a>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-2 wow animated animated3 fadeInLeft">
+        <div class="project-hover">
+            <h2>Ventas</h2>
+            <hr />
+            <p>Controla tus ventas, tene a tus clientes con lo que ellos necesitan.</p>
+            <a href="/Catalogo/OrdenesDePedido">Entrar a Ventas</a>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-3 wow animated animated2 fadeInLeft">
+        <div class="project-hover">
+            <h2>Compras</h2>
+            <hr />
+            <p>Que te compraste?, entra para ver tu listado de ellas.</p>
+            <a href="/Compras/ComprasListado">Entrar a Compras</a>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-4 wow animated fadeInLeft">
+        <div class="project-hover">
+            <h2>Perfil</h2>
+            <hr />
+            <p>Tu Perfil, modificaciones y ver tus datos personales.</p>
+            <a href="/Usuario/Perfil">Entrar a Perfil</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

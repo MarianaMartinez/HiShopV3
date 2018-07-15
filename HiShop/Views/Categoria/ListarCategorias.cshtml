@@ -1,0 +1,469 @@
+﻿ @model HiShop.Models.CategoriaModelAndView
+@{
+    ViewData["Title"] = "ListarCategorias";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+<script>
+
+    $(function () {
+        $("i .zmdi-long-arrow-down").on("mouseover", function () {
+            alert(padre + " " + length);
+            var padre = $(this).attr("id");
+            var lista = $('[padre="' + idPadre + '"]');
+            alert(padre + " " +length);
+        } );
+    });
+
+     //Devuelve las categorias de un padre
+    //AxelMolaro
+    function traerCategoriasDeUnPadre(id, nombrePadre) {
+
+        $.ajax({
+            url: '/Categoria/llenarCategoriasHijas',
+            data: { id },
+            type: 'POST',
+            async: true,
+            success: (function (result) {
+                var array = [];
+
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].padreId == id)
+                    { 
+                        array.push(result[i]);
+                    }
+                }
+                
+                return array;
+            })
+        })
+    }
+
+
+      //Llenas las hijas  , no pega repetidas si tienen el mismo padre
+    //AxelMolaro
+    function llenarCategoriasHijas(id, nombrePadre, nombrePadreSinId) {
+       
+        $.ajax({
+            url: '/Categoria/llenarCategoriasHijas',
+            data: { id },
+            type: 'POST',
+            success: (function (result) {
+                
+                for (var i = 0; i < result.length; i++)
+                {
+                    var idCategoria = result[i].id;
+                    var nombreCategoria = result[i].nombre;
+                    var numeroHija = $("#" + nombrePadre).text().replace(nombrePadre, "") + "." + (i + 1) + "";
+                    if (exiteCategoria(id, nombreCategoria, nombrePadreSinId) == false)
+                        crearCategoriaHija(id, nombreCategoria, idCategoria, nombreCategoria, numeroHija);
+                }
+            })
+        })
+    }
+
+    //Llenas las hijas cuendo hay un alta
+    //AxelMolaro
+    function llenarCategoriasHijasAlta(id, nombrePadre) {
+       
+        $.ajax({
+            url: '/Categoria/llenarCategoriasHijas',
+            data: { id },
+            type: 'POST',
+            success: (function (result) {
+
+                var estaAbieto = false;
+                var elemento = $("#" + id);
+                var clase = document.getElementById(id).className;
+
+                cambiarLogoAOpen(id);
+
+
+                for (var i = 0; i < result.length; i++) {
+                    var idCategoria = result[i].id;
+                    var nombreCategoria = result[i].nombre;
+
+                    var numeroHija = $("#" + nombrePadre).text().replace(nombrePadre, "") + "." + (i + 1) + "";
+                    if (exiteCategoria(id, nombreCategoria, nombrePadre) == false)
+                        crearCategoriaHija(id, nombreCategoria, idCategoria, nombreCategoria, numeroHija);
+                }
+            })
+        })
+    }
+
+    //Edita una categoria, hace un llamado ajax, y la reemplaza en el listado
+    //AxelMolaro
+    function editarCategoria() {
+
+        var id = $("#idcategoriaSeleccionada").val();
+        var nombre = $("#nuevoNombreEditar").val();
+        var nombreViejo = $("#nombreCategoriaSeleccionada").val();
+        $.ajax({
+            url: '/Categoria/editarCategoriaAsync',
+            data: { id , nombre },
+            type: 'POST',
+            success: (function (result) {
+                var categoriaVieja = $("#nombreCategoria-" + id);
+                crearMensaje("mensajeGeneralCategoria", result.texto, result.tipo);
+                if (result.tipo == "EXITO") {
+                    categoriaVieja.text(nombre);
+                    ocultarFormularioDeEdicion();
+                }
+            }),
+            error: (function (result) {
+                crearMensaje("mensajeGeneralCategoria", result.tipo, "ERROR");
+            })
+        })
+    }
+
+    //Da de baja una categoria hace un llamado ajax, y la saca del listado
+    //AxelMolaro
+    function eliminarCategoria() {
+
+        var id = $("#idcategoriaSeleccionadaBaja").val();
+        var nombre = $("#nombreCategoriaSeleccionadaBaja").val();
+        $.ajax({
+            url: '/Categoria/eliminarCategoriaAsync',
+            data: { id },
+            type: 'POST',
+            success: (function (result) {
+                crearMensaje("mensajeGeneralCategoria", result.texto, result.tipo);
+                if (result.tipo == "EXITO") {
+                    $("#" + nombre).remove();
+                    ocultarFormularioDeBaja();
+                }
+            }),
+            error: (function (result) {
+                crearMensaje("mensajeGeneralCategoria", result.tipo, "ERROR");
+            })
+
+        })
+    }
+
+      //Da de alta unca categoria hace un llamado ajax, y la agrega al listado
+    //AxelMolaro
+    function grabarCategoria() {
+
+        var id = $("#idcategoriaSeleccionadaAlta").val();
+        var nombrePadre = $("#nombreCategoriaSeleccionadaAlta").val();
+        var nombre = $("#nuevoNombreAlta").val();
+        $.ajax({
+            url: '/Categoria/altaCategoriaAsync',
+            data: { id ,nombre},
+            type: 'POST',
+            async: true,
+            success: (function (result) {
+                if (id != "") {
+                    if (result.data.mensaje.tipo == "EXITO")
+                        llenarCategoriasHijasAlta(id, nombrePadre);
+                        ocultarFormularioDeAlta();
+                } else {
+                    if (result.data.mensaje.tipo == "EXITO")
+                        crearCategoriaGeneral(result.data.idCategoriaNueva, nombre);
+                        ocultarFormularioDeAlta();
+                }
+                crearMensaje("mensajeGeneralCategoria", result.data.mensaje.texto, result.data.mensaje.tipo);
+            }),
+            error: (function (result) {
+                crearMensaje("mensajeGeneralCategoria", result.data.mensaje.texto, "ERROR");
+            })
+        })
+    }
+
+    //Optiene el numero de la categoria padre antes de agregar
+    //AxelMolaro
+    function obtenerNumeroAntesDeAgregar(idPadre)
+    {
+        var lista = $('[padre="' + idPadre + '"]');
+        var total = lista.length;
+        var ultimoElemento = lista[total-1];
+        var numeroUltimo = $("#" + ultimoElemento.id + " .numeroCategoria").text();
+       
+
+    }
+
+    //Cambia el iciono apara abajo o la derecja segun corresponda
+    //AxelMolaro
+    function cambiarLogoDelIcono(id)
+    {
+        var estaAbieto = false;
+        var elemento = $("#" + id);
+        var clase = document.getElementById(id).className;
+        elemento.removeClass(clase);
+        elemento.addClass("zmdi");
+        if (clase == "zmdi zmdi-arrow-right") {
+            elemento.addClass("zmdi-long-arrow-down");
+        } else
+        {
+            elemento.addClass("zmdi-arrow-right");
+        }
+
+    }
+
+    //Cambia el icono de la flechita siempre apuntando para abajo
+    //AxelMolaro
+    function cambiarLogoAOpen(id) {
+        var estaAbieto = false;
+        var elemento = $("#" + id);
+        var clase = document.getElementById(id).className;
+        elemento.removeClass(clase);
+        elemento.addClass("zmdi");
+        elemento.addClass("zmdi-long-arrow-down");
+
+    }
+
+    //Crea el html de una categoria donde corresponda
+    //AxelMolaro
+    function crearCategoriaHija(idPadre,nombrePadre,idHija,nombreHija,numeroHija)
+    {
+        
+        var elemento = $("#" + idPadre + "-hijas");
+        elemento.append("<div class='categoria col-md-10' padre='" + idPadre + "' id= '" + nombreHija + "' > <i id='" + idHija + "' class='zmdi zmdi-arrow-right' style='cursor : pointer;' onclick='llenarCategoriasHijas(this.id,\"" + nombrePadre + "\");mostrarOcultarCategoriasHijas(" + idHija + ")' ></i> <span class='numeroCategoria'>" + numeroHija + "</span>" + "<span id='nombreCategoria-" + idHija +"'> "  + nombreHija + "</span>" +
+            "<i id='' class='zmdi zmdi-file-add  alert-success' style='cursor : pointer;' onclick='llenarFormularioDeAlta(\"" + idHija + "\",\"" + nombreHija + "\")' ></i> " +
+            "<i id='' class='zmdi zmdi-edit alert-info' style='cursor : pointer;' onclick='llenarFormularioDeEdicion (\"" + idHija + "\",\"" + nombreHija + "\")' ></i> " +
+            "<i id='' class='zmdi zmdi-delete alert-danger' style='cursor : pointer;' onclick='llenarFormularioDeBaja (\"" + idHija + "\",\"" + nombreHija + "\")' ></i> "+
+
+            " </div >" +
+            "<div id='" + idHija + "-hijas'>" +
+
+            "</div>");
+    }
+
+    //Crea una categoria general (que no tiene padre), en el html
+    //AxelMolaro
+    function crearCategoriaGeneral(id, nombre) {
+
+        var cantidadDeCategoriasGenerales = $('[padre=""]').length;
+        var numero = cantidadDeCategoriasGenerales + 1;
+        var elemento = $("#arbolDeCategorias");
+        elemento.append("<div class='categoria col-md-10 ' padre='' id= '" + nombre + "' > <i id='" + id + "' class='zmdi zmdi-arrow-right' style='cursor : pointer;' onclick='llenarCategoriasHijas(this.id,\"" + nombre + "\");mostrarOcultarCategoriasHijas(" + id + ")' ></i> <span class='numeroCategoria'>" + numero+"     " + "</span>" + "<span id='nombreCategoria-" + id + "'>" + nombre +" "+"</span>" +
+            "<i id='' class='zmdi zmdi-file-add  alert-success' style='cursor : pointer;' onclick='llenarFormularioDeAlta(\"" + id + "\",\"" + nombre + "\")' ></i> " +
+            "<i id='' class='zmdi zmdi-edit alert-info' style='cursor : pointer;' onclick='llenarFormularioDeEdicion (\"" + id + "\",\"" + nombre + "\")' ></i> " +
+            "<i id='' class='zmdi zmdi-delete alert-danger' style='cursor : pointer;' onclick='llenarFormularioDeBaja (\"" + id + "\",\"" + nombre + "\")' ></i> " +
+
+            " </div >" +
+            "<div id='" + id + "-hijas'  >" +
+
+            "</div>");
+    }
+
+    //Hace un llamado ajax y verifica si ta existe la categoria con el mismo nombre y el mismo padre
+    //si es asi devuelve true sino falselo
+    //AxelMolaro
+    function exiteCategoria(id, nombre, nombrePadre) {
+         var lista = []
+        $.ajax({
+            url: '/Categoria/llenarCategoriasHijas',
+            data: { id },
+            type: 'POST',
+            async: false,
+            success: (function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    lista.push(result[i]);
+                }
+            })
+        })
+
+       
+        for (var i = 0; i < lista.length; i++)
+        {
+
+            var nombreElementoLista = lista[i].nombre;
+            if ($("#" + lista[i].id).length != 0 && nombreElementoLista == nombre)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Al hacer clieck en la flechita muesta o oculta la categorias hijas de un padre
+    //AxelMolaro
+    function mostrarOcultarCategoriasHijas(padre)
+    {
+        debugger;
+        var lista = $('[padre="' + padre + '"]');
+        var clase = document.getElementById(padre).className;
+        if (clase == "zmdi zmdi-arrow-right") {
+            $("#" + padre + "-hijas").fadeIn();
+            clase = 'zmdi zmdi-long-arrow-down';
+            cambiarLogoAOpen(padre);
+        } else {
+            $("#" + padre + "-hijas").fadeOut();
+            debugger;
+            document.getElementById(padre).className = 'zmdi zmdi-arrow-right';
+
+        }
+    }
+
+    //Llena los readonly del formulario de edicion
+    //AxelMolaro
+    function llenarFormularioDeEdicion(idCategoria, nombreCategoria)
+    {
+
+        mostrarFormularioDeEdicion();
+        $("#nombreCategoriaSeleccionada").val(nombreCategoria);
+        $("#idcategoriaSeleccionada").val(idCategoria);
+    }
+
+
+    //Muestra el formulaio de edicion y oculta el de alta y el de baja
+    //AxelMolaro
+    function mostrarFormularioDeEdicion()
+    {
+        ocultarFormularioDeBaja()
+        ocultarFormularioDeAlta();
+        var form = $("#formularioEdicion");
+        form.fadeIn();
+    }
+
+    //Oculta el formualrio de edicion
+    //AxelMolaro
+    function ocultarFormularioDeEdicion() {
+        var form = $("#formularioEdicion");
+        form.fadeOut(1);
+    }
+
+    //llena los readonly de los formularios de alta 
+    //AxelMolaro
+    function llenarFormularioDeAlta(idCategoria, nombreCategoria) {
+        mostrarFormularioDeAlta();
+        $("#nombreCategoriaSeleccionadaAlta").val(nombreCategoria);
+        $("#idcategoriaSeleccionadaAlta").val(idCategoria);
+    }
+
+    //Muestra el formualrio de alta y oculta el de edicion y borrado
+    //AxelMolaro
+    function mostrarFormularioDeAlta() {
+        ocultarFormularioDeBaja();
+        ocultarFormularioDeEdicion();
+
+        var form = $("#formularioAlta");
+        form.fadeIn();
+    }
+
+    //oculta el formulario de alta
+    //AxelMolaro
+    function ocultarFormularioDeAlta() {
+        var form = $("#formularioAlta");
+        form.fadeOut(1);
+    }
+
+    //Llena los campos readonly del campo de baja
+    //AxelMolaro
+    function llenarFormularioDeBaja(idCategoria, nombreCategoria) {
+        mostrarFormularioDeBaja();
+
+        $("#nombreCategoriaSeleccionadaBaja").val(nombreCategoria);
+        $("#idcategoriaSeleccionadaBaja").val(idCategoria);
+    }
+
+    //Muestra el formulario de baja y oculta el de alta y edicion
+    //AxelMolaro
+    function mostrarFormularioDeBaja() {
+        ocultarFormularioDeEdicion();
+        ocultarFormularioDeAlta();
+        var form = $("#formularioBaja");
+        form.fadeIn();
+    }
+
+    //oculta el formulario de baja
+    //AxelMolaro
+    function ocultarFormularioDeBaja() {
+        var form = $("#formularioBaja");
+        form.fadeOut(1);
+    }
+</script>
+<div class="col-xs-offset-0 col-xs-12 col-md-offset-4 col-md-12 ">
+    <br />
+    <h2>Listado de Categorias</h2>
+    <br />
+    <div id="mensajeGeneralCategoria"></div>
+    <div class="">
+        <div class="row">
+            <form class="form col-md-12 oculto well" id="formularioEdicion">
+                <h3 id="">Formulario de edición </h3>
+                <div class="form-group">
+                    <div>
+
+                        <input type="hidden" class="form-control" readonly="readonly" id="idcategoriaSeleccionada" />
+                        <label class="control-label">Nombre Actual</label>
+                        <input class="form-control" readonly="readonly" id="nombreCategoriaSeleccionada" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nuevo Nombre</label>
+                    <div>
+                        <input class="form-control" id="nuevoNombreEditar" />
+                    </div>
+                </div>
+                <input type="button" class="btn btn-success2" value="Aceptar" onclick="editarCategoria()" />
+                <input type="button" class="btn btn-info" value="Cancelar" onclick="ocultarFormularioDeEdicion()" />
+            </form>
+
+            <form class="form col-md-3 oculto well" id="formularioAlta">
+                <h3 id="a">Formulario de Alta </h3>
+                <div class="form-group">
+                    <div>
+                        <label class="control-label">Categoria Padre</label>
+                        <input type="hidden" class="form-control" readonly="readonly" id="idcategoriaSeleccionadaAlta" />
+                        <input class="form-control" readonly="readonly" id="nombreCategoriaSeleccionadaAlta" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nombre</label>
+                    <div>
+                        <input class="form-control" id="nuevoNombreAlta" />
+                    </div>
+                </div>
+                <input type="button" class="btn btn-success2" value="Aceptar" onclick="grabarCategoria()" />
+                <input type="button" class="btn btn-info" value="Cancelar" onclick="ocultarFormularioDeAlta()" />
+            </form>
+            <form class="form col-md-3 oculto well" id="formularioBaja">
+                <h3 id="a">Formulario de Baja </h3>
+                <div class="form-group">
+                    <label class="control-label">Nombre</label>
+                    <div>
+                        <input type="hidden" class="form-control" readonly="readonly" id="idcategoriaSeleccionadaBaja" />
+                        <input class="form-control" readonly="readonly" id="nombreCategoriaSeleccionadaBaja" />
+                    </div>
+                </div>
+                <div class="alert-warning">¿Seguro que quiere borrar la categoria?</div>
+                <br />
+                <input type="button" class="btn btn-danger" value="Si" onclick="eliminarCategoria()" />
+                <input type="button" class="btn btn-info" value="No" onclick="ocultarFormularioDeBaja()" />
+            </form>
+        </div>
+
+        <div class="Separator"> <br /></div>
+        <div id="arbolDeCategorias" >
+            <div class="row">
+                <div class="btn btn-info" onclick="llenarFormularioDeAlta(null,null)"><i class="zmdi  zmdi-assignment"></i> Agregar categoria general</div>
+            </div>
+            @{
+                var i = 1;
+                @foreach (var c in Model.categorias)
+            {
+                    <div class="categoria  col-md-10" padre="" id="@c.Nombre">
+                        <i id="@c.ID" class="zmdi zmdi-arrow-right" style="cursor : pointer;" onclick="llenarCategoriasHijas(this.id,'@c.Nombre','@c.Nombre');mostrarOcultarCategoriasHijas(@c.ID);"></i>  <span class="numeroCategoria">@i </span><span id="nombreCategoria-@c.ID"> @c.Nombre  </span>
+                        <i id="" class="zmdi zmdi-file-add  alert-success" style="cursor : pointer;" onclick="llenarFormularioDeAlta('@c.ID','@c.Nombre')"></i>
+                        <i id="" class="zmdi zmdi-edit alert-info" style="cursor : pointer;" onclick="llenarFormularioDeEdicion ('@c.ID','@c.Nombre')"></i>
+                        <i id="" class="zmdi zmdi-delete alert-danger" style="cursor : pointer;" onclick="llenarFormularioDeBaja ('@c.ID','@c.Nombre')"></i>
+                    </div>
+
+                    <div id="@c.ID-hijas">
+
+
+                    </div>
+
+                    i++;
+                }
+
+            }
+
+        </div>
+
+
+    </div>
+</div>
+
+   

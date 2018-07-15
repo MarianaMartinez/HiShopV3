@@ -1,0 +1,177 @@
+﻿@model HiShop.Models.Negocio.NegocioGeneralModelAndView
+@{
+    ViewData["Title"] = "RegistrarNegocio";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+<br />
+<script>
+    $("document").ready(function () {
+        llenarImagen();
+    });
+    function llenarImagen()
+    {
+        if (getUrlImagen() == null || getUrlImagen() == "") {
+            $("#imagenFormulario").css('background-image', 'url(../../images/sinFotoDePerfil.jpg)');
+        } else
+        {
+            $("#imagenFormulario").css('background-image', 'url('+getUrlImagen()+')');
+        }
+    }
+    function getUrlImagen()
+    {
+        return '@Model.urlImagen';
+    }
+</script>
+<style>
+
+    .imagenFormulario {
+        background-size: 100%;
+        background-repeat: no-repeat;
+        height: 300px;
+        border: 3px solid orange;
+        padding: 1%;
+        margin: 1%;
+        border-radius: 275px;
+    }
+</style>
+<div class="container-fluid ">
+    <form action="@Model.urlForm" method="post" id="formulario" class="form well-sm" enctype="multipart/form-data">
+        <div>
+            <div>
+                <h3><i class="zmdi zmdi-store"></i> Edición de Negocio </h3>
+            </div>
+        </div>
+        <div class="form-group col-md-2 pull-left" id="inputFileFoto">
+            <div class="col-md-12 imagenFormulario" id="imagenFormulario">
+            </div>
+            <div class="">
+                <input type="file" name="file" id="file" value="" class="" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.file)</div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="Nombre" class="control-label">Nombre</label>
+            <input class="form-control" name="id" type="hidden" value="@Model.id" />
+            <input class="form-control" name="Nombre" placeholder="Ingresá el nombre de tu negocio" value="@Model.Nombre" />
+            <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Nombre)</div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="" class="control-label">Categoría</label>
+            <div>
+                <select id="Categoria" name="CategoriaFK" class="form-control">
+                    <option value="">Seleccionar</option>
+                    @foreach (var c in Model.listaDeCategorias)
+                {
+                    <option value="@c.ID">@c.Nombre</option>
+            }
+                </select>
+            </div>
+            <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.CategoriaFK)</div>
+        </div>
+        <div class="form-group col-md-2" id="">
+            <label class="control-label">Provincia</label>
+            <div>
+                <select name="ProvinciaFK" id="ProvinciaFK" class="form-control">
+                    <option value="">Seleccionar</option>
+                    @foreach (var p in Model.listaDeProvincias)
+                {
+                    <option value="@p.ID" name="ProvinciaFKModel">
+                        @p.Nombre
+                    </option>
+            }
+                </select>
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.ProvinciaFK)</div>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="" class="control-label">Localidad</label>
+            <div>
+                <select id="Localidad" name="LocalidadFk" class="form-control">
+                    <option value="">Seleccionar</option>
+                    @foreach (var l in Model.listaDeLocalidades)
+                {
+                    <option value="@l.ID">@l.Nombre</option>
+            }
+                </select>
+            </div>
+            <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.LocalidadFK)</div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="" class="control-label">Calle</label>
+            <div class="">
+                <input class="form-control" name="Calle" placeholder="Calle" value="@Model.Calle" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Calle)</div>
+
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="" class="control-label">Número</label>
+            <div class="">
+                <input class="form-control" name="Numero" placeholder="Número" value="@Model.Numero" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Numero)</div>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="Telefono" class="control-label">Teléfono</label>
+            <input class="form-control" name="Telefono" placeholder="Ejemplo: 11XXXXXXXX" value="@Model.Telefono" />
+            <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Telefono)</div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="Email" class="control-label">Email</label>
+            <div>
+                <input class="form-control" name="Email" placeholder="Ingresá tu Email" value="@Model.Email" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Email)</div>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="" class="control-label">Pack</label>
+            <a href="Packs">Pagar Pack</a>          
+            <div>
+                <select id="Pack" name="PackActivo" class="form-control">
+                    <option value="">Seleccionar</option>
+                    <option value="1">Pack Full</option>
+                    <option value="2">Pack Intermedio</option>
+                    <option value="3">Pack Basico</option>
+                </select>
+            </div>
+            <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.PackActivo)</div>
+        </div>
+        <!--<div class="form-group col-md-4">
+                        <label for="Email" class="control-label">Showroom</label>
+                        <div>
+                            <select id="Showroom" name="ShowroomFK" class="form-control">
+                                <option value="">Seleccionar</option>
+                                foreach (var s in Model.listaDeShowrooms)
+                                {
+                                    <option value="s.ID">s.</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="alert-danger text-danger">Html.ValidationMessageFor(model => model.Email)</div>
+                    </div>
+    -->
+
+
+        <div class="form-group">
+            <div class="form-group col-md-8">
+                <label for="Descripcion" class="control-label">Descripción</label>
+                <textarea class="form-control" name="Descripcion" id="mensaje" onKeyPress="actualizar(this)" maxlength="140" placeholder="Escribí una breve descripción aquí...">@Model.Descripcion</textarea>
+                <p>
+                    <div id="contador">
+                    </div>
+                </p>
+            </div>
+            <div class="alert-danger text-danger text-center">
+                @TempData["RegistroIncorrecto"]
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-success"><i class="zmdi zmdi-save"> </i> Guardar</button>
+            <button type="button" class="btn btn-info" onclick="return history.back(1);"><i class="zmdi zmdi-long-arrow-left "> </i> Volver</button>
+        </div>
+    </form>
+</div>

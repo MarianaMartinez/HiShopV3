@@ -1,0 +1,45 @@
+﻿@model HiShop.Entity.Negocio
+@{
+    ViewData["Title"] = "DarDeBajaNegocio";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+<div class="row">
+    <div class="col-md-6 col-md-offset-4">
+        <h4>¿Estás seguro que querés dar de baja tu negocio?</h4>
+        <h6> Te invitamos a habilitarlo nuevamente cuando quieras </h6>
+        <form action="/Negocio/DarDeBajaNegocio" method="post">
+            <input type="hidden" name="ID" value="@Model.ID" />
+            <div class="form-group">
+                <label for="Nombre" class="control-label">Nombre</label>
+                <input class="form-control" name="Nombre" readonly="readonly" value="@Model.Nombre" />
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label">Dirección</label>
+                <div class="form-inline">
+                    <input class="form-control" name="Calle" readonly="readonly" value="@Model.Calle" placeholder="No hay información cargada" />
+                    <input class="form-control" name="Numero" readonly="readonly" value="@Model.Numero" placeholder="No hay información cargada" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Telefono" class="control-label">Teléfono</label>
+                <input class="form-control" name="Telefono" readonly="readonly" value="@Model.Telefono" placeholder="No hay información cargada" />
+            </div>
+            <div class="form-group">
+                <label for="Email" class="control-label">Email</label>
+                <input class="form-control" name="Email" readonly="readonly" value="@Model.Email" placeholder="No hay información cargada" />
+            </div>
+            <div class="form-group">
+                <label for="Descripcion" class="control-label">Descripción</label>
+                <textarea class="form-control" name="Descripcion" readonly="readonly" value="@Model.Descripcion" placeholder="No hay información cargada"></textarea>
+
+            </div>
+            <div class="form-group">
+                <a href="javascript:history.back(1)">
+                    <input type="button" value="Cancelar" class="btn btn-warning" />
+                </a>
+                <input type="submit" value="Dar de baja" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr /> 

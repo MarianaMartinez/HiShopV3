@@ -1,0 +1,59 @@
+﻿@model HiShop.Entity.Servicio
+@{
+    ViewData["Title"] = "EditarServicio";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+   
+}
+<h2> Editar Servicio</h2>
+
+<hr />
+
+
+
+
+
+<div class="col-md-12">
+    <form action="/Servicio/EditarServicio" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" name="ID" value="@Model.ID" />
+
+        <div>
+
+        </div>
+        
+        <div class="form-group col-md-4">
+            <label for="Nombre" class="control-label">Nombre (*)</label>
+            <input class="form-control" name="Nombre" placeholder="Ingresá el nombre de tu negocio" value="@Model.Nombre" />
+            @Html.ValidationMessage("Nombre", "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="Direccion" class="control-label">Descripcion</label>
+            <input class="form-control" name="Descripcion" placeholder="Descripcion" value="@Model.Descripcion" />
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="UrlImagenServicio" class="control-label">Imagen (*)</label>
+            <input type="file" name="file" id="file" src="@Model.UrlImagen" />
+            @Html.ValidationMessage("UrlImagenServicio", "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <img class="imagenPerfil col-md-6" src="@Model.UrlImagen" alt="Imagen" height="120px" />
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-success2"><i class="zmdi zmdi-save"> </i> Guardar</button>
+            <button type="button" class="btn btn-info" onclick="return history.back(1);"><i class="zmdi zmdi-long-arrow-left "> </i> Volver</button>
+        </div>
+    </form>
+</div>
+<div class="col-md-12">
+
+    <hr />
+</div>
+
+
+
+

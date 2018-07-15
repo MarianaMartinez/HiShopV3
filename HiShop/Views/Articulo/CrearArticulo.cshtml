@@ -1,0 +1,73 @@
+﻿@model HiShop.Models.ArticuloModel
+@{
+    ViewData["Title"] = "CrearArticulo";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+
+@{
+
+    if (TempData["Mensajes"] != null)
+    {
+        List<HiShop.Models.MensajeModel> mensajes = (List<HiShop.Models.MensajeModel>)TempData["Mensajes"];
+        foreach (var mensaje in mensajes)
+        {
+
+            <div class="alert @mensaje.tipo">@mensaje.texto </div>
+        }
+    }
+
+
+}
+
+
+<h2>Crear Articulo</h2>
+<div class="col-md-12">
+    <div class="container-fluid ">
+        <div class="Separator">
+        </div>
+    </div>
+    <form class="form" action="/Articulo/CrearArticulo" enctype="multipart/form-data" method="post">
+        <div class="form-group col-md-4" >
+            <label for="Nombre" class="control-label">Nombre </label>
+            <div>
+                <input class="form-control" name="Nombre"  value="@ViewData["Nombre"]" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Nombre)</div>
+            </div>
+        </div>
+
+        <div class=" form-group col-md-4 ">
+            <label class="control-label">Descripcion</label>
+            <div>
+                <input class="form-control" name="Descripcion" value="@ViewData["Descripcion"]" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Descripcion)</div>
+            </div>
+        </div>
+        <div class=" form-group col-md-4">
+            <label class="control-label">Cantidad</label>
+            <div>
+                <input class="form-control" name="Cantidad" value="@ViewData["Cantidad"]" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Cantidad)</div>
+            </div>
+        </div>
+        <div class=" form-group col-md-4">
+            <label class="control-label">Precio</label>
+            <div>
+                <input class="form-control" name="Precio" value="@ViewData["Precio"]" />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.Precio)</div>
+            </div>
+        </div>
+        <div class="form-group col-md-4" id="inputFileFoto">
+            <label class="control-label">Foto</label>
+            <div>
+                <input type="file" name="file" id="file"  />
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.file)</div>
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-success2"><i class="zmdi zmdi-save"> </i> Guardar</button>
+            <button type="button" class="btn btn-info" onclick="return history.back(1);"><i class="zmdi zmdi-long-arrow-left "> </i> Volver</button>
+        </div>
+
+    </form>
+
+</div>

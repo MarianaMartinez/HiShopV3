@@ -1,0 +1,56 @@
+﻿@model HiShop.Entity.Negocio
+
+@{
+    ViewData["Title"] = "EditarNegocio";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+<div class="row">
+    <div class="col-md-6 col-md-offset-4">
+        <form action="/Negocio/EditarNegocio" method="post" id="formulario">
+            <input type="hidden" name="ID" value="@Model.ID" />
+            <div>
+                <h6>
+                    Editá la información de tu Negocio
+                </h6>
+            </div>
+            <div class="form-group">
+                <label for="Nombre" class="control-label">Nombre (*)</label>
+                <input class="form-control" name="Nombre" placeholder="Ingresá el nombre de tu negocio" value="@Model.Nombre" />
+                @Html.ValidationMessage("Nombre", "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label">Dirección</label>
+                <div class="form-inline">
+                    <input class="form-control" name="Calle" placeholder="Calle" value="@Model.Calle" />
+                    @Html.ValidationMessage("Calle", "", new { @class = "text-danger" })
+                    <input class="form-control" name="Numero" placeholder="Número" value="@Model.Numero" />
+                    @Html.ValidationMessage("Numero", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Telefono" class="control-label">Teléfono</label>
+                <input class="form-control" name="Telefono" placeholder="Ejemplo: 11XXXXXXXX" value="@Model.Telefono" />
+                @Html.ValidationMessage("Telefono", "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="Email" class="control-label">Email</label>
+                <input class="form-control" name="Email" placeholder="Ingresá tu Email" value="@Model.Email" />
+                @Html.ValidationMessage("Email", "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="Descripcion" class="control-label">Descripción</label>
+                <textarea class="form-control" name="Descripcion" id="mensaje" onKeyPress="actualizar(this)" maxlength="140" placeholder="Escribí una breve descripción aquí...">@Model.Descripcion</textarea>
+                <p>
+                    <div id="contador">
+                    </div>
+                </p>
+            </div>
+            <div class="form-group">
+                <a href="javascript:history.back(1)">
+                    <input type="button" value="Cancelar" class="btn btn-danger" />
+                </a>
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div> 

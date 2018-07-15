@@ -1,0 +1,41 @@
+﻿@model HiShop.Models.Showroom.ShowroomVerModelAndView
+@{
+    Layout = "~/Views/Shared/_Base.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+
+    <script>
+        function guardar() {
+            localStorage.setItem("txthtml", document.getElementById("txthtml").innerHTML);
+            localStorage.setItem("txthtml2", document.getElementById("txthtml2").innerHTML);
+            mostrarDatos();
+        }
+
+        function mostrarDatos() { 
+            var resultado = localStorage.getItem("txthtml");
+            resultado += localStorage.getItem("txthtml2");
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+
+        window.onload = function () {
+            mostrarDatos();
+            if (localStorage.getItem("txthtml") != null)
+                document.getElementById("txthtml").value = localStorage.getItem("txthtml");
+            if (localStorage.getItem("txthtml2") != null)
+                document.getElementById("txthtml2").value = localStorage.getItem("txthtml2");
+        }
+    </script>
+
+    <br />
+    <br />
+
+    <div id="resultado" class="container"></div>
+
+</body>
+</html> 

@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div id="fb-root"></div>
+<script src="~/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="~/js/facebookInicioSessin.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(function () {
+            InitialiseFacebook(1610232299056898);
+        });
+</script>
+
+
+
+<h2>Part 1 - Facebook Login Button</h2>
+
+<fb:login-button autologoutlink="true" perms="read_friendlists, create_event, email, publish_stream"></fb:login-button>
+
+<p>Facebook Access Token: <span id="accessTokenSpan"></span></p>
+<p>Facebook User Id: <span id="uidSpan"></span></p>
+
+<p>If you're not getting javascript prompts on each window load, make sure facebook app id in web config is correct.</p>

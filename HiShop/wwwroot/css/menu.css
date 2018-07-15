@@ -1,0 +1,79 @@
+﻿.title-arch {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.project {
+    width: 100%;
+    height: 450px;
+    background-image: url(http://globbpartner.com/wp-content/uploads/2018/02/guide_tips_ecommerce_platform.png);
+    background-size: cover;
+    background-position: center;
+    padding: 0 !important;
+    float: left;
+}
+
+.project-2 {
+    background-image: url(http://static1.squarespace.com/static/572fc6042b8dde9e10b6ea9d/5730430af699bbaf2d5c9f59/58ded0ea9f74561c4cc2d6b0/1492256212929/How+To+Sell+Your+Shares.jpg?format=1000w);
+}
+
+.project-3 {
+    background-image: url(https://octopus.mx/wp-content/uploads/2015/08/Por-que-abandonan-el-carrito-de-compras-en-internet.jpg);
+}
+
+.project-4 {
+    background-image: url(http://www.svcmscentral.com/SVsitefiles/svcms2/contenido/med/a83cc3_4.jpg);
+}
+
+.project-hover {
+    width: 100%;
+    height: 100%;
+    color: #000;
+    opacity: 0.05;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background-color: rgb(255, 219, 77);
+    padding: 40% 30px !important;
+}
+
+    .project-hover hr {
+        height: 30px;
+        width: 0;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        background-color: rgba(255, 255, 255, 1);
+        border: 0;
+    }
+
+    .project-hover a {
+        color: rgba(255, 255, 255, 1);
+        padding: 2px 22px;
+        line-height: 40px;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+    }
+
+        .project-hover a:hover {
+            border-color: rgba(51, 51, 51, 1);
+            background: rgba(0, 0, 0, .5);
+            background-color: #000;
+        }
+
+.project:hover .project-hover {
+    opacity: 1;
+}
+
+    .project:hover .project-hover hr {
+        width: 100%;
+        height: 4px;
+    }

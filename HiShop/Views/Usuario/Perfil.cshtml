@@ -1,0 +1,306 @@
+﻿@model HiShop.Models.UsuarioModelAndView
+@{
+    ViewData["Title"] = "Perfil";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+
+<script>
+    $("document").ready(function () {
+        
+        //Envia el formualrio datos generales al tocar el bootn borrar imagen
+        $("#botonEliminarImagen").click(function () {
+            $("#formularioDatosGenerales").attr("action","BorrarImagenDePerfil");
+            $("#formularioDatosGenerales").submit();
+        });
+
+        //Al tocar el boton habilitar cuenta oculta los otros formularios y muesta el de habilitar cuenta 
+        $("#btnHabilitarCuenta").click(function () {
+            $(".imagenPerfil ").hide();
+            mostarSoloFormularioActivo("formularioHabilitarCuenta");
+        });
+
+        //Si el estado de usuario es activo da la opcion de desactivar la cuenta , si no de activarla y muestra un mensaje de warning
+        var estadoUsuario = $("#estadoDiv").text().trim();
+        if (estadoUsuario == "INHABILITADO") {
+            $("#btnCerrarCuenta").hide();
+            $("#btnHabilitarCuenta").show();
+            $("#msjCuentaInhabilitada").show();
+            
+        } else { 
+
+            $("#btnCerrarCuenta").show();
+            $("#btnHabilitarCuenta").hide();
+        }
+        //Al hacer click en el boton de cerrar cuenta habilita el formulario
+        $("#btnCerrarCuenta").click(function () { 
+            $(".imagenPerfil ").hide();
+            mostarSoloFormularioActivo("formularioCerrarCuenta");
+        });
+
+        //Si esta activo el formulario de formularioCerrarCuenta lo muestra y oculta los otros
+        //AxelMolaro
+        var formularioActivo = $("#formularioActivoDiv").text().trim();
+
+        if (formularioActivo == "formularioCerrarCuenta") {
+            mostarSoloFormularioActivo("formularioCerrarCuenta");
+        }
+
+
+        //Si esta activo el formulario de formularioHabilitarCuenta lo muestra y oculta los otros
+        //AxelMolaro
+        if (formularioActivo == "formularioHabilitarCuenta") {
+            mostarSoloFormularioActivo("formularioCerrarCuenta");
+        }
+
+         //Si esta activo el formulario de formularioDatosGenerales lo muestra y oculta los otros
+        //AxelMolaro
+        if (formularioActivo == "formularioDatosGenerales") {
+          
+            habilitarFormulario("formularioDatosGenerales");
+            $("#inputFileFoto").removeClass("oculto");
+            $("#btnFormGeneralEditarCambiarContraseñaDiv").hide();
+            $("#botonEliminarImagen").fadeIn();
+            $("#btnGuardarVolverDiv").fadeIn();
+            $("#botonEliminarImagen").show();
+        }
+
+
+        //Si esta activo el formulario de contraseña lo muestra y oculta los otros
+        //AxelMolaro
+        if (formularioActivo == "formularioCambioDeContraseña")
+        {
+            mostarSoloFormularioActivo("formularioCambioDeContraseña");
+        }
+
+        //Cuando envia el formulario lo si es incorrecto muestra el formulario como para
+        //poder seguir editandolo
+        //AxelMolaro
+        var datosValidos = $("#losDatosSonValidos").val();
+        if (datosValidos != "No") {
+            agregarSoloLectura("soloLectura");
+        } else
+        { 
+            $("#inputFileFoto").removeClass("oculto");
+            $("#btnFormGeneralEditarCambiarContraseñaDiv").hide();
+            $("#btnGuardarVolverDiv").fadeIn();
+        }
+        //AxelMolaro
+        $("#btnCambioDeContraseña").click(function () { 
+            mostarFormularioCambioDeContraseña();
+        });
+
+        //Habilita el formulario de datos qgenrales y muestra lo botones de guardar y cancelar
+        //AxelMoalro
+        $("#btnFormGeneralEditar").click(function () {
+            habilitarFormulario("formularioDatosGenerales");
+            $("#inputFileFoto").removeClass("oculto");
+            $("#btnFormGeneralEditarCambiarContraseñaDiv").hide();
+            $("#botonEliminarImagen").fadeIn();
+            $("#btnGuardarVolverDiv").fadeIn();
+            
+        });
+    });
+
+    //Agregar Attr readonly a lo que les ponganlas clase pasada por parametro
+    //AxelMolaro
+    function agregarSoloLectura(clase)
+    { 
+        var elementos = $("." + clase);
+        elementos.each(function () {
+            $(this).attr("readonly", "readonly");
+        });
+    }
+    //Muestra el formulario de cambio de contraseña y oculta el de datos generales
+    //AxelMolaro
+    function mostarFormularioCambioDeContraseña() {
+
+        $("#formularioDatosGenerales").fadeOut(1);
+        $("#formularioCambioDeContraseña").fadeIn();
+    }
+
+
+
+    ///Saca el readonly de los elementos de un formulario
+    //AxelMolaro
+    function habilitarFormulario(idFormulario)
+    {
+        var form = $("#" + idFormulario);
+        var inputs = $("#" + idFormulario + " input");
+        inputs.each(function () {
+            $(this).removeAttr("readonly");
+            $(this).removeClass("soloLectura");
+        });
+    }
+
+    //oculta todo slos formularios y muestra el que tenga la id pasada
+    //AxelMolaro
+    function mostarSoloFormularioActivo(id)
+    {
+        $("form").hide();
+        $("#"+id).show();
+    }
+</script>
+<h2>Perfil</h2>
+
+
+    @{
+
+        if (TempData["Mensajes"] != null)
+        {
+            List<HiShop.Models.MensajeModel> mensajes = (List<HiShop.Models.MensajeModel>)TempData["Mensajes"];
+            foreach (var mensaje in mensajes)
+            {
+
+                <div class="alert @mensaje.tipo">@mensaje.texto </div>
+            }
+        }
+
+
+    }
+
+
+    <div class="Separator">
+
+    </div>
+    <div class="oculto" id="formularioActivoDiv">
+        @Model.formularioActivo
+    </div>
+    <div class="oculto" id="estadoDiv">
+        @Model.estado
+    </div>
+
+    <div class="  col-md-offset-4 row">
+
+    <div class="col-md-10">
+            
+            <div class="col-md-12">
+                <img class="imagenPerfil col-md-6" src="@Model.urlImagen" alt="Error al cargar la Imagen" />
+                <div class="col-md-12">
+                        <button type="submit" class="btn btn-info" style="display:none" id="botonEliminarImagen" ><i class="zmdi zmdi-delete"></i> Eliminar Imagen</button>
+
+                    <br /><br />
+                </div>
+            </div>
+        <form class="form" id="formularioDatosGenerales" method="post" action="/Usuario/EditarDatosGenerales" enctype="multipart/form-data" >
+
+            <div class="form-group oculto" id="inputFileFoto">
+                <label class="control-label">Cambiar Foto</label>
+                <div>
+                    <input type="file" name="file" id="file"/>
+                    <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.file)</div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nombre</label>
+               
+                <div><input name="losDatosSonValidos" id="losDatosSonValidos" class="form-control soloLectura" type="hidden" value="@Model.losDatosSonValidos" /></div>
+
+                <div><input name="nombre" class="form-control soloLectura" value="@Model.nombre" /></div>
+                <div><input name="id"  type="hidden" value="@Model.id" required/></div>
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.nombre)</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Apellido</label>
+                <div><input name="apellido" class="form-control soloLectura" value="@Model.apellido"  required/></div>
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.apellido) </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Mail</label>
+                <div><input name="mail" class="form-control soloLectura" value="@Model.mail" required/></div>
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.mail)</div>
+            </div>
+            <div class="form-group alert-warning oculto" id="msjCuentaInhabilitada" >
+                <p><i class="zmdi zmdi-alert-triangle zmdi-hc-lg"></i>  Actualmente su cuenta se encuentra inhabilitada .</p>
+
+            </div>
+            <div class="form-group" id="btnFormGeneralEditarCambiarContraseñaDiv">
+                <button type="button" id="btnFormGeneralEditar" class="btn btn-success2">Editar</button>
+                <button type="button" class="btn btn-success2" id="btnCambioDeContraseña">Cambio de contraseña </button>
+                <button type="button" class="btn btn-danger" id="btnCerrarCuenta">Cerrar Mi Cuenta </button>
+                <button type="button" class="btn btn-success2" style="display:none" id="btnHabilitarCuenta">Habilitar Mi Cuenta </button>
+
+            </div>
+            <div class="form-group oculto" id="btnGuardarVolverDiv">
+                <button type="Submit" class="btn btn-success2">Guardar</button>
+                <a href="/Usuario/Perfil" class="btn btn-info">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+        <form class="form oculto" id="formularioCambioDeContraseña" method="post" action="/Usuario/CambioDeContraseña">
+            <div class="form-group">
+                <label class="control-label">Contraseña Actual</label>
+                <div><input type="password" name="contraseña" class="form-control " value="@Model.contraseña" /></div>
+                <div><input name="id" type="hidden" value="@Model.id" /></div>
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.contraseña)</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nueva Contraseña</label>
+                <div><input  type="password" name="contraseña2" class="form-control " value="@Model.contraseña2" /></div>
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.contraseña2) </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Repita Nueva Contraseña</label>
+                <div><input  type="password" name="contraseña3" class="form-control " value="@Model.contraseña3" /></div>
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.contraseña3) </div>
+            </div>
+
+           
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success2">Aceptar</button>
+                <a href="/Usuario/Perfil" class="btn btn-info">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+        <form class="form oculto" id="formularioCerrarCuenta" method="post" action="/Usuario/CerrarCuenta">
+           <div class="form-group alert-warning">
+              <p><i class="zmdi zmdi-alert-triangle zmdi-hc-lg"></i>  Si usted da de baja su cuenta puede reactivarla desde esta sección .</p>
+               <p>Cuando usted de de baja su cuenta se ocultaran todas las publicaciones en nuestro sistema .</p>
+               <br />
+               <br />
+           </div>
+            <div class="form-group">
+                <label class="control-label">Contraseña</label>
+                <div><input type="password" name="contraseña" class="form-control " value="@Model.contraseña" /></div>
+                <div><input name="id" type="hidden" value="@Model.id" /></div>
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.contraseña)</div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger"    >Aceptar</button>
+                <a href="/Usuario/Perfil" class="btn btn-info">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+        <form class="form oculto" id="formularioHabilitarCuenta" method="post" action="/Usuario/HabilitarCuenta">
+            <div class="form-group alert-warning">
+                <p><i class="zmdi zmdi-alert-triangle zmdi-hc-lg"></i>  Usted va a habilitar la cuenta .</p>
+                <br />
+                <br />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Contraseña</label>
+                <div><input type="password" name="contraseña" class="form-control " value="@Model.contraseña" /></div>
+                <div><input name="id" type="hidden" value="@Model.id" /></div>
+                <div class="alert-danger text-danger">@Html.ValidationMessageFor(model => model.contraseña)</div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger">Aceptar</button>
+                <a href="/Usuario/Perfil" class="btn btn-info">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<style>
+    .soloLectura  {
+        border:  none;
+    }
+    
+</style>

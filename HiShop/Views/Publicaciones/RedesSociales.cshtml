@@ -1,0 +1,81 @@
+﻿@model IEnumerable<HiShop.Entity.Articulo>
+@{
+    ViewData["Title"] = "RedesSociales";
+    Layout = "~/Views/Shared/_BaseMenu.cshtml";
+}
+
+<center><h2>Publicaiones en Redes Sociales</h2></center>
+
+
+<hr />
+<div class="row " >
+    <div class="col-md-6 col-md-offset-4">
+        <div>
+            <h3><i class="zmdi zmdi-plus-box"></i> Mis Articulos Publicados </h3>
+        </div>
+
+        <br />
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UrlImagenArticulo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cantidad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+                    </th>
+                    <th>
+                        <i class="zmdi zmdi-time">Horarios / Fecha </i> 
+                    </th>
+                    <th>
+                        <i class="zmdi zmdi-instagram">Instagram</i>
+                    </th>
+                    <th>
+                        <i class="zmdi zmdi-facebook-box">Facebook</i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/ImagenesServidor/ImagenesArticulos/@item.UrlImagenArticulo" alt="ImagenArticulo" width="60" height="60" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>  
+                        <td>                           
+                            <i class="zmdi zmdi-time">1/1/2017 12:00</i> 
+                        </td>
+                        <td>                           
+                            <a href="#" value="@item.ID"><i class="zmdi zmdi-instagram">Si</i></a> 
+                        </td>
+                        <td>
+                            <a href="#" value="@item.ID"><i class="zmdi zmdi-facebook-box">No</i></a>
+                        </td>                 
+                    </tr>
+                }
+            </tbody>
+        </table>     
+    </div>
+</div>
+<hr />

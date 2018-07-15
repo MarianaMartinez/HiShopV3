@@ -1,0 +1,283 @@
+﻿@model HiShop.Models.Negocio.NegocioGeneralModelAndView
+@{
+    ViewData["Title"] = "MisNegocios";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+
+<style>
+
+    .opcionConfirmacion:hover {
+        color: darkorange;
+        cursor: pointer;
+    }
+</style>
+<script>
+
+    $("document").ready(function () {
+
+
+
+        //Oculta el msj de confirmacion cuando se clickea un span
+        //AxelMolaro
+        $("#confirmacion span").click(function () {
+            $("#confirmacion").hide();
+            $("#boton").show();
+        });
+
+        //cuando carga la tabla selecciona el activo
+        //AxelMolaro
+        $("table").ready(function () {
+
+            if (getNegocioActivoId()!= null)
+            {
+                pintarTr(getNegocioActivoId());
+                mostrarBotonSeleccionadoOcultarOtros(getNegocioActivoId());
+            }
+        });
+         
+    });
+
+    //Limpiar los filtros
+    //AxelMolaro
+    function limpiarFiltros()
+    { 
+        $("#nombreFiltro").val("");
+        $("formFiltro").submit();
+    }
+    //Oculta los mensajes de confirmacion y solo muestra uno segun el id que se le pasa
+    //AxelMolaro
+    function ocultarOtrosMostrarMensaje(id)
+    {
+        $(".confirmacion").hide();
+        $(".boton").show();
+        $("#boton-" + id).hide();
+        $("#confirmacion-" + id).show();
+    }
+
+    //Cambia el estado de un negocio cuando toca que si
+    //AxelMolaro
+    function cambiarEstado(id, estado)
+    { 
+        $.ajax({
+            url: '/Negocio/CambiarEstado',
+            data: { id , estado},
+            type: 'POST',
+            async: true,
+            success: (function (result) {
+                debugger;
+                if (estado == "APROBADO")
+                     document.getElementById("estado").className = "glyphicon glyphicon-ok-circle text-success";
+                if (estado == "INHABILITADO")
+                    document.getElementById("estado").className = "glyphicon glyphicon-minus-sign text-danger";
+
+                location.reload();//TODOAM: CAMBIAR PARA QUE NO RECARGUE AXEL
+
+            }),
+            error: (function (result) {
+
+                alert("No cambio");
+            })
+        })
+    }
+
+    //Seleccionar un negocio y lo manda al controller y lo poene en session
+    //AxelMolaro
+    function seleccionarNegocio(id){
+        $.ajax({
+            url: '/Negocio/SeleccionarNegocio',
+            data: { id },
+            type: 'POST',
+            async: true,
+            success: (function (result) {
+                debugger;
+                if (result.data.mensaje.tipo == "ERROR")
+                { 
+                    crearMensaje("mensajeGeneral", result.data.mensaje.texto, result.data.mensaje.tipo);
+                } else
+                {
+                    location.reload();
+                }
+            }),
+            error: (function (result) {
+
+                alert("Error al seleccionar");
+            })
+        })
+    }
+
+    //Pinta una fila del negocio seleccionado
+    //AxelMolaro
+    function pintarTr(id)
+    {
+        var tr = $("#tr-" + id);
+        tr.css("backgroundColor", "orange");
+        tr.css("color", "white");
+
+    }
+
+     //Muesta el boton seleccionado  y oculta los otros
+    //AxelMolaro
+    function mostrarBotonSeleccionadoOcultarOtros(id)
+    {
+        $(".btnSeleccionado").hide();
+        $(".btnSeleccionar").show();
+        $("#seleccionar-" + id).hide();
+        $("#seleccionado-" + id).show();
+    }
+
+     //Devuelve el id del neocio activo, si no devuelve null
+    //AxelMolaro
+    function getNegocioActivoId()
+    { 
+        var id = @Model.idNegocioActivo;
+        if (id == 0)
+            return null;
+        return id;
+    }
+  
+</script>
+    <div class="container-fluid">
+        <div>
+            <h3><i class="zmdi zmdi-store"></i> Mis Negocios </h3>
+        </div>
+        <br />
+        <div id="mensajeGeneral"></div>
+        <div>
+            <form method="get" id="formFiltro" action="/Negocio/MisNegocios" class="form-inline alert alert-info" >
+                <div class="form-group form-inline">
+                    <label class="control-label">Nombre</label>
+                    <input  class="form-control" name="nombreFiltro"  id="nombreFiltro" value="@Model.filtro.nombreFiltro"/>
+                </div>
+                <input name="paginaActual" value="@Model.filtro.paginaActual" id="inputPaginaActual" readonly ="readonly" type="hidden"/>
+                <input value="@Model.filtro.total" id="inputTotalDePaginas"   readonly ="readonly" type="hidden"/>
+
+                <div class="form-group form-inline">
+                    <button type="submit" class="btn btn-success" >Filtrar</button>
+                    <button type="submit" class="btn btn-info" onclick="limpiarFiltros()">Limpiar Filtros</button>
+                </div>
+            </form>
+        </div>
+       
+        <br />
+        <div class="pull-right">
+           <i class="zmdi zmdi-skip-previous" id="paginaAnterior" onclick="paginarAnterior()" style="cursor:pointer"></i> @Model.filtro.paginaActual - @Model.filtro.total <i class="zmdi zmdi-skip-next" id="paginaSiguiente" onclick="paginarSiguiente()"  style="cursor:pointer"></i>
+        </div>
+        <table class="table  table-striped  " id="TablaDeNegocios" >
+            <thead class="cabeceraTabla">
+                <tr>
+                    <th>
+                        Imagen
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>
+                    <th>
+                        Dirección
+                    </th>
+                    <th>
+                        Teléfono
+                    </th>
+                    <th>
+                       Email
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Editar
+                    </th>
+                    <th>
+                        Cambiar Estado
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.listaDeNegocios != null)
+                { 
+                    @foreach (var item in Model.listaDeNegocios)
+                    {
+                        <tr id="tr-@item.ID">
+                            <td>
+                                <img src="@item.UrlImagenNegocio" alt="sinImagen" height="80px"/>
+                            </td>
+                            <td>
+                                    @item.Nombre
+                            </td>
+                            <td>
+                                    @item.Calle @item.Numero
+                            </td>
+                            <td>
+                                    @item.Telefono
+                            </td>
+                            <td>
+                                    @item.Email
+                            </td>
+                            <td>
+                                    @item.Descripcion
+                            </td>
+                            <td>
+
+                            @if (item.Estado == HiShop.Enum.EstadoNegocio.APROBADO)
+                            {
+                                    <i class="glyphicon glyphicon-ok-circle text-success" id="estado">
+                                    </i> 
+                              
+                            }
+                            else
+                            {
+                                    <i class="glyphicon glyphicon-minus-sign text-danger" id="estado">
+                                    </i> 
+                            }
+                            </td>
+                            <td>
+                                <a href="/Negocio/EditarNegocio/@item.ID" value="@item.ID"><i class="zmdi zmdi-edit"></i></a> 
+                            </td>
+                            <td>
+                                @if (item.Estado == HiShop.Enum.EstadoNegocio.APROBADO)
+                                {
+                                    <div id="divBoton">
+                                        <i class="zmdi zmdi-download boton" id="boton-@item.ID" onclick="ocultarOtrosMostrarMensaje(@item.ID)"></i>
+                                    </div>
+                                    <div id="confirmacion-@item.ID"  class=" confirmacion " style="display:none">
+                                        <p>¿Cerrar Negocio?  </p>
+                                        <span class="opcionConfirmacion" onclick="cambiarEstado(@item.ID,'INHABILITADO')">Si</span>
+                                        <span class="opcionConfirmacion"  onclick=" ocultarOtrosMostrarMensaje(0)">No</span>
+                                    </div>
+
+
+                                }
+                                else
+                                {
+                                    <div id="divBoton">
+                                        <i class="zmdi zmdi-upload boton" id="boton-@item.ID" onclick="ocultarOtrosMostrarMensaje(@item.ID)"></i>
+
+                                    </div>
+                                    <div id="confirmacion-@item.ID" class=" confirmacion oculto">
+                                        <p>¿Habilitar Negocio? </p>
+                                        <span class="opcionConfirmacion" onclick="cambiarEstado(@item.ID,'APROBADO')">Si</span>
+                                        <span class="opcionConfirmacion" onclick="ocultarOtrosMostrarMensaje(0)">No</span>
+                                    </div>
+
+
+                                }
+
+                                
+                            </td>
+                        </tr>
+
+                    }
+                }
+
+            </tbody>
+        </table>
+        <div>
+            <a href="/Negocio/RegistrarNegocio" class="btn btn-success">
+                <i class="glyphicon glyphicon-plus-sign" ></i> Nuevo
+            </a>
+            <button type="button" class="btn btn-info" onclick="return history.back(1);"><i class="glyphicon glyphicon-circle-arrow-left"></i>  Volver</button>
+        </div>
+    </div>

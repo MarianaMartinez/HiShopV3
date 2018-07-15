@@ -1,0 +1,77 @@
+﻿@model HiShop.Models.Catalogo.DetalleServicioModelAndView
+@{
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Comprar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>DetallesDeProducto</title>
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/css/price-range.css" rel="stylesheet">
+    <link href="~/css/animate.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href="~/css/responsive.css" rel="stylesheet"> <!-- esto lo saco cuando pongamos el layout -->
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <input type="hidden" value="@Model.Servicio.ID" />
+                        <div class="row">
+
+                            <h3 style="color:forestgreen;">@TempData["Mensaje"]</h3>
+
+                            <h3>@TempData["Error"]</h3>
+
+                            <div class="col-xs-2">
+                                <img class="img-responsive" src="@Model.Servicio.UrlImagen">
+                            </div>
+                            <div class="col-xs-4">
+                                <h4 class="product-name"><strong>@Model.Servicio.Nombre</strong></h4><h4><small>@Model.Servicio.Descripcion</small></h4>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="col-xs-6 text-right">
+                                    <h6><strong>@Model.Servicio.Precio <span class="text-muted">x</span></strong></h6>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control input-sm" value="@TempData["GuardarCantidad"]" readonly="readonly" />
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="button" class="btn btn-link btn-xs">
+                                        <span class="glyphicon glyphicon-trash"> </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row text-center">
+                            <div class="col-xs-9">
+                                <h4 class="text-right">Total <strong>@TempData["total"]</strong></h4>
+                            </div>
+                            <div class="col-xs-3">
+                                <form action="/Catalogo/ComprarPost/@Model.Servicio.ID?" method="post">
+                                    <input type="hidden" value="@TempData["total"]" name="Total" />
+                                    <input type="submit" value="Confirmar" class="btn btn-success btn-block" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

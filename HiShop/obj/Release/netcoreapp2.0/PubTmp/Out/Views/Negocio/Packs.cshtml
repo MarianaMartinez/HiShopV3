@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewData["Title"] = "Packs";
+    Layout = "~/Views/Shared/_Base.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/style2.css">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+
+<div class="jumbotron" id="pack"><h2>Contratacion de Packs</h2></div>
+<button type="button" class="btn btn-info" onclick="return history.back(1);"><i class="zmdi zmdi-long-arrow-left "> </i> Volver</button>
+<div class=' container'>
+
+    <div class='package'>
+        <div class='name'>Intermedio</div>
+        <div class='price'>$599 + %1,5 CT</div>
+        <div class='trial'>
+
+            <a mp-mode="dftl" href="http://mpago.la/g4tF" name="MP-payButton" class='blue-tr-l-rn-undefined'>HiShopPayment</a>
+            <script type="text/javascript">
+                (function () {
+                    function $MPC_load() {
+                        window.$MPC_loaded !== true && (function () {
+                            var s = document.createElement("script");
+                            s.type = "text/javascript";
+                            s.async = true;
+                            s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+                            var x = document.getElementsByTagName('script')[0];
+                            x.parentNode.insertBefore(s, x);
+                            window.$MPC_loaded = true;
+                        })();
+                    }
+                    window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
+                })();
+            </script>
+        </div>
+        <hr>
+        <ul>
+            <li>
+                <strong>Sin limites</strong>
+                Anticulos + Servicios
+            </li>
+            <li>
+                <strong>Redes Sociales</strong>
+                Facebook + Instagram + Mail
+            </li>
+            <li>
+                <strong>Envios y Medios de Pago</strong>
+                A todo el pais
+            </li>
+        </ul>
+    </div>
+    <div class='package brilliant'>
+        <div class='name'>Full</div>
+        <div class='price'>$999 + 0,5% CT</div>
+        <div class='trial'>
+
+
+            <a mp-mode="dftl" href="http://mpago.la/g4tF" name="MP-payButton" class='blue-tr-l-rn-undefined'>HiShopPayment</a>
+            <script type="text/javascript">
+                (function () {
+                    function $MPC_load() {
+                        window.$MPC_loaded !== true && (function () {
+                            var s = document.createElement("script");
+                            s.type = "text/javascript";
+                            s.async = true;
+                            s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+                            var x = document.getElementsByTagName('script')[0];
+                            x.parentNode.insertBefore(s, x);
+                            window.$MPC_loaded = true;
+                        })();
+                    }
+                    window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
+                })();
+            </script>
+
+        </div>
+        <hr>
+        <ul>
+            <li>
+                <strong>Sin limites</strong>
+                Articulos + Servicios
+            </li>
+            <li>
+                <strong>Redes Sociales</strong>
+                Facebook + Instagram + Mail + Mercado Libre
+            </li>
+            <li>
+                <strong>Envios</strong>
+                A todo el pais
+            </li>
+            <li>
+                Notificaciones de Stock
+            </li>
+            <li>
+                Alto Posicionamiento 
+            </li>
+        </ul>
+    </div>
+    <div class='package'>
+        <div class='name'>Basico</div>
+        <div class='price'>$299 + %1,5 CT</div>
+        <div class='trial'>
+
+            <a mp-mode="dftl" href="http://mpago.la/g4tF" name="MP-payButton" class='blue-tr-l-rn-undefined'>HiShopPayment</a>
+            <script type="text/javascript">
+                (function () {
+                    function $MPC_load() {
+                        window.$MPC_loaded !== true && (function () {
+                            var s = document.createElement("script");
+                            s.type = "text/javascript";
+                            s.async = true;
+                            s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+                            var x = document.getElementsByTagName('script')[0];
+                            x.parentNode.insertBefore(s, x);
+                            window.$MPC_loaded = true;
+                        })();
+                    }
+                    window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
+                })();
+            </script>
+        </div>
+        <hr>
+        <ul>
+            <li>
+                <strong>10</strong>
+                Articulos
+            </li>
+            <li>
+                <strong>Posicionamiento</strong>
+                Bajo
+            </li>
+            <li>
+                <strong>Medios de Pago</strong>
+
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="separadorFinal"><br /></div>
+
+<footer class="pie">
+    <p id="time"><center>&copy; @DateTime.Now.Year - HiShop</center></p>
+</footer>

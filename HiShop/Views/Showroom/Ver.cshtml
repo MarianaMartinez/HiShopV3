@@ -1,0 +1,77 @@
+﻿@model HiShop.Models.Showroom.ShowroomVerModelAndView
+@{
+    ViewData["Title"] = "Ver";
+    Layout = "~/Views/Shared/_Base.cshtml";
+}
+<script type="text/javascript" src="~/js/dragAndDropHiShop.js"></script>
+
+<script>
+
+    window.addEventListener('load', init);
+
+    function init() {
+
+
+        $("#contenedorBanner").ready(function () {
+            $("#contenedorBanner").append(formatearHtml(getHtmlBannerVisitante()));
+            cambiarElTextoDeUnElemento(formatearHtml(getTituloBannerVisitante()), $(".textoPrincipal"));
+            cambiarElValueDeUnElemento("Banner", $("#textoPrincipalBannerInput"));
+
+            $(".colorPrincipalBanner ").css("backgroundColor", formatearHtml(getColorBannerVisitante()));
+        });
+
+        $("#contenedorCuerpo").ready(function () {
+            $("#contenedorCuerpo").append(formatearHtml(getHtmlCuerpoVisitante()));
+                $("#contenedorCuerpo .container").ready(function () {
+
+                    $(".itemProducto").ready(function () {
+
+                        var contenedorProductos = $("#contenedorCuerpo .container");
+                        var itemProducto = $(".itemProducto");
+                        debugger;
+                        llenarCatalogoAjaxConLinks(contenedorProductos, itemProducto);
+                    });
+
+                });
+
+
+        });
+        $("body").css("backgroundColor", formatearHtml(getHtmlColorFondoVisitante()));
+
+
+
+    }
+
+
+    function getHtmlBannerVisitante() {
+        return "@Model.Banner.Html";
+    }
+     function getTituloBannerVisitante() {
+        return "@Model.Banner.Titulo";
+    }
+       function getColorBannerVisitante() {
+        return "@Model.Banner.ColorBanner";
+    }
+
+
+     function getHtmlCuerpoVisitante()
+    {
+        return "@Model.Cuerpo.Html";
+    }
+     function getHtmlColorFondoVisitante()
+    {
+        return "@Model.Showroom.ColorDeFondo";
+    }
+
+
+
+</script>
+<div class="contenedorPrincipalClase" id="contenedorPrincipal">
+    <div id="contenedorBanner">
+
+    </div>
+    <div id="contenedorCuerpo">
+
+    </div>
+
+</div>
