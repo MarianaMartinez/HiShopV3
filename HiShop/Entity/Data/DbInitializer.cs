@@ -314,7 +314,7 @@ namespace HiShop.Entity.Data
                     Numero = "1900",
                     Telefono = "1134567890",
                     Descripcion = "Jeans! Jeans! Jeans! Y mas jeans! En todos los talles, en todos los colores. La mas amplia variedad.",
-                    UrlImagenNegocio = "/ImagenesServidor/ImagenesNegocios/Inicializar/jeans-logo.png",
+                    UrlImagenNegocio = "/ImagenesServidor/ImagenesNegocios/Inicializar/images/jeans-logo.png",
                     Usuario = usuario2,
                 };
                 context.Negocios.Add(negocio7);
@@ -414,31 +414,31 @@ namespace HiShop.Entity.Data
                 context.Productos.Add(articulo23);
                 context.SaveChanges();
 
-                var articulo24 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456781", Nombre = "Jean", Precio = 600, Negocio = negocio7, UrlImagen = "https://image.ibb.co/kQFyWy/1.jpg" };
+                var articulo24 = new Articulo { Cantidad = 100, Descripcion = "Codigo: 123456781", Nombre = "Jean", Precio = 600, Negocio = negocio7, UrlImagen = "https://image.ibb.co/kQFyWy/1.jpg" };
                 context.Productos.Add(articulo24);
                 context.SaveChanges();
-                var articulo25 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456782", Nombre = "Jean", Precio = 200, Negocio = negocio7, UrlImagen = "https://image.ibb.co/cYdcry/2.jpg" };
+                var articulo25 = new Articulo { Cantidad = 100, Descripcion = "Codigo: 123456782", Nombre = "Jean", Precio = 200, Negocio = negocio7, UrlImagen = "https://image.ibb.co/cYdcry/2.jpg" };
                 context.Productos.Add(articulo25);
                 context.SaveChanges();
-                var articulo26 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456783", Nombre = "Jean", Precio = 300, Negocio = negocio7, UrlImagen = "https://image.ibb.co/j3kU4J/3.jpg" };
+                var articulo26 = new Articulo { Cantidad = 100, Descripcion = "Codigo: 123456783", Nombre = "Jean", Precio = 300, Negocio = negocio7, UrlImagen = "https://image.ibb.co/j3kU4J/3.jpg" };
                 context.Productos.Add(articulo26);
                 context.SaveChanges();
-                var articulo27 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456784", Nombre = "Jean", Precio = 350, Negocio = negocio7, UrlImagen = "https://image.ibb.co/dDgrJd/4.jpg" };
+                var articulo27 = new Articulo { Cantidad = 100, Descripcion = "Codigo: 123456784", Nombre = "Jean", Precio = 350, Negocio = negocio7, UrlImagen = "https://image.ibb.co/dDgrJd/4.jpg" };
                 context.Productos.Add(articulo27);
                 context.SaveChanges();
-                var articulo28 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456785", Nombre = "Jean", Precio = 400, Negocio = negocio7, UrlImagen = "https://image.ibb.co/dmWQdd/5.jpg" };
+                var articulo28 = new Articulo { Cantidad = 100, Descripcion = "Codigo: 123456785", Nombre = "Jean", Precio = 400, Negocio = negocio7, UrlImagen = "https://image.ibb.co/dmWQdd/5.jpg" };
                 context.Productos.Add(articulo28);
                 context.SaveChanges();
-                var articulo29 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456786", Nombre = "Jean", Precio = 500, Negocio = negocio7, UrlImagen = "https://image.ibb.co/jmioyd/6.jpg" };
+                var articulo29 = new Articulo { Cantidad = 100, Descripcion = "Codigo: 123456786", Nombre = "Jean", Precio = 500, Negocio = negocio7, UrlImagen = "https://image.ibb.co/jmioyd/6.jpg" };
                 context.Productos.Add(articulo29);
                 context.SaveChanges();
-                var articulo30 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456787", Nombre = "Jean", Precio = 650, Negocio = negocio7, UrlImagen = "https://image.ibb.co/c212PJ/7.jpg" };
+                var articulo30 = new Articulo { Cantidad = 100, Descripcion = "Codigo: 123456787", Nombre = "Jean", Precio = 650, Negocio = negocio7, UrlImagen = "https://image.ibb.co/c212PJ/7.jpg" };
                 context.Productos.Add(articulo30);
                 context.SaveChanges();
-                var articulo31 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456788", Nombre = "Jean", Precio = 270, Negocio = negocio7, UrlImagen = "https://image.ibb.co/nKg2PJ/8.jpg" };
+                var articulo31 = new Articulo { Cantidad = 100, Descripcion = "Codigo: 123456788", Nombre = "Jean", Precio = 270, Negocio = negocio7, UrlImagen = "https://image.ibb.co/nKg2PJ/8.jpg" };
                 context.Productos.Add(articulo31);
                 context.SaveChanges();
-                var articulo32 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456789", Nombre = "Jean", Precio = 380, Negocio = negocio7, UrlImagen = "https://image.ibb.co/iGhLBy/9.jpg" };
+                var articulo32 = new Articulo { Cantidad = 100, Descripcion = "Codigo: 123456789", Nombre = "Jean", Precio = 380, Negocio = negocio7, UrlImagen = "https://image.ibb.co/iGhLBy/9.jpg" };
                 context.Productos.Add(articulo32);
                 context.SaveChanges(); 
 
