@@ -83,7 +83,7 @@ namespace HiShop.Entity.Data
                 context.Usuarios.Add(usuario5);
                 context.SaveChanges();
 
-                var usuario2 = new Usuario { Nombre = "Mariana", Apellido = "Martinez", Mail = "marianaMartinez@gmail.com", Contraseña = "1234", Estado = Enum.Estado.APROBADO };
+                var usuario2 = new Usuario { Nombre = "Mariana", Apellido = "Martinez", Mail = "marianamartinez@gmail.com", Contraseña = "1234", Estado = Enum.Estado.APROBADO };
                 context.Usuarios.Add(usuario2);
                 context.SaveChanges();
 
@@ -195,7 +195,7 @@ namespace HiShop.Entity.Data
                 context.SaveChanges();
 
                 //Negocios
-                var negocio1 = new Negocio
+                /* var negocio1 = new Negocio
                 {
                     Nombre = "Fashion",
                     Email = "Fashion@gmail.com",
@@ -266,7 +266,7 @@ namespace HiShop.Entity.Data
 
                 };
                 context.Negocios.Add(negocio4);
-                context.SaveChanges();
+                context.SaveChanges(); */
 
                 var negocio5 = new Negocio
                 {
@@ -286,8 +286,42 @@ namespace HiShop.Entity.Data
                 context.Negocios.Add(negocio5);
                 context.SaveChanges();
 
+                var negocio6 = new Negocio
+                {
+                    Nombre = "Pinturerias Oeste",
+                    Email = "pintureriasdeloeste@hotmail.com",
+                    Estado = EstadoNegocio.APROBADO,
+                    Categoria = caetegoria2,
+                    Localidad = localidad4,
+                    Calle = "F. Varela",
+                    Numero = "1900",
+                    Telefono = "1134567890",
+                    Descripcion = "Todo para el pintor. Pinturas para exterior e interior, accesorios, y mucho mas...",
+                    UrlImagenNegocio = "/ImagenesServidor/ImagenesNegocios/Inicializar/pintureria-logo.png",
+                    Usuario = usuario, 
+                };
+                context.Negocios.Add(negocio6);
+                context.SaveChanges();
+
+                var negocio7 = new Negocio
+                {
+                    Nombre = "Blue Jeans",
+                    Email = "sjbluejeans@hotmail.com",
+                    Estado = EstadoNegocio.APROBADO,
+                    Categoria = caetegoria2,
+                    Localidad = localidad4,
+                    Calle = "Jose Marmol",
+                    Numero = "1900",
+                    Telefono = "1134567890",
+                    Descripcion = "Jeans! Jeans! Jeans! Y mas jeans! En todos los talles, en todos los colores. La mas amplia variedad.",
+                    UrlImagenNegocio = "/ImagenesServidor/ImagenesNegocios/Inicializar/jeans-logo.png",
+                    Usuario = usuario2,
+                };
+                context.Negocios.Add(negocio7);
+                context.SaveChanges();
+
                 //Servicios
-                var servicio1 = new Servicio { Descripcion = "Servicio de modista", Nombre = "Modista", Precio = 600, Negocio = negocio1, UrlImagen = "/ImagenesServidor/ImagenesServicios/Inicializar/fashionServicio1.jpg" };
+                /* var servicio1 = new Servicio { Descripcion = "Servicio de modista", Nombre = "Modista", Precio = 600, Negocio = negocio1, UrlImagen = "/ImagenesServidor/ImagenesServicios/Inicializar/fashionServicio1.jpg" };
                 context.Servicios.Add(servicio1);
                 context.SaveChanges();
 
@@ -334,7 +368,7 @@ namespace HiShop.Entity.Data
 
                 var articulo10 = new Articulo { Cantidad = 20, Descripcion = "Torta ideal para fiestas de cumpleaños", Nombre = "Torta de Cumpleaños5", Precio = 600, Negocio = negocio2, UrlImagen = "/ImagenesServidor/ImagenesArticulos/Inicializar/totasProducto5.jpg" };
                 context.Productos.Add(articulo10);
-                context.SaveChanges();
+                context.SaveChanges(); */
 
 
                 /* var articulo11 = new Articulo { Cantidad = 20, Descripcion = "Remera casual", Nombre = "Remera", Precio = 300, Negocio = negocio5, UrlImagen = "/ImagenesServidor/ImagenesArticulos/Inicializar/remera.jpg" };
@@ -361,8 +395,55 @@ namespace HiShop.Entity.Data
                 context.Productos.Add(articulo17);
                 context.SaveChanges();
 
+                var articulo18 = new Articulo { Cantidad = 150, Descripcion = "Color: Blanco - Tamaño: 20Lts.", Nombre = "Membrana liquida para techos", Precio = 1600, Negocio = negocio6, UrlImagen = "https://image.ibb.co/itDeMy/Img1.jpg" };
+                context.Productos.Add(articulo18);
+                context.SaveChanges();
+                var articulo19 = new Articulo { Cantidad = 300, Descripcion = "Decoralba Profesional - 20Lts.", Nombre = "Latex interior ALBA", Precio = 1250, Negocio = negocio6, UrlImagen = "https://image.ibb.co/jZr5uJ/Img2.jpg" };
+                context.Productos.Add(articulo19);
+                context.SaveChanges();
+                var articulo20 = new Articulo { Cantidad = 1500, Descripcion = "Oferta! -10% de descuento en compra online", Nombre = "Cinta para pintor - Oferta!", Precio = 55, Negocio = negocio6, UrlImagen = "https://image.ibb.co/giX61y/Img3.jpg" };
+                context.Productos.Add(articulo20);
+                context.SaveChanges();
+                var articulo21 = new Articulo { Cantidad = 250, Descripcion = "3 tamaños diferentes - Perfectos para el hogar", Nombre = "Pinceles x 3", Precio = 125, Negocio = negocio6, UrlImagen = "https://image.ibb.co/iSMoEJ/Img4.jpg" };
+                context.Productos.Add(articulo21);
+                context.SaveChanges();
+                var articulo22 = new Articulo { Cantidad = 75, Descripcion = "Sherwin Williams Satinadoado", Nombre = "Latex interior 20 lts.", Precio = 3600, Negocio = negocio6, UrlImagen = "https://image.ibb.co/j30gZJ/Img5.jpg" };
+                context.Productos.Add(articulo22);
+                context.SaveChanges();
+                var articulo23 = new Articulo { Cantidad = 20, Descripcion = "Blanco 20Lts", Nombre = "Frentes Recuplast", Precio = 2600, Negocio = negocio6, UrlImagen = "https://image.ibb.co/dgUVTd/Img6.jpg" };
+                context.Productos.Add(articulo23);
+                context.SaveChanges();
+
+                var articulo24 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456781", Nombre = "Jean", Precio = 600, Negocio = negocio7, UrlImagen = "https://image.ibb.co/kQFyWy/1.jpg" };
+                context.Productos.Add(articulo24);
+                context.SaveChanges();
+                var articulo25 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456782", Nombre = "Jean", Precio = 200, Negocio = negocio7, UrlImagen = "https://image.ibb.co/cYdcry/2.jpg" };
+                context.Productos.Add(articulo25);
+                context.SaveChanges();
+                var articulo26 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456783", Nombre = "Jean", Precio = 300, Negocio = negocio7, UrlImagen = "https://image.ibb.co/j3kU4J/3.jpg" };
+                context.Productos.Add(articulo26);
+                context.SaveChanges();
+                var articulo27 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456784", Nombre = "Jean", Precio = 350, Negocio = negocio7, UrlImagen = "https://image.ibb.co/dDgrJd/4.jpg" };
+                context.Productos.Add(articulo27);
+                context.SaveChanges();
+                var articulo28 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456785", Nombre = "Jean", Precio = 400, Negocio = negocio7, UrlImagen = "https://image.ibb.co/dmWQdd/5.jpg" };
+                context.Productos.Add(articulo28);
+                context.SaveChanges();
+                var articulo29 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456786", Nombre = "Jean", Precio = 500, Negocio = negocio7, UrlImagen = "https://image.ibb.co/jmioyd/6.jpg" };
+                context.Productos.Add(articulo29);
+                context.SaveChanges();
+                var articulo30 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456787", Nombre = "Jean", Precio = 650, Negocio = negocio7, UrlImagen = "https://image.ibb.co/c212PJ/7.jpg" };
+                context.Productos.Add(articulo30);
+                context.SaveChanges();
+                var articulo31 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456788", Nombre = "Jean", Precio = 270, Negocio = negocio7, UrlImagen = "https://image.ibb.co/nKg2PJ/8.jpg" };
+                context.Productos.Add(articulo31);
+                context.SaveChanges();
+                var articulo32 = new Articulo { Cantidad = 100, Descripcion = "Código: #123456789", Nombre = "Jean", Precio = 380, Negocio = negocio7, UrlImagen = "https://image.ibb.co/iGhLBy/9.jpg" };
+                context.Productos.Add(articulo32);
+                context.SaveChanges(); 
+
                 //ORDEN DE PEDIDO 
-                var orden = new OrdenPedido { NegocioID = negocio5.ID, Pago = Pago.EFECTIVO, Envio = Envio.ACUERDO, Producto = articulo10, Total = 600, Usuario = usuario5, EstadoPedido = EstadoPedido.CONCRETADO };
+                /* var orden = new OrdenPedido { NegocioID = negocio5.ID, Pago = Pago.EFECTIVO, Envio = Envio.ACUERDO, Producto = articulo10, Total = 600, Usuario = usuario5, EstadoPedido = EstadoPedido.CONCRETADO };
                 context.OrdenPedidos.Add(orden);
                 context.SaveChanges();
                 var orden2 = new OrdenPedido { NegocioID = negocio5.ID, Pago = Pago.EFECTIVO, Envio = Envio.ACUERDO, Producto = articulo10, Total = 600, Usuario = usuario5, EstadoPedido = EstadoPedido.CONCRETADO };
@@ -370,7 +451,7 @@ namespace HiShop.Entity.Data
                 context.SaveChanges();
                 var orden3 = new OrdenPedido { NegocioID = negocio5.ID, Pago = Pago.EFECTIVO, Envio = Envio.ACUERDO, Producto = articulo10, Total = 600, Usuario = usuario5, EstadoPedido = EstadoPedido.PENDIENTE };
                 context.OrdenPedidos.Add(orden3);
-                context.SaveChanges();
+                context.SaveChanges(); */
             }
 
 

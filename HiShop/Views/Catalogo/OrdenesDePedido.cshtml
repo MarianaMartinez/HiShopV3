@@ -13,9 +13,9 @@
         <section class="container">
             <h1>Órdenes de Pedido</h1>
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="width:750px;">
                     <div class="panel-body">
-                        <div class="pull-right">
+                        <div class="pull-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
                                 <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="table-container">
-                            <table class="table table-filter">
+                            <table class="table table-filter" style="width:720px;">
                                 <tbody>
                                     @foreach (var item in Model.ordenes)
                                     {
@@ -43,7 +43,7 @@
                                                     @Html.DisplayFor(modelItem => item.Total)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Negocio.ID)
+                                                    @Html.DisplayFor(modelItem => item.Negocio.Nombre)
                                                 </td>
                                             </tr>
                                         }
@@ -66,7 +66,7 @@
                                                     @Html.DisplayFor(modelItem => item.Total)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Negocio.ID)
+                                                    @Html.DisplayFor(modelItem => item.Negocio.Nombre)
                                                 </td>
                                                 <td>
                                                     <form action="/Catalogo/OrdenesDePedido/@item.ID" method="post">

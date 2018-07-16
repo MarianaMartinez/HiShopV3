@@ -188,7 +188,7 @@
                             <script>
                                     function UserAction() {
                                     var xhttp = new XMLHttpRequest();
-                                    xhttp.open("POST", "https://api.mercadolibre.com/items?access_token=APP_USR-7157869629400488-071500-ed08882343b66ed1567f2d8c2e057252-336217790", true);
+                                    xhttp.open("POST", "https://api.mercadolibre.com/items?access_token=APP_USR-7157869629400488-071521-72b4604fffd54a949b29503b27a9fa16-336217790", true);
                                     xhttp.setRequestHeader("Content-type", "application/json");
                                     xhttp.send("{'title':'@Model.listaDeArticulos[i].Nombre (Item de test - No Ofertar)', 'category_id':'MLA3530','price':@Convert.ToDouble(Model.listaDeArticulos[i].Precio),'currency_id':'ARS','available_quantity':@Convert.ToInt32(Model.listaDeArticulos[i].Cantidad),'buying_mode':'buy_it_now','listing_type_id':'gold_special','condition':'new','description' : { 'plain_text': '@Model.listaDeArticulos[i].Descripcion (Item de test - No Ofertar)' },'warranty': '12 months','pictures':[{ 'source': '@Model.listaDeArticulos[i].UrlImagen' }]}");
                                     var response = JSON.parse(xhttp.responseText);

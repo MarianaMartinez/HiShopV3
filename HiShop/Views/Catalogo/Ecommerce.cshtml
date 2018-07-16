@@ -151,16 +151,16 @@
 
                 <div class="col-sm-9 padding-right">
                     <div class="features_items">
-                        <!--features_items--> 
+                        <!--features_items-->
 
 
-                    <form action="/Catalogo/Ecommerce/query=@TempData["PalabraClave"]" method="post">
-                        
-                        <input type="text" placeholder="buscar" value="@TempData["PalabraClave"]" name="query" /> <input type="submit" value="Buscar" />
+                        <form action="/Catalogo/Ecommerce/query=@TempData["PalabraClave"]" method="post">
 
-                    </form>
+                            <input type="text" placeholder="buscar" value="@TempData["PalabraClave"]" name="query" /> <input type="submit" value="Buscar" />
 
-                        <h2 class="title text-center">Productos</h2> 
+                        </form>
+
+                        <h2 class="title text-center">Productos</h2>
 
                         <h2 class="title text-center text-danger"> @TempData["Mensaje"] </h2>
                         @foreach (var item in Model.productos)
@@ -169,12 +169,13 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="@item.UrlImagen" alt="" height="200" />
+                                            <img src="@item.UrlImagen" alt="@item.Nombre" width="300" />
                                             <h2>$@item.Precio</h2>
                                             <p>@item.Nombre</p>
                                         </div>
                                         <div class="product-overlay">
                                             <div class="overlay-content">
+                                                <img src="~/images/Logo.png" alt="@item.Nombre" width="300" />
                                                 <h2>$@item.Precio</h2>
                                                 <p>@item.Nombre</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Comprar</a>
@@ -182,9 +183,25 @@
                                         </div>
                                     </div>
 
+                                    <!-- <div class="choose">
+                                        <ul class="nav nav-pills nav-justified">
+                                            <li>
+                                                <form action="/Catalogo/DetallesDeProducto/@item.ID" method="post">
+                                                    <i class="fa fa-plus-square"></i><input type="submit" value="ver mas" />
+                                                    Ver más detalles
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div> -->
+
                                     <div class="choose">
                                         <ul class="nav nav-pills nav-justified">
-                                            <li><form action ="/Catalogo/DetallesDeProducto/@item.ID" method="post"><i class="fa fa-plus-square"></i><input type="submit" value="ver mas" />Ver más detalles</form></li>
+                                            <li>
+                                                <a href="/Catalogo/DetallesDeProducto/@item.ID">
+                                                    <i class="fa fa-plus-square"></i>
+                                                    Ver más detalles
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
 

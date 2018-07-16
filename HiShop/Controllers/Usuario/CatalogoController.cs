@@ -83,7 +83,7 @@ namespace HiShop.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        //[HttpPost]
         public IActionResult DetallesDeProducto(int id)
         {
             Producto producto = ProductoDAo.get(_context, id);

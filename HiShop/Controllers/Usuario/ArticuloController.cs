@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using HiShop.Controllers;
 using HiShop.Entity.Data;
 using HiShop.Models;
-using Microsoft.EntityFrameworkCore;
 using HiShop.Entity;
 using HiShop.Dao;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +11,6 @@ using Microsoft.AspNetCore.Hosting;
 using HiShop.Enum;
 using HiShop.Models.Articulo;
 using HiShop.Models.Filtros;
-using HiShop.Models.Base;
 
 namespace HiShop.Controllers
 {
