@@ -55,6 +55,9 @@ namespace HiShop.Controllers
                     Producto = producto
                 };
                 OrdenPedidoDao.grabar(_context, ordenPedido);
+
+                Articulo articulo = ArticuloDao.get(_context, model.Producto.ID);
+
                 return RedirectToAction("Perfil","Usuario");
             }
             return View();

@@ -221,6 +221,7 @@ namespace HiShop.Controllers
             OrdenPedidoDao.Editar(_context, orden);
             List<OrdenPedido> ordenes = OrdenPedidoDao.getListado(_context, UsuarioDao.getUsuario(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID));
             model.ordenes = ordenes;
+
             return View(model);
         }
 

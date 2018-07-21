@@ -25,7 +25,7 @@
             type: 'POST',
             async: true,
             success: (function (result) {
-                debugger;
+                //debugger;
                 if (result.data.mensaje.tipo == "ERROR") {
                     crearMensaje("mensajeGeneral", result.data.mensaje.texto, result.data.mensaje.tipo);
                 } else {
@@ -91,7 +91,7 @@
                     <li><a href="/Negocio/MisNegocios">Negocios</a></li>
                     @if (Model.negocioModelBase != null)
                     {
-                        <li><a href="/Showroom/EditarShowroom">Maquetar negocio</a></li>
+                        <li><a href="/Showroom/EditarShowroom2">Maquetar negocio</a></li>
                         <li><a href="/Articulo/ListarArticulo">Artículos</a></li>
                     }
                    
