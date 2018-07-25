@@ -7,7 +7,7 @@
 function crearMensaje(idElemento,mensaje,tipo)
 {
     var clase;
-    debugger;
+    //debugger;
     if (tipo == "EXITO")
     {
         clase = "alert-success" 
@@ -21,7 +21,7 @@ function crearMensaje(idElemento,mensaje,tipo)
 
     var elementoContenedor = $("#" + idElemento);
 
-    debugger;
+    //debugger;
     var cantidadDeMensajes = $(".mensajeAutoCreado").length;
     $("#mensajeAutoCreado-" + cantidadDeMensajes).fadeOut(2);
     var valor = cantidadDeMensajes + 1;

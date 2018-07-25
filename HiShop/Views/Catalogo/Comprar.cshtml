@@ -63,6 +63,25 @@
                             </div>
                             <div class="col-xs-3">
                                 <form action="/Catalogo/ComprarPost/@Model.Servicio.ID?" method="post">
+
+                                    <h6>Seleccione: </h6>
+                                    <select name="Pago">
+                                        <option value="0" name="Pago"> EFECTIVO</option>
+                                        <option value="1" name="Pago"> MERCADOPAGO</option>
+                                        <option value="2" name="Pago"> TRANSFERENCIA</option>
+                                    </select>
+
+                                    <h6>Seleccione: </h6>
+                                    <select name="Envio">
+                                        <option value="0" name="Envio"> ACUERDO </option>
+                                        <option value="1" name="Envio"> MERCADOENVIO </option>
+                                        <option value="2" name="Envio"> OCA </option>
+                                        <option value="3" name="Envio"> CORREO </option>
+                                    </select>
+
+                                    <input type="hidden" value="@TempData["pago"]" name="Pago" />
+                                    <input type="hidden" value="@TempData["envio"]" name="Envio" />
+
                                     <input type="hidden" value="@TempData["total"]" name="Total" />
                                     <input type="submit" value="Confirmar" class="btn btn-success btn-block" />
                                 </form>

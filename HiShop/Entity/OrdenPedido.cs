@@ -21,5 +21,6 @@ namespace HiShop.Entity
 
         public Producto Producto { get; set; } 
 
+        public int ProductoID { get; set; }
     }
 }

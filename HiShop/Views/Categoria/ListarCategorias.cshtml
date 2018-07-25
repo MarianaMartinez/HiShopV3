@@ -280,7 +280,7 @@
     //AxelMolaro
     function mostrarOcultarCategoriasHijas(padre)
     {
-        debugger;
+        //debugger;
         var lista = $('[padre="' + padre + '"]');
         var clase = document.getElementById(padre).className;
         if (clase == "zmdi zmdi-arrow-right") {
@@ -289,7 +289,7 @@
             cambiarLogoAOpen(padre);
         } else {
             $("#" + padre + "-hijas").fadeOut();
-            debugger;
+            //debugger;
             document.getElementById(padre).className = 'zmdi zmdi-arrow-right';
 
         }

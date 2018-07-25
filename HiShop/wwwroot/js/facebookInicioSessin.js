@@ -96,7 +96,7 @@ function loguearConFacebook(respuestaFacebook) {
         },
         type: 'POST',
         success: (function (respuesta) {
-            debugger;
+            //debugger;
             if (respuesta == "/Usuario/Perfil") {
                 window.location.href = respuesta;
             }
@@ -109,7 +109,7 @@ function loguearConFacebook(respuestaFacebook) {
 
 
 function cargarFacebook() {
-    debugger;
+    //debugger;
     (function (d) {
         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
         if (d.getElementById(id)) {

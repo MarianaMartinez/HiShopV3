@@ -64,7 +64,7 @@
             type: 'POST',
             async: true,
             success: (function (result) {
-                debugger;
+                //debugger;
                 if (estado == "APROBADO")
                      document.getElementById("estado").className = "glyphicon glyphicon-ok-circle text-success";
                 if (estado == "INHABILITADO")
@@ -89,7 +89,7 @@
             type: 'POST',
             async: true,
             success: (function (result) {
-                debugger;
+                //debugger;
                 if (result.data.mensaje.tipo == "ERROR")
                 { 
                     crearMensaje("mensajeGeneral", result.data.mensaje.texto, result.data.mensaje.tipo);

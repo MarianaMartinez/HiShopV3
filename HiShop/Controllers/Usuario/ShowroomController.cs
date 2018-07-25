@@ -338,7 +338,7 @@ namespace HiShop.Controllers
         public IActionResult Ver2(int id)
         {
             ShowroomVerModelAndView model = new ShowroomVerModelAndView();
-            Negocio negocio = NegocioDao.get(_context, id);
+            Negocio negocio = NegocioDao.get(_context, HttpContext.Session.GetObjectFromJson<Negocio>("negocioEnSession").ID);
             Showroom showroom = new Showroom();
             Banner banner = new Banner();
             Cuerpo cuerpo = new Cuerpo();

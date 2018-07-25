@@ -19,7 +19,7 @@ namespace HiShop.Dao
     /// </summary>
     public class ProductoDAo
     {
-      
+
         /// <summary>
         /// Listado de Productos  
         /// PedroCora
@@ -30,6 +30,20 @@ namespace HiShop.Dao
             return _context.Productos.ToList();
         }
 
+        public static List<Producto> ListadoDeProductosFiltro(HiShopContext _context, int id)
+        {
+            var listaDeProductos = _context.Productos.ToList();
+            var nuevaLista = new List<Producto>();
+            foreach (var item in listaDeProductos)
+            {
+                if (item.Negocio.UsuarioID != id)
+                {
+                    nuevaLista.Add(item);
+                }
+            }
+
+            return nuevaLista;
+        }
 
         public static List<Producto> getListado(HiShopContext _context, Negocio negocio)
         {
@@ -53,7 +67,7 @@ namespace HiShop.Dao
                 throw new InvalidDataException("Ocurrio un error al buscar el articulo .");
             }
             return prodcuto;
-        } 
+        }
 
         public static bool EsArticulo(HiShopContext context, int id)
         {
@@ -61,13 +75,13 @@ namespace HiShop.Dao
 
             ArticuloDao articuloDao = new ArticuloDao();
 
-            List<Articulo> articulos = articuloDao.ListadoDeArticulos(context); 
+            List<Articulo> articulos = articuloDao.ListadoDeArticulos(context);
 
-            foreach(var a in articulos)
+            foreach (var a in articulos)
             {
                 if (producto.ID == a.ID)
                 {
-                    return true; 
+                    return true;
                 }
             }
             return false;

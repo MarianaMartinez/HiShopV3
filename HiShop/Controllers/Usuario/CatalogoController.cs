@@ -39,7 +39,8 @@ namespace HiShop.Controllers
         public IActionResult Ecommerce()
         {
             CatalogoGeneral model = new CatalogoGeneral(HttpContext, _context);
-            List<Producto> productos = ProductoDAo.ListadoDeProductos(_context);
+            //List<Producto> productos = ProductoDAo.ListadoDeProductos(_context);
+            List<Producto> productos = ProductoDAo.ListadoDeProductosFiltro(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID); 
             model.productos = productos;
             return View(model);
         }
@@ -146,23 +147,24 @@ namespace HiShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult ComprarPost(int id, decimal total, int p, OrdenPedido orden)
+        public IActionResult ComprarPost(int id, decimal total, int pago, int envio, int p, OrdenPedido orden)
         {
             Producto producto = ProductoDAo.get(_context, id);
 
             TempData["total"] = total;
 
-            //Axel: con esto estuve probando, pero todo lo q tenga q ver con enum, no sirve
-            p = Convert.ToInt32(TempData["GuardarPago"]);
+            TempData["Pago"] = pago;
+            TempData["Envio"] = envio; 
 
             OrdenPedido ordenPedido = new OrdenPedido
             {
                 EstadoPedido = EstadoPedido.PENDIENTE,
-                Pago = (Pago)p,
-                Envio = orden.Envio,
+                Pago = (Pago)pago,
+                Envio = (Envio)envio,
                 Total = Convert.ToDecimal(TempData["total"]),
                 NegocioID = producto.NegocioID,
                 Producto = ProductoDAo.get(_context, id),
+                ProductoID = ProductoDAo.get(_context, id).ID, 
                 Usuario = UsuarioDao.getUsuario(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID)
             };
 

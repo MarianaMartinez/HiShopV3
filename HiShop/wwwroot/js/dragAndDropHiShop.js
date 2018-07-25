@@ -84,9 +84,9 @@ function llenarCatalogoAjaxConLinks(contenedor, elementoItemHTML) {
 
         success: (function (respuesta) {
             var productos = respuesta.data.productos;
-            debugger;
+            //debugger;
             for (var i = 0; i < respuesta.data.productos.length; i++) {
-                debugger;
+                //debugger;
                 var elemento = elementoItemHTML.clone();
                 elemento.removeClass("itemProductoBase");
                 var elementoTitulo = elemento.find("[pk='tituloCuerpo-0']");
@@ -130,7 +130,7 @@ function llenarCatalogoAjaxConLinks(contenedor, elementoItemHTML) {
             success: (function (respuesta) {
                 html = respuesta.data.html;
                 $("#contenedorBanner").ready(function () {
-                    debugger;
+                    //debugger;
                     var contenedorBanner = $("#contenedorBanner");
                     contenedorBanner.append(formatearHtml(html));
                 });
