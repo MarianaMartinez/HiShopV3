@@ -44,8 +44,14 @@
     //AxelMolaro
     function limpiarFiltros() {
         $("#nombreFiltro").val("");
-        $("formFiltro").submit();
+        $("#inputPaginaActual").val("1");
+        $("#formFiltro").submit();
     }
+    function filtrar() {
+        $("#inputPaginaActual").val("1");
+        $("#formFiltro").submit();
+    }
+
 
     function post(nombre, descripcion, precio, imagen) {
         debugger;
@@ -93,8 +99,8 @@
                 <input value="@Model.filtro.total" id="inputTotalDePaginas" readonly="readonly" type="hidden" />
 
                 <div class="form-group form-inline">
-                    <button type="submit" class="btn btn-success2">Filtrar</button>
-                    <button type="submit" class="btn btn-info" onclick="limpiarFiltros()">Limpiar Filtros</button>
+                    <button type="button" class="btn btn-success2" onclick="filtrar()">Filtrar</button>
+                    <button type="button" class="btn btn-info" onclick="limpiarFiltros()">Limpiar Filtros</button>
                 </div>
             </form>
 
