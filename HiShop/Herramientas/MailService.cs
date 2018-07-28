@@ -103,7 +103,7 @@ namespace HiShop.Herramientas
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new System.Net.NetworkCredential("hishopecommerce@hotmail.com", "LigaFederal2018");
             smtp.EnableSsl = true;
-            smtp.Send(mail);
+            //smtp.Send(mail);
         }
 
         /// <summary>

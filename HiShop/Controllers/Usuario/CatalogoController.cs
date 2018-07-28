@@ -97,6 +97,9 @@ namespace HiShop.Controllers
                 {
                     DetalleArticuloModelAndView model = new DetalleArticuloModelAndView(HttpContext, _context);
                     model.Articulo = a;
+                    Usuario usuarioModelBase = HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession");
+                    TempData["usuarioSesionTemp"] = usuarioModelBase;
+
                     return View("DetallesDeArticulo", model);
                 }
             }
@@ -132,6 +135,11 @@ namespace HiShop.Controllers
         {
             Producto producto = ProductoDAo.get(_context, id);
             HiShop.Models.Catalogo.DetalleServicioModelAndView model = new DetalleServicioModelAndView(HttpContext, _context);
+          /*  if (model.usuarioModelBase == null) {
+                agregarMensajePrincipal("Inicia sesión para poder comprar", TipoMensaje.ADVERTENCIA);
+                TempData["Mensajes"] = mensajes;
+                return Redirect("/InicioLogueado/Inicio");
+            }*/
             model.Servicio = producto;
             if (cantidad == 0)
             {
