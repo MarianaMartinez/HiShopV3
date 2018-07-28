@@ -1,7 +1,20 @@
 ﻿@model HiShop.Models.Catalogo.CatalogoGeneral
-
 @{
-    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+    string registrado = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
+    string noRegistrado = "~/Views/Shared/_BaseMenuNoRegistrado.cshtml";
+    string lay = "";
+    if (Model.usuarioModelBase == null)
+    {
+        lay = noRegistrado;
+    }
+    else
+    {
+        lay = registrado;
+
+
+    }
+
+    Layout = lay;
 }
 
 <!DOCTYPE html>

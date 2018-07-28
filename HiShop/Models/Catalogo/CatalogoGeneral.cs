@@ -14,7 +14,6 @@ namespace HiShop.Models.Catalogo
         public CatalogoGeneral(HttpContext httpContext, HiShopContext _context) : base(httpContext, _context)
         {
         }
-
         public List<Producto> productos { get; set; }
     }
 }
