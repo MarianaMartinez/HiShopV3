@@ -97,8 +97,7 @@ namespace HiShop.Controllers
                 {
                     DetalleArticuloModelAndView model = new DetalleArticuloModelAndView(HttpContext, _context);
                     model.Articulo = a;
-                    Usuario usuarioModelBase = HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession");
-                    TempData["usuarioSesionTemp"] = usuarioModelBase;
+                  
 
                     return View("DetallesDeArticulo", model);
                 }
