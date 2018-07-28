@@ -151,3 +151,14 @@ C:\Users\Jorge\Documents\GitHub\HiShopV3\HiShopV3\HiShop\obj\Debug\netcoreapp2.0
 C:\Users\Jorge\Documents\GitHub\HiShopV3\HiShopV3\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
 C:\Users\Jorge\Documents\GitHub\HiShopV3\HiShopV3\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
 C:\Users\Jorge\Documents\GitHub\HiShopV3\HiShopV3\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
+C:\proy\HiShopV3\HiShop\bin\Debug\netcoreapp2.0\HiShop.deps.json
+C:\proy\HiShopV3\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.json
+C:\proy\HiShopV3\HiShop\bin\Debug\netcoreapp2.0\HiShop.runtimeconfig.dev.json
+C:\proy\HiShopV3\HiShop\bin\Debug\netcoreapp2.0\HiShop.dll
+C:\proy\HiShopV3\HiShop\bin\Debug\netcoreapp2.0\HiShop.pdb
+C:\proy\HiShopV3\HiShop\obj\Debug\netcoreapp2.0\HiShop.csprojResolveAssemblyReference.cache
+C:\proy\HiShopV3\HiShop\obj\Debug\netcoreapp2.0\HiShop.csproj.CoreCompileInputs.cache
+C:\proy\HiShopV3\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfoInputs.cache
+C:\proy\HiShopV3\HiShop\obj\Debug\netcoreapp2.0\HiShop.AssemblyInfo.cs
+C:\proy\HiShopV3\HiShop\obj\Debug\netcoreapp2.0\HiShop.dll
+C:\proy\HiShopV3\HiShop\obj\Debug\netcoreapp2.0\HiShop.pdb
