@@ -82,15 +82,14 @@
 </script>
 <div id="fb-root"></div>
 
-<div class="row">
-    <div class="container">
+<div class="">
+    <div class=" container-fluid">
         <div>
             <br />
             <h3><i class="zmdi zmdi-plus-box"></i> Mis Articulos </h3>
         </div>
         <div>
-            Filtro
-            <form method="get" id="formFiltro" action="/Articulo/ListarArticulo" class="form-inline">
+            <form method="get" id="formFiltro" action="/Articulo/ListarArticulo" class="form-inline alert alert-info">
                 <div class="form-group form-inline">
                     <label class="control-label">Nombre</label>
                     <input class="form-control" name="nombreFiltro" id="nombreFiltro" value="@Model.filtro.nombreFiltro" />
