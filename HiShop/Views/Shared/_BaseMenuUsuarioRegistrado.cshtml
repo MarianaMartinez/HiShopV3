@@ -172,7 +172,7 @@
 
         <form class="buscadorHeader  visible-md visible-lg" role="search" action="/Catalogo/Ecommerce/query=@TempData["PalabraClave"]" id="formBuscar" method="post">
             <div class="input-group">
-                <input type="text" class="form-control" aria-describedby="start-date">
+                <input type="text" placeholder="buscar" value="@TempData["PalabraClave"]" name="query"   class="form-control" aria-describedby="start-date"/> 
                 <span class="input-group-addon" id="start-date"><span class="glyphicon glyphicon-search" onclick="$('#formBuscar').submit()"></span></span>
             </div>
         </form>
@@ -183,7 +183,7 @@
 
 <br />
 @{
-    /*
+/*
     if (TempData["Mensajes"] != null)
     {
         List<HiShop.Models.MensajeModel> mensajes = (List<HiShop.Models.MensajeModel>)TempData["Mensajes"];
@@ -208,11 +208,6 @@
 <br />
 
 <div id="mensajeGeneral"></div>
-@RenderBody()
-
-
-
-
 
 @RenderBody()
 
