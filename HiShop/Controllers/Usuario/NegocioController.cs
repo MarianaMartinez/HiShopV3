@@ -87,7 +87,7 @@ namespace HiShop.Controllers
                     Email = model.Email,
                     Descripcion = model.Descripcion,
                     Usuario = UsuarioDao.getUsuario(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID),
-                    Estado = EstadoNegocio.INHABILITADO, //se crea con estado inhabilitado por el momento.
+                    Estado = EstadoNegocio.APROBADO, //se crea con estado inhabilitado por el momento.
                     UrlImagenNegocio = "",
                     //Showroom = ShowroomDao.get(_context, model.ShowroomFk)
                 };

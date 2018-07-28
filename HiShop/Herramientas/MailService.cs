@@ -133,7 +133,7 @@ namespace HiShop.Herramientas
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new System.Net.NetworkCredential("hishopecommerce@hotmail.com", "LigaFederal2018");
             smtp.EnableSsl = true;
-            smtp.Send(mail);
+            //smtp.Send(mail);
         }
 
         /*public void ConfirmarPedido(HiShopContext context, MailModel _objModelMail, OrdenPedido orden)
