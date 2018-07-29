@@ -1,6 +1,6 @@
 ﻿@model HiShop.Models.Showroom.ShowroomDADGeneralModelAndView
 @{
-    Layout = "~/Views/Shared/_Base.cshtml";
+    Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
 }
 
 <!DOCTYPE html>
@@ -9,10 +9,18 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title></title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    <style>
+        #barra {
+            margin-top: -40px;
+        }
 
+        .pie {
+            height: 40px;
+        }
+    </style>
     <script type="text/javascript">
 
         var fontSize = 1;
@@ -90,421 +98,443 @@
             <div class="row setup-content" id="step-1">
                 <div class="col-xs-6 col-md-offset-3">
                     <div class="col-md-12">
-                        <center>
-                            <h3> Diseñá tu marca: </h3>
-                        </center>
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="navigation">
-                                    <h5>Seleccioná:</h5>
+                        <a href="javascript:window.history.back();" type="button" class="btn btn-info">Volver</a> 
+                    </div>
 
-                                    <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTextColor(this)'}">
-                                        Color
-                                    </button>
-                                    <script>
-                                        function setTextColor(picker) {
-                                            document.getElementById('par').style.color = '#' + picker.toString()
+                    <center>
+                        <h3> Diseñá tu marca: </h3>
+                    </center>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="navigation">
+                                <h5>Seleccioná:</h5>
+
+                                <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTextColor(this)'}">
+                                    Color
+                                </button>
+                                <script>
+                                    function setTextColor(picker) {
+                                        document.getElementById('par').style.color = '#' + picker.toString()
+                                    }
+                                </script>
+
+                                <h5>Seleccioná:</h5>
+                                <select onchange="cambiarEstiloFuente(this.value)">
+                                    <option selected> Estilo de fuente </option>
+                                    <option value="Arial"> Arial </option>
+                                    <option value="Arial Black"> Arial Black </option>
+                                    <option value="Arial Narrow"> Arial Narrow </option>
+                                    <option value="Century Gothic"> Century Gothic </option>
+                                    <option value="Copperplate Gothic Light"> Copperplate Gothic Light </option>
+                                    <option value="Courier New"> Courier New </option>
+                                    <option value="Georgia"> Georgia </option>
+                                    <option value="Gill Sans"> Gill Sans </option>
+                                    <option value="Impact"> Impact </option>
+                                    <option value="Lucida Console"> Lucida Console </option>
+                                    <option value="Lucida Sans Unicode"> Lucida Sans Unicode </option>
+                                    <option value="Palatino Linotype"> Palatino Linotype </option>
+                                    <option value="Tahoma"> Tahoma </option>
+                                    <option value="Times New Roman"> Times New Roman </option>
+                                    <option value="Trebuchet MS"> Trebuchet MS </option>
+                                    <option value="Verdana"> Verdana </option>
+                                </select>
+
+                                <h5>Seleccioná:</h5>
+                                <select onchange="cambiarAlineacionParrafo(this.value)">
+                                    <option selected> Alineación del texto </option>
+                                    <option value="right"> Derecha </option>
+                                    <option value="center"> Centro </option>
+                                    <option value="left"> Izquierda </option>
+                                </select>
+
+                                <h5>Elegí el tamaño de la fuente:</h5>
+                                <header>
+                                    <span onclick="zoomIn()"> A+ </span> <span onclick="zoomOut()"> A- </span>
+                                </header>
+                            </div>
+                        </div>
+
+                        <style>
+                            .navigation {
+                                background: #eeeeee;
+                                width: 100%;
+                                padding: 20px;
+                                box-sizing: border-box;
+                            }
+
+                            .img-responsive {
+                                max-width: 100%;
+                            }
+
+                            .m-20 {
+                                margin-bottom: 20px;
+                            }
+
+                            .section__picture {
+                                margin-bottom: 0;
+                            }
+
+                            .step {
+                                margin-bottom: 20px;
+                                float: left;
+                            }
+
+                            .centered {
+                                text-align: center;
+                            }
+
+                            footer {
+                                background: #0a3055;
+                                height: 80px;
+                                margin-top: 20px;
+                            }
+
+                            header {
+                                height: 80px;
+                                margin-bottom: 20px;
+                            }
+
+                            .step-header-fixed {
+                                background: #eeeeee;
+                                font-size: 22px;
+                                padding: 10px;
+                                color: #3e3e3e;
+                                margin-bottom: 0 !important;
+                            }
+                        </style>
+                        <script>
+                            (function () {
+                                var c, f; c = this.jQuery || window.jQuery; f = c(window); c.fn.stick_in_parent = function (b) {
+                                    var A, w, B, n, p, J, k, E, t, K, q, L; null == b && (b = {}); t = b.sticky_class; B = b.inner_scrolling; E = b.recalc_every; k = b.parent; p = b.offset_top; n = b.spacer; w = b.bottoming; null == p && (p = 0); null == k && (k = void 0); null == B && (B = !0); null == t && (t = "is_stuck"); A = c(document); null == w && (w = !0); J = function (a) {
+                                        var b; return window.getComputedStyle ? (a = window.getComputedStyle(a[0]), b = parseFloat(a.getPropertyValue("width")) + parseFloat(a.getPropertyValue("margin-left")) +
+                                            parseFloat(a.getPropertyValue("margin-right")), "border-box" !== a.getPropertyValue("box-sizing") && (b += parseFloat(a.getPropertyValue("border-left-width")) + parseFloat(a.getPropertyValue("border-right-width")) + parseFloat(a.getPropertyValue("padding-left")) + parseFloat(a.getPropertyValue("padding-right"))), b) : a.outerWidth(!0)
+                                    }; K = function (a, b, q, C, F, u, r, G) {
+                                        var v, H, m, D, I, d, g, x, y, z, h, l; if (!a.data("sticky_kit")) {
+                                            a.data("sticky_kit", !0); I = A.height(); g = a.parent(); null != k && (g = g.closest(k)); if (!g.length) throw "failed to find stick parent";
+                                            v = m = !1; (h = null != n ? n && a.closest(n) : c("<div />")) && h.css("position", a.css("position")); x = function () {
+                                                var d, f, e; if (!G && (I = A.height(), d = parseInt(g.css("border-top-width"), 10), f = parseInt(g.css("padding-top"), 10), b = parseInt(g.css("padding-bottom"), 10), q = g.offset().top + d + f, C = g.height(), m && (v = m = !1, null == n && (a.insertAfter(h), h.detach()), a.css({ position: "", top: "", width: "", bottom: "" }).removeClass(t), e = !0), F = a.offset().top - (parseInt(a.css("margin-top"), 10) || 0) - p, u = a.outerHeight(!0), r = a.css("float"), h && h.css({
+                                                    width: J(a),
+                                                    height: u, display: a.css("display"), "vertical-align": a.css("vertical-align"), "float": r
+                                                }), e)) return l()
+                                            }; x(); if (u !== C) return D = void 0, d = p, z = E, l = function () {
+                                                var c, l, e, k; if (!G && (e = !1, null != z && (--z, 0 >= z && (z = E, x(), e = !0)), e || A.height() === I || x(), e = f.scrollTop(), null != D && (l = e - D), D = e, m ? (w && (k = e + u + d > C + q, v && !k && (v = !1, a.css({ position: "fixed", bottom: "", top: d }).trigger("sticky_kit:unbottom"))), e < F && (m = !1, d = p, null == n && ("left" !== r && "right" !== r || a.insertAfter(h), h.detach()), c = { position: "", width: "", top: "" }, a.css(c).removeClass(t).trigger("sticky_kit:unstick")),
+                                                    B && (c = f.height(), u + p > c && !v && (d -= l, d = Math.max(c - u, d), d = Math.min(p, d), m && a.css({ top: d + "px" })))) : e > F && (m = !0, c = { position: "fixed", top: d }, c.width = "border-box" === a.css("box-sizing") ? a.outerWidth() + "px" : a.width() + "px", a.css(c).addClass(t), null == n && (a.after(h), "left" !== r && "right" !== r || h.append(a)), a.trigger("sticky_kit:stick")), m && w && (null == k && (k = e + u + d > C + q), !v && k))) return v = !0, "static" === g.css("position") && g.css({ position: "relative" }), a.css({ position: "absolute", bottom: b, top: "auto" }).trigger("sticky_kit:bottom")
+                                            },
+                                                y = function () { x(); return l() }, H = function () { G = !0; f.off("touchmove", l); f.off("scroll", l); f.off("resize", y); c(document.body).off("sticky_kit:recalc", y); a.off("sticky_kit:detach", H); a.removeData("sticky_kit"); a.css({ position: "", bottom: "", top: "", width: "" }); g.position("position", ""); if (m) return null == n && ("left" !== r && "right" !== r || a.insertAfter(h), h.remove()), a.removeClass(t) }, f.on("touchmove", l), f.on("scroll", l), f.on("resize", y), c(document.body).on("sticky_kit:recalc", y), a.on("sticky_kit:detach", H), setTimeout(l,
+                                                    0)
                                         }
-                                    </script>
+                                    }; q = 0; for (L = this.length; q < L; q++)b = this[q], K(c(b)); return this
+                                }
+                            }).call(this);
 
-                                    <h5>Seleccioná:</h5>
-                                    <select onchange="cambiarEstiloFuente(this.value)">
-                                        <option selected> Estilo de fuente </option>
-                                        <option value="Arial"> Arial </option>
-                                        <option value="Arial Black"> Arial Black </option>
-                                        <option value="Arial Narrow"> Arial Narrow </option>
-                                        <option value="Century Gothic"> Century Gothic </option>
-                                        <option value="Copperplate Gothic Light"> Copperplate Gothic Light </option>
-                                        <option value="Courier New"> Courier New </option>
-                                        <option value="Georgia"> Georgia </option>
-                                        <option value="Gill Sans"> Gill Sans </option>
-                                        <option value="Impact"> Impact </option>
-                                        <option value="Lucida Console"> Lucida Console </option>
-                                        <option value="Lucida Sans Unicode"> Lucida Sans Unicode </option>
-                                        <option value="Palatino Linotype"> Palatino Linotype </option>
-                                        <option value="Tahoma"> Tahoma </option>
-                                        <option value="Times New Roman"> Times New Roman </option>
-                                        <option value="Trebuchet MS"> Trebuchet MS </option>
-                                        <option value="Verdana"> Verdana </option>
-                                    </select>
+                            $(".navigation").stick_in_parent({
+                                offset_top: 20,
+                            });
 
-                                    <h5>Seleccioná:</h5>
-                                    <select onchange="cambiarAlineacionParrafo(this.value)">
-                                        <option selected> Alineación del texto </option>
-                                        <option value="right"> Derecha </option>
-                                        <option value="center"> Centro </option>
-                                        <option value="left"> Izquierda </option>
-                                    </select>
+                        </script>
 
-                                    <h5>Elegí el tamaño de la fuente:</h5>
-                                    <header>
-                                        <span onclick="zoomIn()"> A+ </span> <span onclick="zoomOut()"> A- </span>
-                                    </header>
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" style="width:125px;height:40px;margin-top:307px;font-size:14px;background-color:#FF8C00">Siguiente</button>
+
+                    </div>
+
+                    <hr />
+
+                    <div class="fuente2" id="txthtml" name="txthtml" onKeyUp="renderHtml(this.value)">
+                        <p id="par" name="Titulo">
+                            <img src="@Model.negocioModelBase.UrlImagenNegocio" width="100" />
+                            @Model.negocioModelBase.Nombre
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="row setup-content" id="step-2">
+        <div class="col-xs-6 col-md-offset-3">
+            <div class="col-md-12">
+
+
+                <div class="setup-panel">
+                    <div class="stepwizard-step">
+                        <a href="#step-1" type="button" class="btn btn-info">Volver</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <h3 class="text-center"> Personalizá tus imágenes </h3>
+
+            <h5>Seleccioná un color para el fondo:</h5>
+            <button id="colorDeFondo" class="jscolor {valueElement:'chosen-value', onFineChange:'setBodyColor(this)'}">
+                Color
+            </button>
+            <div id="txthtml2" name="txthtml2" onKeyUp="renderHtml2(this.value)">
+
+                <script>
+                    function setBodyColor(picker) {
+                        document.body.style.backgroundColor = '#' + picker.toString()
+                    }
+                </script>
+
+                <style class="cp-pen-styles">
+                    body {
+                        cursor: 32 32, move;
+                    }
+
+                    *, *:before, *:after {
+                        box-sizing: border-box;
+                    }
+
+                    .container2 {
+                        position: relative;
+                        top: 50%;
+                        left: 50%;
+                        margin-top: 250px;
+                        margin-left: -70px;
+                        opacity: 0;
+                        visibility: hidden;
+                        -webkit-transform: translate(-50%, -50%);
+                        transform: translate(-50%, -50%);
+                        cursor: move;
+                        cursor: 32 32, move;
+                    }
+
+                    .list-item {
+                        position: absolute;
+                        top: -200px;
+                        left: 0;
+                        height: 140px;
+                        width: 240px;
+                    }
+
+                    .item-content {
+                        width: 250px;
+                        height: 100%;
+                        border: 0px solid rgba(123, 123, 123, 0.49804);
+                        border-radius: 4px;
+                        color: transparent;
+                        line-height: 140px;
+                        padding-left: 32px;
+                        font-size: 0px;
+                        font-weight: 400;
+                        background-color: transparent;
+                    }
+                </style>
+
+                <section class="container2" id="gallery">
+                    <div>
+                        @for (int i = 0; i < Model.productos.Count; i++)
+                        {
+                            <div class="list-item" id="alpha">
+                                <div class="item-content">
+                                    <span class="order">@i</span>
+                                    <img src="@Model.productos[i].UrlImagen" draggable="false" width="130" style="margin-left:30px;" />
                                 </div>
                             </div>
-
-                            <style>
-                                .navigation {
-                                    background: #eeeeee;
-                                    width: 100%;
-                                    padding: 20px;
-                                    box-sizing: border-box;
-                                }
-
-                                .img-responsive {
-                                    max-width: 100%;
-                                }
-
-                                .m-20 {
-                                    margin-bottom: 20px;
-                                }
-
-                                .section__picture {
-                                    margin-bottom: 0;
-                                }
-
-                                .step {
-                                    margin-bottom: 20px;
-                                    float: left;
-                                }
-
-                                .centered {
-                                    text-align: center;
-                                }
-
-                                footer {
-                                    background: #0a3055;
-                                    height: 80px;
-                                    margin-top: 20px;
-                                }
-
-                                header {
-                                    height: 80px;
-                                    margin-bottom: 20px;
-                                }
-
-                                .step-header-fixed {
-                                    background: #eeeeee;
-                                    font-size: 22px;
-                                    padding: 10px;
-                                    color: #3e3e3e;
-                                    margin-bottom: 0 !important;
-                                }
-                            </style>
-                            <script>
-                                (function () {
-                                    var c, f; c = this.jQuery || window.jQuery; f = c(window); c.fn.stick_in_parent = function (b) {
-                                        var A, w, B, n, p, J, k, E, t, K, q, L; null == b && (b = {}); t = b.sticky_class; B = b.inner_scrolling; E = b.recalc_every; k = b.parent; p = b.offset_top; n = b.spacer; w = b.bottoming; null == p && (p = 0); null == k && (k = void 0); null == B && (B = !0); null == t && (t = "is_stuck"); A = c(document); null == w && (w = !0); J = function (a) {
-                                            var b; return window.getComputedStyle ? (a = window.getComputedStyle(a[0]), b = parseFloat(a.getPropertyValue("width")) + parseFloat(a.getPropertyValue("margin-left")) +
-                                                parseFloat(a.getPropertyValue("margin-right")), "border-box" !== a.getPropertyValue("box-sizing") && (b += parseFloat(a.getPropertyValue("border-left-width")) + parseFloat(a.getPropertyValue("border-right-width")) + parseFloat(a.getPropertyValue("padding-left")) + parseFloat(a.getPropertyValue("padding-right"))), b) : a.outerWidth(!0)
-                                        }; K = function (a, b, q, C, F, u, r, G) {
-                                            var v, H, m, D, I, d, g, x, y, z, h, l; if (!a.data("sticky_kit")) {
-                                                a.data("sticky_kit", !0); I = A.height(); g = a.parent(); null != k && (g = g.closest(k)); if (!g.length) throw "failed to find stick parent";
-                                                v = m = !1; (h = null != n ? n && a.closest(n) : c("<div />")) && h.css("position", a.css("position")); x = function () {
-                                                    var d, f, e; if (!G && (I = A.height(), d = parseInt(g.css("border-top-width"), 10), f = parseInt(g.css("padding-top"), 10), b = parseInt(g.css("padding-bottom"), 10), q = g.offset().top + d + f, C = g.height(), m && (v = m = !1, null == n && (a.insertAfter(h), h.detach()), a.css({ position: "", top: "", width: "", bottom: "" }).removeClass(t), e = !0), F = a.offset().top - (parseInt(a.css("margin-top"), 10) || 0) - p, u = a.outerHeight(!0), r = a.css("float"), h && h.css({
-                                                        width: J(a),
-                                                        height: u, display: a.css("display"), "vertical-align": a.css("vertical-align"), "float": r
-                                                    }), e)) return l()
-                                                }; x(); if (u !== C) return D = void 0, d = p, z = E, l = function () {
-                                                    var c, l, e, k; if (!G && (e = !1, null != z && (--z, 0 >= z && (z = E, x(), e = !0)), e || A.height() === I || x(), e = f.scrollTop(), null != D && (l = e - D), D = e, m ? (w && (k = e + u + d > C + q, v && !k && (v = !1, a.css({ position: "fixed", bottom: "", top: d }).trigger("sticky_kit:unbottom"))), e < F && (m = !1, d = p, null == n && ("left" !== r && "right" !== r || a.insertAfter(h), h.detach()), c = { position: "", width: "", top: "" }, a.css(c).removeClass(t).trigger("sticky_kit:unstick")),
-                                                        B && (c = f.height(), u + p > c && !v && (d -= l, d = Math.max(c - u, d), d = Math.min(p, d), m && a.css({ top: d + "px" })))) : e > F && (m = !0, c = { position: "fixed", top: d }, c.width = "border-box" === a.css("box-sizing") ? a.outerWidth() + "px" : a.width() + "px", a.css(c).addClass(t), null == n && (a.after(h), "left" !== r && "right" !== r || h.append(a)), a.trigger("sticky_kit:stick")), m && w && (null == k && (k = e + u + d > C + q), !v && k))) return v = !0, "static" === g.css("position") && g.css({ position: "relative" }), a.css({ position: "absolute", bottom: b, top: "auto" }).trigger("sticky_kit:bottom")
-                                                },
-                                                    y = function () { x(); return l() }, H = function () { G = !0; f.off("touchmove", l); f.off("scroll", l); f.off("resize", y); c(document.body).off("sticky_kit:recalc", y); a.off("sticky_kit:detach", H); a.removeData("sticky_kit"); a.css({ position: "", bottom: "", top: "", width: "" }); g.position("position", ""); if (m) return null == n && ("left" !== r && "right" !== r || a.insertAfter(h), h.remove()), a.removeClass(t) }, f.on("touchmove", l), f.on("scroll", l), f.on("resize", y), c(document.body).on("sticky_kit:recalc", y), a.on("sticky_kit:detach", H), setTimeout(l,
-                                                        0)
-                                            }
-                                        }; q = 0; for (L = this.length; q < L; q++)b = this[q], K(c(b)); return this
-                                    }
-                                }).call(this);
-
-                                $(".navigation").stick_in_parent({
-                                    offset_top: 20,
-                                });
-
-                            </script>
-
-                            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" style="width:125px;height:40px;margin-top:307px;font-size:14px;background-color:#FF8C00">Siguiente</button>
-
-                        </div>
-
-                        <hr />
-
-                        <div class="fuente2" id="txthtml" name="txthtml" onKeyUp="renderHtml(this.value)">
-                            <p id="par" name="Titulo">
-                                <img src="@Model.negocioModelBase.UrlImagenNegocio" width="100" />
-                                @Model.negocioModelBase.Nombre
-                            </p>
-                        </div>
+                        }
                     </div>
-                </div>
-            </div>
+                </section>
 
-            <div class="row setup-content" id="step-2">
-                <div class="col-xs-6 col-md-offset-3">
-                    <div class="col-md-12">
-                        <h3 class="text-center"> Personalizá tus imágenes </h3>
+                <script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/utils/Draggable.min.js"></script>
+                <script type="text/javascript">
+                    "use strict";
 
-                        <h5>Seleccioná un color para el fondo:</h5>
-                        <button id="colorDeFondo" class="jscolor {valueElement:'chosen-value', onFineChange:'setBodyColor(this)'}">
-                            Color
-                        </button>
-                        <div id="txthtml2" name="txthtml2" onKeyUp="renderHtml2(this.value)">
+                    var rowSize = 150;
+                    var colSize = 250;
+                    var totalRows = 3;
+                    var totalCols = 3;
 
-                            <script>
-                                function setBodyColor(picker) {
-                                    document.body.style.backgroundColor = '#' + picker.toString()
-                                }
-                            </script>
+                    var cells = [];
 
-                            <style class="cp-pen-styles">
-                                body {
-                                    cursor: 32 32, move;
-                                }
+                    for (var row = 0; row < totalRows; row++) {
+                        if (window.CP.shouldStopExecution(2)) { break; }
+                        for (var col = 0; col < totalCols; col++) {
+                            if (window.CP.shouldStopExecution(1)) { break; }
+                            cells.push({
+                                row: row,
+                                col: col,
+                                x: col * colSize,
+                                y: row * rowSize
+                            });
+                        }
+                        window.CP.exitedLoop(1);
 
-                                *, *:before, *:after {
-                                    box-sizing: border-box;
-                                }
+                    }
+                    window.CP.exitedLoop(2);
 
-                                .container2 {
-                                    position: relative;
-                                    top: 50%;
-                                    left: 50%;
-                                    margin-top: 250px;
-                                    margin-left: -100px;
-                                    opacity: 0;
-                                    visibility: hidden;
-                                    -webkit-transform: translate(-50%, -50%);
-                                    transform: translate(-50%, -50%);
-                                    cursor: move;
-                                    cursor: 32 32, move;
-                                }
+                    var container = document.querySelector(".container2");
+                    var listItems = Array.from(document.querySelectorAll(".list-item")); // Array of elements
+                    var sortables = listItems.map(Sortable); // Array of sortables
+                    var total = sortables.length;
 
-                                .list-item {
-                                    position: absolute;
-                                    top: -200px;
-                                    left: 0;
-                                    height: 140px;
-                                    width: 240px;
-                                }
+                    TweenLite.to(container, 0.5, { autoAlpha: 1 });
 
-                                .item-content {
-                                    width: 250px;
-                                    height: 100%;
-                                    border: 0px solid rgba(123, 123, 123, 0.49804);
-                                    border-radius: 4px;
-                                    color: transparent;
-                                    line-height: 140px;
-                                    padding-left: 32px;
-                                    font-size: 0px;
-                                    font-weight: 400;
-                                    background-color: transparent;
-                                }
-                            </style>
+                    function changeIndex(item, to, sameRow, sameCol) {
 
-                            <section class="container2" id="gallery">
-                                <div>
-                                    @for (int i = 0; i < Model.productos.Count; i++)
-                                    {
-                                        <div class="list-item" id="alpha">
-                                            <div class="item-content">
-                                                <span class="order">@i</span>
-                                                <img src="@Model.productos[i].UrlImagen" draggable="false" width="130" style="margin-left:30px;" />
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            </section>
+                        if (sameRow && !sameCol || !sameRow && sameCol) {
 
-                            <script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/utils/Draggable.min.js"></script>
-                            <script type="text/javascript">
-                                "use strict";
+                            var temp = sortables[to];
+                            sortables[to] = item;
+                            sortables[item.index] = temp;
+                        } else {
 
-                                var rowSize = 150;
-                                var colSize = 250;
-                                var totalRows = 3;
-                                var totalCols = 3;
+                            arrayMove(sortables, item.index, to);
+                        }
 
-                                var cells = [];
+                        sortables.forEach(function (sortable) {
+                            return container.appendChild(sortable.element);
+                        });
 
-                                for (var row = 0; row < totalRows; row++) {
-                                    if (window.CP.shouldStopExecution(2)) { break; }
-                                    for (var col = 0; col < totalCols; col++) {
-                                        if (window.CP.shouldStopExecution(1)) { break; }
-                                        cells.push({
-                                            row: row,
-                                            col: col,
-                                            x: col * colSize,
-                                            y: row * rowSize
-                                        });
-                                    }
-                                    window.CP.exitedLoop(1);
+                        sortables.forEach(function (sortable, index) {
+                            return sortable.setIndex(index);
+                        });
+                    }
 
-                                }
-                                window.CP.exitedLoop(2);
+                    function Sortable(element, index) {
 
-                                var container = document.querySelector(".container2");
-                                var listItems = Array.from(document.querySelectorAll(".list-item")); // Array of elements
-                                var sortables = listItems.map(Sortable); // Array of sortables
-                                var total = sortables.length;
+                        var content = element.querySelector(".item-content");
+                        var order = element.querySelector(".order");
 
-                                TweenLite.to(container, 0.5, { autoAlpha: 1 });
+                        var animation = TweenLite.to(content, 0.3, {
+                            boxShadow: "rgba(0,0,0,0.2) 0px 16px 32px 0px",
+                            force3D: true,
+                            scale: 1.5,
+                            paused: true
+                        });
 
-                                function changeIndex(item, to, sameRow, sameCol) {
+                        var dragger = new Draggable(element, {
+                            onDragStart: downAction,
+                            onRelease: upAction,
+                            onDrag: dragAction,
+                            cursor: "inherit"
+                        });
 
-                                    if (sameRow && !sameCol || !sameRow && sameCol) {
+                        var position = element._gsTransform;
 
-                                        var temp = sortables[to];
-                                        sortables[to] = item;
-                                        sortables[item.index] = temp;
-                                    } else {
+                        var sortable = {
+                            cell: cells[index],
+                            dragger: dragger,
+                            element: element,
+                            index: index,
+                            setIndex: setIndex
+                        };
 
-                                        arrayMove(sortables, item.index, to);
-                                    }
+                        TweenLite.set(element, {
+                            x: sortable.cell.x,
+                            y: sortable.cell.y
+                        });
 
-                                    sortables.forEach(function (sortable) {
-                                        return container.appendChild(sortable.element);
-                                    });
+                        function setIndex(index) {
 
-                                    sortables.forEach(function (sortable, index) {
-                                        return sortable.setIndex(index);
-                                    });
-                                }
+                            var cell = cells[index];
+                            var dirty = position.x !== cell.x || position.y !== cell.y;
 
-                                function Sortable(element, index) {
+                            sortable.cell = cell;
+                            sortable.index = index;
+                            order.textContent = index + 1;
 
-                                    var content = element.querySelector(".item-content");
-                                    var order = element.querySelector(".order");
+                            if (!dragger.isDragging && dirty) layout();
+                        }
 
-                                    var animation = TweenLite.to(content, 0.3, {
-                                        boxShadow: "rgba(0,0,0,0.2) 0px 16px 32px 0px",
-                                        force3D: true,
-                                        scale: 1.5,
-                                        paused: true
-                                    });
+                        function downAction() {
+                            animation.play();
+                            this.update();
+                        }
 
-                                    var dragger = new Draggable(element, {
-                                        onDragStart: downAction,
-                                        onRelease: upAction,
-                                        onDrag: dragAction,
-                                        cursor: "inherit"
-                                    });
+                        function dragAction() {
 
-                                    var position = element._gsTransform;
+                            var col = clamp(Math.round(this.x / colSize), 0, totalCols - 1);
+                            var row = clamp(Math.round(this.y / rowSize), 0, totalRows - 1);
 
-                                    var sortable = {
-                                        cell: cells[index],
-                                        dragger: dragger,
-                                        element: element,
-                                        index: index,
-                                        setIndex: setIndex
-                                    };
+                            var cell = sortable.cell;
+                            var sameCol = col === cell.col;
+                            var sameRow = row === cell.row;
 
-                                    TweenLite.set(element, {
-                                        x: sortable.cell.x,
-                                        y: sortable.cell.y
-                                    });
+                            if (!sameRow || !sameCol) {
 
-                                    function setIndex(index) {
+                                var index = totalCols * row + col;
 
-                                        var cell = cells[index];
-                                        var dirty = position.x !== cell.x || position.y !== cell.y;
-
-                                        sortable.cell = cell;
-                                        sortable.index = index;
-                                        order.textContent = index + 1;
-
-                                        if (!dragger.isDragging && dirty) layout();
-                                    }
-
-                                    function downAction() {
-                                        animation.play();
-                                        this.update();
-                                    }
-
-                                    function dragAction() {
-
-                                        var col = clamp(Math.round(this.x / colSize), 0, totalCols - 1);
-                                        var row = clamp(Math.round(this.y / rowSize), 0, totalRows - 1);
-
-                                        var cell = sortable.cell;
-                                        var sameCol = col === cell.col;
-                                        var sameRow = row === cell.row;
-
-                                        if (!sameRow || !sameCol) {
-
-                                            var index = totalCols * row + col;
-
-                                            changeIndex(sortable, index, sameRow, sameCol);
-                                        }
-                                    }
-
-                                    function upAction() {
-                                        animation.reverse();
-                                        layout();
-                                    }
-
-                                    function layout() {
-                                        TweenLite.to(element, 0.3, {
-                                            x: sortable.cell.x,
-                                            y: sortable.cell.y
-                                        });
-                                    }
-
-                                    return sortable;
-                                }
-
-                                function arrayMove(array, from, to) {
-                                    array.splice(to, 0, array.splice(from, 1)[0]);
-                                }
-
-                                function clamp(value, a, b) {
-                                    return value < a ? a : value > b ? b : value;
-                                }
-                            </script>
-                        </div>
-
-                        <button onclick="renderHtml();" class="btn btn-primary nextBtn btn-lg pull-right" type="button" style="width:125px;height:40px;margin-top:120px;font-size:14px;background-color:#FF8C00">Siguiente</button>
-                    </div>
-                </div>
-            </div>
-            <div class="row setup-content" id="step-3">
-                <div class="col-xs-6 col-md-offset-3">
-                    <div class="col-md-12">
-                        <h3> Vista previa </h3>
-
-                        <script>
-                            function renderHtml(html) {
-                                html = html || document.getElementById("txthtml").innerHTML;
-                                document.getElementById("divView").innerHTML = html; 
-                                renderHtml2();
+                                changeIndex(sortable, index, sameRow, sameCol);
                             }
-                            function renderHtml2(html) {
-                                html = html || document.getElementById("txthtml2").innerHTML;
-                                document.getElementById("divView2").innerHTML = html;
-                                //document.getElementById("gallery").style.marginLeft = "55px";
-                            }
-                        </script>
+                        }
 
-                        <div id="divView"></div>
-                        <div id="divView2"></div>
+                        function upAction() {
+                            animation.reverse();
+                            layout();
+                        }
 
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        function layout() {
+                            TweenLite.to(element, 0.3, {
+                                x: sortable.cell.x,
+                                y: sortable.cell.y
+                            });
+                        }
 
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-2674404638298268"
-                             data-ad-slot="9209491414"
-                             data-ad-format="auto"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
+                        return sortable;
+                    }
 
-                        <button onclick="guardar()" style="margin-top:100px;margin-left:100px;" class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
+                    function arrayMove(array, from, to) {
+                        array.splice(to, 0, array.splice(from, 1)[0]);
+                    }
+
+                    function clamp(value, a, b) {
+                        return value < a ? a : value > b ? b : value;
+                    }
+                </script>
+            </div>
+
+            <button onclick="renderHtml();" class="btn btn-primary nextBtn btn-lg pull-right" type="button" style="width:125px;height:40px;margin-top:120px;font-size:14px;background-color:#FF8C00">Siguiente</button>
+        </div>
+    </div>
+    </div>
+    <div class="row setup-content" id="step-3">
+        <div class="col-xs-6 col-md-offset-3">
+            <div class="col-md-12">
+
+                <div class="setup-panel">
+                    <div class="stepwizard-step">
+                        <a href="#step-2" type="button" class="btn btn-info">Volver</a>
                     </div>
                 </div>
             </div>
-        </form>
+
+            <h3> Vista previa </h3>
+
+            <script>
+                function renderHtml(html) {
+                    html = html || document.getElementById("txthtml").innerHTML;
+                    document.getElementById("divView").innerHTML = html;
+                    renderHtml2();
+                }
+                function renderHtml2(html) {
+                    html = html || document.getElementById("txthtml2").innerHTML;
+                    document.getElementById("divView2").innerHTML = html;
+                    //document.getElementById("gallery").style.marginLeft = "55px";
+                }
+            </script>
+
+            <div id="divView"></div>
+            <div id="divView2"></div>
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2674404638298268"
+                 data-ad-slot="9209491414"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+
+            <button onclick="guardar()" style="margin-top:100px;margin-left:100px;" class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
+        </div>
+    </div>
+    </div>
+    </form>
 
     </div>
 
@@ -607,7 +637,7 @@
 
     <!-- guardar showroom de manera local -->
     <script>
-        function guardar() { 
+        function guardar() {
             document.getElementById("gallery").style.marginLeft = "55px";
             localStorage.setItem("txthtml", document.getElementById("txthtml").innerHTML);
             localStorage.setItem("txthtml2", document.getElementById("txthtml2").innerHTML);
