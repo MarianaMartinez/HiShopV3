@@ -88,7 +88,80 @@ namespace HiShop.Controllers
                 string urlImagen = "/images/sinFotoDePerfil.jpg";
                 if (model.file != null)
                 {
-                     urlImagen = ArticuloDao.guardarUnaImagenEnUnCarpetaDelServidor(model.file, _env, ArticuloNuevo);
+                    string name = model.file.FileName;
+                    if (name == "pintureria1.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/geFBdo/pintureria1.jpg";
+                    }
+                    else if (name == "pintureria2.jpg") {
+                        urlImagen = "https://image.ibb.co/hyxPyo/pitureria2.jpg";
+                    }else if (name == "pintureria3.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/njDKW8/pitureria3.jpg";
+                    }
+                    else if (name == "pintureria4.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/bxrjyo/pitureria4.jpg";
+                    }
+                    else if (name == "pintureria5.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/dtMTPT/pitureria5.jpg";
+                    }
+                    else if (name == "pintureria6.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/j4VzW8/pitureria6.jpg";
+                    }
+                    if (name == "zapato1.jpg")
+                    {
+                        urlImagen = "https://preview.ibb.co/nfRTPT/zapato1.jpg";
+                    }
+                    else if (name == "zapato2.jpg")
+                    {
+                        urlImagen = "https://preview.ibb.co/hwi8PT/zapato2.jpg";
+                    }
+                    else if (name == "zapato3.jpg")
+                    {
+                        urlImagen = "https://preview.ibb.co/g2UhjT/zapato3.jpg";
+                    }
+                    else if (name == "zapato4.jpg")
+                    {
+                        urlImagen = "https://preview.ibb.co/c5pRB8/zapato4.jpg";
+                    }
+                    else if (name == "zapato5.jpg")
+                    {
+                        urlImagen = "https://preview.ibb.co/itp4yo/zapato5.jpg";
+                    }
+                    else if (name == "zapato6.jpg")
+                    {
+                        urlImagen = "https://preview.ibb.co/nGw6B8/zapato6.jpg";
+                    }
+                    if (name == "cafe1.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/h1pCJo/cafe1.jpg";
+                    }
+                    else if (name == "cafe2.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/gESor8/cafe2.jpg";
+                    }
+                    else if (name == "cafe3.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/dGCMB8/cafe3.jpg";
+                    }
+                    else if (name == "cafe4.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/dBtuW8/cafe4.jpg";
+                    }
+                    else if (name == "cafe5.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/h386do/cafe5.jpg";
+                    }
+                    else if (name == "cafe7.jpg")
+                    {
+                        urlImagen = "https://image.ibb.co/iyv8r8/cafe7.jpg";
+                    }
+                    else {
+                         urlImagen = ArticuloDao.guardarUnaImagenEnUnCarpetaDelServidor(model.file, _env, ArticuloNuevo);
+                    }
                 }
                 ArticuloNuevo.UrlImagen = urlImagen;
             ArticuloDao.grabarArticulo(_context, ArticuloNuevo);
