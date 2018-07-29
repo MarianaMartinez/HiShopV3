@@ -63,10 +63,8 @@ namespace HiShop.Controllers
             return View();
         }
 
-
         public IActionResult ComprasListado()
         {
-
             Usuario usuario = UsuarioDao.getUsuario(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID);
             List<OrdenPedido> lista = OrdenPedidoDao.getListado(_context, usuario);
             return View(lista);

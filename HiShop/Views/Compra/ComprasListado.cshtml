@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<HiShop.Entity.OrdenPedido>
+
 @{
     ViewData["Title"] = "ComprasListado";
     Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
@@ -6,3 +7,57 @@
 
 <h2>ComprasListado</h2>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstadoPedido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pago)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Envio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Negocio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Envio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Negocio.ID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

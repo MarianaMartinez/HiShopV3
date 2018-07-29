@@ -31,7 +31,7 @@ namespace HiShop.Controllers
         ArticuloDao ArticuloDao = new ArticuloDao();
         ServicioDao servicioDao = new ServicioDao();
         MailService mailService = new MailService();
-        
+
         /// <summary>
         /// Trae todos los Productos (artículos y servicios) 
         /// </summary>
@@ -40,7 +40,7 @@ namespace HiShop.Controllers
         {
             CatalogoGeneral model = new CatalogoGeneral(HttpContext, _context);
             //List<Producto> productos = ProductoDAo.ListadoDeProductos(_context);
-            List<Producto> productos = ProductoDAo.ListadoDeProductosFiltro(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID); 
+            List<Producto> productos = ProductoDAo.ListadoDeProductosFiltro(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID);
             model.productos = productos;
             return View(model);
         }
@@ -51,38 +51,49 @@ namespace HiShop.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Ecommerce(string query)
+        public IActionResult Ecommerce(string query, string filtro)
         {
             CatalogoGeneral model = new CatalogoGeneral(HttpContext, _context);
 
-            List<Producto> productos = ProductoDAo.ListadoDeProductos(_context);
-
-            TempData["PalabraClave"] = query;
-
-            List<Producto> nuevaLista = new List<Producto>();
-
-            foreach (var q in productos)
+            List<Producto> productos = ProductoDAo.ListadoDeProductosFiltro(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID);
+            if(query != null)
             {
-                if (query != null)
+                TempData["PalabraClave"] = query;
+                
+                var ExpresionRegular = productos.Where(x => x.Nombre.ToLower().StartsWith(query.ToLower().Trim()) ||
+                                        x.Nombre.ToLower().EndsWith(query.ToLower().Trim()) ||
+                                        x.Nombre.ToLower().Contains(query.ToLower().Trim()));
+
+                List<Producto> nuevaLista = ExpresionRegular.ToList();
+                
+                if (nuevaLista.Count() == 0)
                 {
-                    if ((q.Nombre.ToLower()).Contains(query.ToLower()))
-                    {
-                        nuevaLista.Add(q);
-                    }
+                    TempData["Mensaje"] = "No se encontraron resultados";
                 }
-                else {
-                    nuevaLista = productos;
-                }
-            }
+                model.productos = nuevaLista;
 
-            if (nuevaLista.Count() == 0)
+                return View(model);
+            }
+            else if(filtro != null)
             {
-                TempData["Mensaje"] = "No se encontraron resultados";
-            }
-            model.productos = nuevaLista;
+                TempData["Precio"] = filtro;
 
+                var filtroString = Convert.ToString(TempData["Precio"]);
+
+                if (TempData["Precio"].ToString() == "0")
+                {
+                    var consulta = productos.OrderBy(x => x.Precio);
+                    model.productos = consulta.ToList();
+                }
+
+                else
+                {
+                    var consulta = productos.OrderByDescending(x => x.Precio);
+                    model.productos = consulta.ToList();
+                }
+            }
             return View(model);
-        }
+        } 
 
         //[HttpPost]
         public IActionResult DetallesDeProducto(int id)
@@ -154,7 +165,7 @@ namespace HiShop.Controllers
             TempData["total"] = total;
 
             TempData["Pago"] = pago;
-            TempData["Envio"] = envio; 
+            TempData["Envio"] = envio;
 
             OrdenPedido ordenPedido = new OrdenPedido
             {
@@ -164,7 +175,7 @@ namespace HiShop.Controllers
                 Total = Convert.ToDecimal(TempData["total"]),
                 NegocioID = producto.NegocioID,
                 Producto = ProductoDAo.get(_context, id),
-                ProductoID = ProductoDAo.get(_context, id).ID, 
+                ProductoID = ProductoDAo.get(_context, id).ID,
                 Usuario = UsuarioDao.getUsuario(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID)
             };
 
@@ -177,7 +188,7 @@ namespace HiShop.Controllers
             TempData["Mensajes"] = mensajes;
             ModelBase model = new ModelBase();
             model.llenarDatosGenerales(HttpContext, _context);
-            return View("~/Views/Inicio/InicioLogueado.cshtml",model);
+            return View("~/Views/Inicio/InicioLogueado.cshtml", model);
         }
 
         //[HttpPost] 
@@ -197,7 +208,16 @@ namespace HiShop.Controllers
         public IActionResult OrdenesDePedido()
         {
             HiShop.Models.Catalogo.VentasModelAndView model = new VentasModelAndView(HttpContext, _context);
-            List<OrdenPedido> ordenes = OrdenPedidoDao.getListado(_context, UsuarioDao.getUsuario(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID));
+            List<OrdenPedido> ordenes = OrdenPedidoDao.getListadoPorUsuario(_context, UsuarioDao.getUsuario(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID));
+            model.ordenes = ordenes;
+
+            return View(model);
+        }
+
+        public IActionResult ComprasRealizadas()
+        {
+            HiShop.Models.Catalogo.VentasModelAndView model = new VentasModelAndView(HttpContext, _context);
+            List<OrdenPedido> ordenes = OrdenPedidoDao.getListadoPorUsuarioCompras(_context, UsuarioDao.getUsuario(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID));
             model.ordenes = ordenes;
 
             return View(model);
