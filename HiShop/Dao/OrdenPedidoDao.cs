@@ -27,38 +27,6 @@ namespace HiShop.Dao
 
         }
 
-        public static List<OrdenPedido> getListadoPorUsuario(HiShopContext _context, Usuario usuario)
-        {
-            var lista = _context.OrdenPedidos.ToList();
-            var listaNueva = new List<OrdenPedido>(); 
-            foreach(var item in lista)
-            {
-                if(item.Usuario != usuario)
-                {
-                    listaNueva.Add(item);
-                }
-            }
-
-            return listaNueva;
-
-        }
-
-        public static List<OrdenPedido> getListadoPorUsuarioCompras(HiShopContext _context, Usuario usuario)
-        {
-            var lista = _context.OrdenPedidos.ToList();
-            var listaNueva = new List<OrdenPedido>();
-            foreach (var item in lista)
-            {
-                if (item.Usuario == usuario)
-                {
-                    listaNueva.Add(item);
-                }
-            }
-
-            return listaNueva;
-
-        }
-
         public static List<OrdenPedido> getListadoCompras(HiShopContext _context, Usuario usuario)
         {
             var lista = _context.OrdenPedidos.Where(O => O.Usuario.ID == usuario.ID).ToList();

@@ -2,17 +2,17 @@
 <!--Mariana Martinez-->
 <!--Esta es menu de un usuario que no esta loguiado-->
 @{
-
+    
     ViewData["Title"] = "No Registrado";
     Layout = "~/Views/Shared/_Base.cshtml";
 }
-<!-- Brand and toggle get grouped for better mobile display -->
-
+     <!-- Brand and toggle get grouped for better mobile display -->
+              
 <script>
 
     $("document").ready(function () {
         //InitialiseFacebook(1610232299056898);
-
+        
     });
     //Si loguea correctamente accede a la otra vista, si no recibe un mensaje de error
     //AxelMolaro
@@ -29,7 +29,8 @@
                 var url = respuesta.redireccion;
                 if (url != null && url != "" && url != "undefined") {
                     location.href = url;
-                } else {
+                } else
+                { 
                     var tipoMensaje = respuesta.data.mensaje;
 
                     $("#mailLoginForm").css("border", "3px solid red");
@@ -39,7 +40,7 @@
                 }
             }),
             error: (function (error) {
-                alert("incorrecto" + mailUsuario + " " + contraseniaUsuario);
+                alert("incorrecto" + mailUsuario + " " + contraseniaUsuario );
             })
 
 
@@ -48,77 +49,78 @@
     }
 
 </script>
-@RenderSection("libreriasJs", false)
+    @RenderSection("libreriasJs", false)
 
-
+ 
 <title>@ViewBag.Title</title>
 
 
+    
+   <nav class=" navbar-collapse navbar-default" >
 
-<nav class=" navbar-collapse navbar-default">
+       <div class="container-fluid ">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand visible-xs" href="~/Registro/Login">HiShop</a>
+        
+       </div>
+           <a class="navbar-brand visible-lg visible-md" href="~/Registro/Login">HiShop</a>
+           <!-- Collect the nav links, forms, and other content for toggling -->
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             
+               <ul class="nav navbar-nav pull-right">
+                  
+                   <li class="visible-lg visible-md">
+                       <form class="form-inline form-menu" method="post" action="/Registro/Login">
+                            <label>Mail</label>
+                            <input class="form-control mr-sm-2" type="text" id="mailLoginForm" name="mailLogin" placeholder="Ingrese mail">
+                            <label>Contraseña</label>
+                           <input  class="form-control mr-sm-2" type="password" id="contraseniaLoginForm" name="contraseñaLogin" placeholder="Ingrese contraseña">
+                           <button type="button" class="btn btn-info my-2 my-sm-0" onclick="Loguear();">Ingresar</button>
+                            <button  type="button" class="btn btn-info my-2 my-sm-0"  onclick=" "><fb:login-button autologoutlink="true" perms="read_friendlists, create_event, email, publish_stream"></fb:login-button></button>
+                       </form> 
+                   </li>
+               </ul>
+               <form class="buscadorHeader  visible-md visible-lg" role="search">
+                   <div class="input-group">
+                       <input type="text" class="form-control" aria-describedby="start-date">
+                       <span class="input-group-addon" id="start-date"><span class="glyphicon glyphicon-search"></span></span>
+                   </div>
+               </form>
+           </div>
 
-    <div class="container-fluid ">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand visible-xs" href="~/Registro/Login">HiShop</a>
+    </nav>
+    <br />
+    @{
 
-    </div>
-    <a class="navbar-brand visible-lg visible-md" href="~/Inicio/Inicio">HiShop</a>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                if (TempData["Mensajes"] != null)
+                {
+                    List<HiShop.Models.MensajeModel> mensajes = (List<HiShop.Models.MensajeModel>)TempData["Mensajes"];
+                    foreach (var mensaje in mensajes)
+                    {
 
-        <ul class="nav navbar-nav pull-right">
-
-            <li class="visible-lg visible-md">
-                <form class="form-inline form-menu" method="post" action="/Registro/Login">
-                    <label>Mail</label>
-                    <input class="form-control mr-sm-2" type="text" id="mailLoginForm" name="mailLogin" placeholder="Ingrese mail">
-                    <label>Contraseña</label>
-                    <input class="form-control mr-sm-2" type="password" id="contraseniaLoginForm" name="contraseñaLogin" placeholder="Ingrese contraseña">
-                    <button type="button" class="btn btn-info my-2 my-sm-0" onclick="Loguear();">Ingresar</button>
-                </form>
-            </li>
-        </ul>
-        <!-- <form class="buscadorHeader  visible-md visible-lg" role="search">
-            <div class="input-group">
-                <input type="text" class="form-control" aria-describedby="start-date">
-                <span class="input-group-addon" id="start-date"><span class="glyphicon glyphicon-search"></span></span>
-            </div>
-        </form> -->
-    </div>
-
-</nav>
-<br />
-@{
-
-    if (TempData["Mensajes"] != null)
-    {
-        List<HiShop.Models.MensajeModel> mensajes = (List<HiShop.Models.MensajeModel>)TempData["Mensajes"];
-        foreach (var mensaje in mensajes)
-        {
-
-            <div class="alert @mensaje.tipo">@mensaje.texto </div>
+                <div class="alert @mensaje.tipo">@mensaje.texto </div>
+            }
         }
+
+
     }
 
 
-}
-
-
-<form class="buscadorMobile  pull-right visible-xs" role="search">
-    <div class="input-group">
-        <input type="text" class="form-control" aria-describedby="start-date">
-        <span class="input-group-addon" id="start-date"><span class="glyphicon glyphicon-search"></span></span>
-    </div>
-</form>
-<br />
-
-@RenderBody()
+    <form class="buscadorMobile  pull-right visible-xs" role="search">
+        <div class="input-group">
+            <input type="text" class="form-control" aria-describedby="start-date">
+            <span class="input-group-addon" id="start-date"><span class="glyphicon glyphicon-search"></span></span>
+        </div>
+    </form>
+    <br />
+    
+      @RenderBody()
 
 
 
-
-
+  
+       

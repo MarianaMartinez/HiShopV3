@@ -7,38 +7,23 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="~/css/TableStyle.css" rel="stylesheet" />
-<script src="~/js/TableJS.js"></script> 
-
+<script src="~/js/TableJS.js"></script>
 <div class="container">
     <div class="row">
-        <section class="container"> 
-            <center>
-                <h1 style="font-family:'Arial Rounded MT';">Órdenes de Pedido</h1>
-            </center>
+        <section class="container">
+            <h1>Órdenes de Pedido</h1>
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default" style="width:750px;margin-left:-75px;">
+                <div class="panel panel-default" style="width:750px;">
                     <div class="panel-body">
                         <div class="pull-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-success btn-filter" data-target="pagado">Efectuadas</button>
-                                <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendientes</button>
-                                <button type="button" class="btn btn-default btn-filter" data-target="all">Todas</button>
+                                <button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
+                                <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
+                                <button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
                             </div>
                         </div>
                         <div class="table-container">
-                            <table class="table table-filter text-center" style="width:720px;">
-                                
-                                <thead>
-                                    <tr>
-                                        <td> Estado </td> 
-                                        <td> Medio de Pago </td>
-                                        <td> Método de Envío </td>
-                                        <td> Monto </td>
-                                        <td> Negocio </td> 
-                                        <td> Acciones </td>
-                                    </tr>
-                                </thead>
-                                
+                            <table class="table table-filter" style="width:720px;">
                                 <tbody>
                                     @foreach (var item in Model.ordenes)
                                     {
