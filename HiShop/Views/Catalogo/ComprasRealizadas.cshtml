@@ -7,13 +7,13 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="~/css/TableStyle.css" rel="stylesheet" />
-<script src="~/js/TableJS.js"></script> 
+<script src="~/js/TableJS.js"></script>
 
 <div class="container">
     <div class="row">
-        <section class="container"> 
+        <section class="container">
             <center>
-                <h1 style="font-family:'Arial Rounded MT';">Órdenes de Pedido</h1>
+                <h1 style="font-family:'Arial Rounded MT';">Mis compras</h1>
             </center>
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default" style="width:750px;margin-left:-75px;">
@@ -28,14 +28,13 @@
                         <div class="table-container">
                             <table class="table table-filter text-center" style="width:720px;">
                                 
-                                <thead>
+                                <thead class="alert-info">
                                     <tr>
-                                        <td> Estado </td> 
+                                        <td> Estado </td>
                                         <td> Medio de Pago </td>
                                         <td> Método de Envío </td>
                                         <td> Monto </td>
                                         <td> Negocio </td> 
-                                        <td> Acciones </td>
                                     </tr>
                                 </thead>
                                 
@@ -55,14 +54,14 @@
                                                     @Html.DisplayFor(modelItem => item.Envio)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Total)
+                                                    $@Html.DisplayFor(modelItem => item.Total)
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Negocio.Nombre)
                                                 </td>
                                             </tr>
                                         }
-                                    }
+                                    } 
                                     @foreach (var item in Model.ordenes)
                                     {
                                         if (item.EstadoPedido == HiShop.Enum.EstadoPedido.PENDIENTE)
@@ -78,15 +77,10 @@
                                                     @Html.DisplayFor(modelItem => item.Envio)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Total)
+                                                    $@Html.DisplayFor(modelItem => item.Total)
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Negocio.Nombre)
-                                                </td>
-                                                <td>
-                                                    <form action="/Catalogo/OrdenesDePedido/@item.ID" method="post">
-                                                        <input type="submit" value="Concretar compra" class="btn btn-info" />
-                                                    </form>
                                                 </td>
                                             </tr>
                                         }

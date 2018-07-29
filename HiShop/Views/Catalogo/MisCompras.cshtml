@@ -1,17 +1,18 @@
-﻿@model HiShop.Models.Catalogo.VentasModelAndView
+﻿@model List<HiShop.Entity.OrdenPedido>
 
 @{
+    ViewData["Title"] = "MisCompras";
     Layout = "~/Views/Shared/_BaseMenuUsuarioRegistrado.cshtml";
 }
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="~/css/TableStyle.css" rel="stylesheet" />
-<script src="~/js/TableJS.js"></script> 
+<script src="~/js/TableJS.js"></script>
 
 <div class="container">
     <div class="row">
-        <section class="container"> 
+        <section class="container">
             <center>
                 <h1 style="font-family:'Arial Rounded MT';">Órdenes de Pedido</h1>
             </center>
@@ -26,21 +27,9 @@
                             </div>
                         </div>
                         <div class="table-container">
-                            <table class="table table-filter text-center" style="width:720px;">
-                                
-                                <thead>
-                                    <tr>
-                                        <td> Estado </td> 
-                                        <td> Medio de Pago </td>
-                                        <td> Método de Envío </td>
-                                        <td> Monto </td>
-                                        <td> Negocio </td> 
-                                        <td> Acciones </td>
-                                    </tr>
-                                </thead>
-                                
+                            <table class="table table-filter" style="width:720px;">
                                 <tbody>
-                                    @foreach (var item in Model.ordenes)
+                                    @foreach (var item in Model)
                                     {
                                         if (item.EstadoPedido == HiShop.Enum.EstadoPedido.CONCRETADO)
                                         {
@@ -63,7 +52,7 @@
                                             </tr>
                                         }
                                     }
-                                    @foreach (var item in Model.ordenes)
+                                    @foreach (var item in Model)
                                     {
                                         if (item.EstadoPedido == HiShop.Enum.EstadoPedido.PENDIENTE)
                                         {
