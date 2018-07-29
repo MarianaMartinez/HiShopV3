@@ -29,25 +29,68 @@
             })
         })
     }
+    //onclick=";
+    $("document").ready(function () {
 
+        $("#btnFacebook").ready(function () {
+
+            $(".btnFacebook").click(function () {
+                var enumerador = $("#" + this.id).attr("itemEnumerador");
+                post($('#nombreArticulo-' + enumerador).val(), $('#descripcionArticulo-' + enumerador).val(), $('#precioArticulo-' + enumerador).val(), $('#urlImagenArticulo-' + enumerador).val());
+            });
+        });
+    });
     //Limpiar los filtros
     //AxelMolaro
     function limpiarFiltros() {
         $("#nombreFiltro").val("");
-        $("formFiltro").submit();
+        $("#inputPaginaActual").val("1");
+        $("#formFiltro").submit();
     }
+    function filtrar() {
+        $("#inputPaginaActual").val("1");
+        $("#formFiltro").submit();
+    }
+
+
+    function post(nombre, descripcion, precio, imagen) {
+        debugger;
+        var nombreP = nombre;
+        debugger;
+
+
+        FB.api('/me/photos', 'post', { message: 'Vendo ' + nombre + '(' + descripcion + ') a $' + precio, url: imagen }, function (response) {
+            if (response.id != null) {
+                document.getElementById('status').innerHTML = '<br /><div class="text-center text-success"> <h4> ¡Producto publicado! </h4> </div>';
+            }
+            else {
+                document.getElementById('status').innerHTML = '<br /><div class="text-center text-danger"> <h4> Iniciá sesión en facebook para poder compartir tus artículos </h4> </div>';
+            }
+        });
+    }
+
+    function UserAction(nombre, precio, cantidad, descripcion, imagen) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "https://api.mercadolibre.com/items?access_token=APP_USR-7157869629400488-072822-335db6899fca3f189f45f5466a277bcf-336217790", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        alert("Publicando en Mercado Libre...");
+        xhttp.send("{'title':'" + nombre + "(Item de test - No Ofertar)', 'category_id':'MLA3530','price':" + precio + ",'currency_id':'ARS','available_quantity':" + cantidad + ",'buying_mode':'buy_it_now','listing_type_id':'gold_special','condition':'new','description' : {'plain_text': '" + descripcion + " (Item de test - No Ofertar)' },'warranty': '12 months','pictures':[{'source': '" + imagen + "' }]}");
+
+        var response = JSON.parse(xhttp.responseText);
+        document.getElementById("responseMercadoLibre").innerHTML = "Compartido en mercado libre!";
+    }
+
 </script>
 <div id="fb-root"></div>
 
-<div class="row">
-    <div class="container">
+<div class="">
+    <div class=" container-fluid">
         <div>
             <br />
             <h3><i class="zmdi zmdi-plus-box"></i> Mis Articulos </h3>
         </div>
         <div>
-            Filtro
-            <form method="get" id="formFiltro" action="/Articulo/ListarArticulo" class="form-inline">
+            <form method="get" id="formFiltro" action="/Articulo/ListarArticulo" class="form-inline alert alert-info">
                 <div class="form-group form-inline">
                     <label class="control-label">Nombre</label>
                     <input class="form-control" name="nombreFiltro" id="nombreFiltro" value="@Model.filtro.nombreFiltro" />
@@ -56,8 +99,8 @@
                 <input value="@Model.filtro.total" id="inputTotalDePaginas" readonly="readonly" type="hidden" />
 
                 <div class="form-group form-inline">
-                    <button type="submit" class="btn btn-success2">Filtrar</button>
-                    <button type="submit" class="btn btn-info" onclick="limpiarFiltros()">Limpiar Filtros</button>
+                    <button type="button" class="btn btn-success2" onclick="filtrar()">Filtrar</button>
+                    <button type="button" class="btn btn-info" onclick="limpiarFiltros()">Limpiar Filtros</button>
                 </div>
             </form>
 
@@ -130,100 +173,21 @@
                         <td>
                             <!-- <div class="fb-share-button" data-href="  http://192.168.0.3:8080/Catalogo/DetallesDeProducto/@Model.listaDeArticulos[i].ID" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A49836%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div> -->
                             <!-- <div class="fb-share-button" data-href="  http://192.168.0.3:8080/a/prueba" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A49836%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div> -->
-                            <script>
 
-                                function post(posicion) {
-                                    if (posicion == 0) {
-                                    FB.api('/me/photos', 'post', { message: 'Vendo @Model.listaDeArticulos[0].Nombre (@Model.listaDeArticulos[0].Descripcion) a $@Model.listaDeArticulos[0].Precio', url: '@Model.listaDeArticulos[0].UrlImagen' }, function (response) {
-                                        if (response.id != null) {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-success"> <h4> ¡Producto publicado! </h4> </div>';
-                                        }
-                                        else {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-danger"> <h4> Iniciá sesión en facebook para poder compartir tus artículos </h4> </div>';
-                                        }
-                                    });
-                                    }
-                                    else if (posicion == 1) {
-                                        FB.api('/me/photos', 'post', { message: 'Vendo @Model.listaDeArticulos[1].Nombre (@Model.listaDeArticulos[1].Descripcion) a $@Model.listaDeArticulos[1].Precio', url: '@Model.listaDeArticulos[1].UrlImagen' }, function (response) {
-                                    if (response.id != null) {
-                                        document.getElementById('status').innerHTML = '<br /><div class="text-center text-success"> <h4> ¡Producto publicado! </h4> </div>';
-                                    }
-                                    else {
-                                        document.getElementById('status').innerHTML = '<br /><div class="text-center text-danger"> <h4> Iniciá sesión en facebook para poder compartir tus artículos </h4> </div>';
-                                    }
-                                    });
-                                    }
-
-                                    else if (posicion == 2) {
-                                    FB.api('/me/photos', 'post', { message: 'Vendo @Model.listaDeArticulos[2].Nombre (@Model.listaDeArticulos[2].Descripcion) a $@Model.listaDeArticulos[2].Precio', url: '@Model.listaDeArticulos[2].UrlImagen' }, function (response) {
-                                        if (response.id != null) {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-success"> <h4> ¡Producto publicado! </h4> </div>';
-                                        }
-                                        else {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-danger"> <h4> Iniciá sesión en facebook para poder compartir tus artículos </h4> </div>';
-                                        }
-                                    });
-                                    }
-
-                                    else if (posicion == 3) {
-                                    FB.api('/me/photos', 'post', { message: 'Vendo @Model.listaDeArticulos[3].Nombre (@Model.listaDeArticulos[3].Descripcion) a $@Model.listaDeArticulos[3].Precio', url: '@Model.listaDeArticulos[3].UrlImagen' }, function (response) {
-                                        if (response.id != null) {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-success"> <h4> ¡Producto publicado! </h4> </div>';
-                                        }
-                                        else {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-danger"> <h4> Iniciá sesión en facebook para poder compartir tus artículos </h4> </div>';
-                                        }
-                                    });
-                                    }
-
-                                    else {
-                                    FB.api('/me/photos', 'post', { message: 'Vendo @Model.listaDeArticulos[i].Nombre (@Model.listaDeArticulos[i].Descripcion) a $@Model.listaDeArticulos[i].Precio', url: '@Model.listaDeArticulos[i].UrlImagen' }, function (response) {
-                                        if (response.id != null) {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-success"> <h4> ¡Producto publicado! </h4> </div>';
-                                        }
-                                        else {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-danger"> <h4> Iniciá sesión en facebook para poder compartir tus artículos </h4> </div>';
-                                        }
-                                    });
-                                    }
-                                }
-                            </script>
                             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
                             <a href="https://twitter.com/intent/tweet?text=@Model.listaDeArticulos[i].Nombre+(@Model.listaDeArticulos[i].Descripcion)+$@Model.listaDeArticulos[i].Precio+@Model.listaDeArticulos[i].UrlImagen">
                                 <img src="https://static1.squarespace.com/static/549157fde4b0a57121fdbe9f/t/5a53a3720852297684dc395b/1515493253245/Twitter-Social-Share-Button.png" width="140" style="margin-left:-7px;" />
                             </a>
+                            <input id="enumeradorArticulo-@i" value="@i" type="hidden" />
+                            <input id="nombreArticulo-@i" value="@Model.listaDeArticulos[i].Nombre" type="hidden" />
+                            <input id="descripcionArticulo-@i" value="@Model.listaDeArticulos[i].Descripcion" type="hidden" />
+                            <input id="cantidadArticulo-@i" value="@Convert.ToDouble(@Model.listaDeArticulos[i].Cantidad)" type="hidden" />
+                            <input id="precioArticulo-@i" value="@Convert.ToDouble(@Model.listaDeArticulos[i].Precio)" type="hidden" />
+                            <input id="urlImagenArticulo-@i" value="@Model.listaDeArticulos[i].UrlImagen" type="hidden" />
+                            <a id="btnFacebook-@i" class="btnFacebook" itemEnumerador="@i"> <img src="https://adnlife.com/img/facebook.png" width="100" /> </a>
+                            <a id="btnMercado-@i" class="btnMercado" itemEnumerador="@i" onclick="UserAction('@Model.listaDeArticulos[i].Nombre','@Convert.ToDouble(@Model.listaDeArticulos[i].Precio)','@Convert.ToDouble(@Model.listaDeArticulos[i].Cantidad)','@Model.listaDeArticulos[i].Descripcion','@Model.listaDeArticulos[i].UrlImagen')"> <img src="https://mlstaticquic-a.akamaihd.net/ui/navigation/4.0.1/mercadolibre/logo__large_plus.png" width="100" /> </a>
 
-                            <a href="#" onclick="post(@i)"> <img src="https://adnlife.com/img/facebook.png" width="100" /> </a>
-
-                            <a href="#" onclick="UserAction(@i)"> <img src="https://mlstaticquic-a.akamaihd.net/ui/navigation/4.0.1/mercadolibre/logo__large_plus.png" width="100" /> </a>
-
-                            <!-- MERCADO LIBRE -->
-                            <script>
-                                function UserAction(posicion) {
-                                    var xhttp = new XMLHttpRequest();
-                                    xhttp.open("POST", "https://api.mercadolibre.com/items?access_token=APP_USR-7157869629400488-071920-99f2acc42989f091d7d293d346f03d36-336217790", true);
-                                    xhttp.setRequestHeader("Content-type", "application/json");
-                                    alert("Publicando en Mercado Libre...");
-                                    if (posicion == 0) {
-                                        xhttp.send("{'title':'@Model.listaDeArticulos[0].Nombre (Item de test - No Ofertar)', 'category_id':'MLA3530','price':@Convert.ToDouble(Model.listaDeArticulos[0].Precio),'currency_id':'ARS','available_quantity':@Convert.ToInt32(Model.listaDeArticulos[0].Cantidad),'buying_mode':'buy_it_now','listing_type_id':'gold_special','condition':'new','description' : { 'plain_text': '@Model.listaDeArticulos[0].Descripcion (Item de test - No Ofertar)' },'warranty': '12 months','pictures':[{ 'source': '@Model.listaDeArticulos[0].UrlImagen' }]}");
-                                    }
-                                    else if (posicion == 1) {
-                                        xhttp.send("{'title':'@Model.listaDeArticulos[1].Nombre (Item de test - No Ofertar)', 'category_id':'MLA3530','price':@Convert.ToDouble(Model.listaDeArticulos[1].Precio),'currency_id':'ARS','available_quantity':@Convert.ToInt32(Model.listaDeArticulos[1].Cantidad),'buying_mode':'buy_it_now','listing_type_id':'gold_special','condition':'new','description' : { 'plain_text': '@Model.listaDeArticulos[1].Descripcion (Item de test - No Ofertar)' },'warranty': '12 months','pictures':[{ 'source': '@Model.listaDeArticulos[1].UrlImagen' }]}");
-                                    }
-                                    else if (posicion == 2) {
-                                        xhttp.send("{'title':'@Model.listaDeArticulos[2].Nombre (Item de test - No Ofertar)', 'category_id':'MLA3530','price':@Convert.ToDouble(Model.listaDeArticulos[2].Precio),'currency_id':'ARS','available_quantity':@Convert.ToInt32(Model.listaDeArticulos[2].Cantidad),'buying_mode':'buy_it_now','listing_type_id':'gold_special','condition':'new','description' : { 'plain_text': '@Model.listaDeArticulos[2].Descripcion (Item de test - No Ofertar)' },'warranty': '12 months','pictures':[{ 'source': '@Model.listaDeArticulos[2].UrlImagen' }]}");
-                                    }
-                                    else if (posicion == 3) {
-                                        xhttp.send("{'title':'@Model.listaDeArticulos[3].Nombre (Item de test - No Ofertar)', 'category_id':'MLA3530','price':@Convert.ToDouble(Model.listaDeArticulos[3].Precio),'currency_id':'ARS','available_quantity':@Convert.ToInt32(Model.listaDeArticulos[3].Cantidad),'buying_mode':'buy_it_now','listing_type_id':'gold_special','condition':'new','description' : { 'plain_text': '@Model.listaDeArticulos[3].Descripcion (Item de test - No Ofertar)' },'warranty': '12 months','pictures':[{ 'source': '@Model.listaDeArticulos[3].UrlImagen' }]}");
-                                    }
-                                    else {
-                                        xhttp.send("{'title':'@Model.listaDeArticulos[i].Nombre (Item de test - No Ofertar)', 'category_id':'MLA3530','price':@Convert.ToDouble(Model.listaDeArticulos[i].Precio),'currency_id':'ARS','available_quantity':@Convert.ToInt32(Model.listaDeArticulos[i].Cantidad),'buying_mode':'buy_it_now','listing_type_id':'gold_special','condition':'new','description' : { 'plain_text': '@Model.listaDeArticulos[i].Descripcion (Item de test - No Ofertar)' },'warranty': '12 months','pictures':[{ 'source': '@Model.listaDeArticulos[i].UrlImagen' }]}");
-                                    }
-                                    var response = JSON.parse(xhttp.responseText);
-                                    document.getElementById("responseMercadoLibre").innerHTML = "Compartido en mercado libre!";
-                                }
-                            </script>
 
                         </td>
                     </tr>
@@ -232,40 +196,40 @@
         </table>
 
         <script>
-                                //initialize and setup facebook js sdk
-                                window.fbAsyncInit =
-                                    function () {
-                                        FB.init({
-                                            appId: '233058437422928',
-                                            xfbml: true,
-                                            version: 'v2.5'
-                                        });
-                                        FB.getLoginStatus(function (response) {
-                                            if (response.status === 'connected') {
-                                                document.getElementById('status').innerHTML = '<br /><div class="text-center text-info"> <h4> Conectado a facebook </h4> </div>';
-                                                document.getElementById('login').style.visibility = 'hidden';
-                                            }
-                                        });
-                                    };
-                                (function (d, s, id) {
-                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                    if (d.getElementById(id)) { return; }
-                                    js = d.createElement(s); js.id = id;
-                                    js.src = "//connect.facebook.net/en_US/sdk.js";
-                                    fjs.parentNode.insertBefore(js, fjs);
-                                }(document, 'script', 'facebook-jssdk'));
-                                function login() {
-                                    FB.login(function (response) {
-                                        if (response.status === 'connected') {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-info"> <h4> Conectado a facebook </h4> </div>';
-                                            document.getElementById('login').style.visibility = 'hidden';
-                                        }
+            //initialize and setup facebook js sdk
+            window.fbAsyncInit =
+                function () {
+                    FB.init({
+                        appId: '233058437422928',
+                        xfbml: true,
+                        version: 'v2.5'
+                    });
+                    FB.getLoginStatus(function (response) {
+                        if (response.status === 'connected') {
+                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-info"> <h4> Conectado a facebook </h4> </div>';
+                            document.getElementById('login').style.visibility = 'hidden';
+                        }
+                    });
+                };
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) { return; }
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            function login() {
+                FB.login(function (response) {
+                    if (response.status === 'connected') {
+                        document.getElementById('status').innerHTML = '<br /><div class="text-center text-info"> <h4> Conectado a facebook </h4> </div>';
+                        document.getElementById('login').style.visibility = 'hidden';
+                    }
 
-                                        else {
-                                            document.getElementById('status').innerHTML = '<br /><div class="text-center text-info"> <h4> Iniciá sesión en facebook para poder compartir tus artículos </h4> </div>';
-                                        }
-                                    }, { scope: 'publish_actions' });
-                                }
+                    else {
+                        document.getElementById('status').innerHTML = '<br /><div class="text-center text-info"> <h4> Iniciá sesión en facebook para poder compartir tus artículos </h4> </div>';
+                    }
+                }, { scope: 'publish_actions' });
+            }
         </script>
 
         <a href="/Articulo/CrearArticulo" class="btn btn-success2">
