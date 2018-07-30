@@ -15,12 +15,11 @@ namespace HiShop.Entity
         public Envio Envio { get; set; }
         public decimal Total { get; set; }
         public int NegocioID { get; set; }
+        public int identificacionProd { get; set; }
 
         public Negocio Negocio { get; set; }
         public Usuario Usuario { get; set; }
 
         public Producto Producto { get; set; } 
-
-        //public int ProductoID { get; set; }
     }
 }
