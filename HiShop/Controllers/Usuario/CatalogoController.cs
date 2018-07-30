@@ -175,7 +175,7 @@ namespace HiShop.Controllers
                 Total = Convert.ToDecimal(TempData["total"]),
                 NegocioID = producto.NegocioID,
                 Producto = ProductoDAo.get(_context, id),
-                ProductoID = ProductoDAo.get(_context, id).ID,
+                //ProductoID = ProductoDAo.get(_context, id).ID,
                 Usuario = UsuarioDao.getUsuario(_context, HttpContext.Session.GetObjectFromJson<Usuario>("usuarioEnSession").ID)
             };
 

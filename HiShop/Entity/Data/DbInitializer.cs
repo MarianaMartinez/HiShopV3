@@ -13,8 +13,8 @@ namespace HiShop.Entity.Data
     {
         public static void Initialize(HiShopContext context)
         {
-            context.Database.EnsureCreated();
-            bool reiniciaBdd = false;//Dejar en false si no queiro que recree la base de datos
+            context.Database.EnsureCreated(); 
+            bool reiniciaBdd = true; //Dejar en false si no queiro que recree la base de datos
             //Borra Datos
             List<Usuario> ListaDeUsuarios = context.Usuarios.ToList();
             if (reiniciaBdd)
